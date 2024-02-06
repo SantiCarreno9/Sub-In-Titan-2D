@@ -231,7 +231,7 @@ MonoBehaviour:
   cannon: {fileID: 4156316170993444572}
   shootPoint: {fileID: 2268335747826541110}
   maxCannonAmmo: 10
-  cannonProjectilePrefab: {fileID: 6633583746551242928, guid: 392800c08f61a5148a9286683ce88656, type: 3}
+  cannonProjectilePrefab: {fileID: 448546401790797507, guid: 392800c08f61a5148a9286683ce88656, type: 3}
   aoeCharge: {fileID: 7385848086867789300}
   cannonFireCooldown: 0.5
   aoeFireCooldown: 999
