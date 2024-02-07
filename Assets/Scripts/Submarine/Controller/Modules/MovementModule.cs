@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Submarine
 {
-    public class MovementController : MonoBehaviour
+    public class MovementModule : BaseModule
     {
         [Header("Physics")]
         [SerializeField] private Rigidbody2D _rigidbody;
@@ -21,7 +21,6 @@ namespace Submarine
         private bool _isDashing = false;
 
         private Vector2 _movementInputs;
-        private bool _canMove = true;
         private float _speed = 0;
         private float _speedMultiplier = 1f;
         private Vector2 _movement;
@@ -40,7 +39,7 @@ namespace Submarine
 
         private void FixedUpdate()
         {
-            if (!_canMove)
+            if (!IsEnabled)
                 return;
 
             Move();
@@ -49,8 +48,15 @@ namespace Submarine
             _dashBar.fillAmount = GetRemainingDashPercentage();
         }
 
-        public void EnableMovement() => _canMove = true;
-        public void DisableMovement() => _canMove = false;
+        public override void EnableModule()
+        {
+            base.EnableModule();
+        }
+
+        public override void DisableModule()
+        {
+            base.DisableModule();
+        }
 
         public float GetDashUsage()
         {
@@ -93,6 +99,7 @@ namespace Submarine
 
         #endregion
 
+        public Vector2 GetVelocity() => _rigidbody.velocity;
 
         private void Move()
         {

@@ -4,7 +4,7 @@ namespace Submarine
 {
     public class AimController : MonoBehaviour
     {
-        private Vector2 _aimDirection = Vector2.zero;
+        private Vector2 _aimDirection = Vector2.zero;        
 
         [SerializeField] private Transform _cannonTransform;
 
