@@ -13,6 +13,7 @@ public class AOECharge : MonoBehaviour
     [SerializeField] Transform effect_SecondCircle;
     float timeAccumulator;
     AOEState state = AOEState.None;
+    public bool IsAOEReady => state == AOEState.Ready;
 
     public void Update()
     {
@@ -21,10 +22,10 @@ public class AOECharge : MonoBehaviour
             timeAccumulator += Time.deltaTime;
             if(timeAccumulator <= chargeTime)
             {
-                effect_FirstCircle.localScale *= Mathf.Lerp(0, chargeRadius, timeAccumulator / chargeTime);
+                effect_FirstCircle.localScale = Vector3.one * Mathf.Lerp(0, chargeRadius, timeAccumulator / chargeTime);
                 return;
             }
-            effect_FirstCircle.localScale *= chargeRadius;
+            effect_FirstCircle.localScale = Vector3.one * chargeRadius;
             state = AOEState.Ready;
         }
         if(state == AOEState.Using)
@@ -32,12 +33,14 @@ public class AOECharge : MonoBehaviour
             timeAccumulator += Time.deltaTime;
             if (timeAccumulator <= damageTime)
             {
-                effect_FirstCircle.localScale *= Mathf.Lerp(0, chargeRadius, timeAccumulator / damageTime);
+                effect_SecondCircle.localScale = Vector3.one * Mathf.Lerp(0, chargeRadius, timeAccumulator / damageTime);
                 return;
             }
-            effect_FirstCircle.localScale *= chargeRadius;
+            effect_SecondCircle.localScale = Vector3.one * chargeRadius;
             DamageEnemies();
             state = AOEState.None;
+            effect_FirstCircle.localScale = Vector3.zero;
+            effect_SecondCircle.localScale = Vector3.zero;
         }
     }
     public void UseCharge()
@@ -74,7 +77,7 @@ public class AOECharge : MonoBehaviour
         {
             return;
         }
-        effect_FirstCircle.localScale *= 0;
+        effect_FirstCircle.localScale = Vector3.zero;
         state = AOEState.None;
     }
 

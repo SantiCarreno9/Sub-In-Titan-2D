@@ -11,7 +11,9 @@ namespace Submarine
         [SerializeField] private ActionMenuModule _actionMenuController;
 
         private PlayerInputs _inputs;
-        private bool _allowUserInputs = true;                  
+        private bool _allowUserInputs = true;
+
+        public Transform Transform => throw new System.NotImplementedException();
 
         private void Awake()
         {
@@ -175,6 +177,11 @@ namespace Submarine
         }
 
         public void Damage(int amount)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Vector2 GetRelativeAttackPosition()
         {
             throw new System.NotImplementedException();
         }

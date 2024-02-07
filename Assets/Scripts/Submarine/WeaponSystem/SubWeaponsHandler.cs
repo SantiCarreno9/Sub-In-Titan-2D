@@ -18,6 +18,10 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 
     public int CurrentCannonAmmo { get; private set; }
 
+    public int MaxAmmo => maxCannonAmmo;
+
+    public bool IsAOEReady => aoeCharge.IsAOEReady;
+
     float cannonFireCooldownLeft = 0;
     float aoeFireCooldownLeft = 0;
 
@@ -32,7 +36,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     }
     public void FireCannon()
     {
-        if(cannonFireCooldownLeft <= 0)
+        if(CanFireCannon)
         {
             var projectile = Instantiate(cannonProjectilePrefab, shootPoint.position, Quaternion.identity);
             projectile.Shoot(cannon.up);
@@ -42,11 +46,6 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
         }
     }
 
-    public void ReloadCannon()
-    {
-        CurrentCannonAmmo = maxCannonAmmo;
-    }
-
     public void SetCannonAimDirection(Vector2 direction)
     {
         cannon.up = direction;
@@ -54,7 +53,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 
     public void UseAOE()
     {
-        if (aoeFireCooldownLeft <= 0)
+        if (CanUseAOE && aoeCharge.IsAOEReady)
         {
             aoeCharge.UseCharge();
             aoeFireCooldownLeft = aoeFireCooldown;
@@ -81,5 +80,27 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
         }
 
         CanUseAOE = true;
+    }
+
+    public void ReloadCannon(int ammo)
+    {
+        CurrentCannonAmmo += ammo;
+        if(CurrentCannonAmmo > maxCannonAmmo)
+        {
+            CurrentCannonAmmo = maxCannonAmmo;
+        }
+    }
+
+    public void ChargeAOE()
+    {
+        if (CanUseAOE)
+        {
+            aoeCharge.StartCharging();
+        }        
+    }
+
+    public void CancelAOE()
+    {
+        aoeCharge.CancelCharge();
     }
 }

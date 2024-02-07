@@ -20,8 +20,18 @@ public class Submersible : MonoBehaviour, ISubmarine
         }
         if (weaponHandler.CanUseAOE && Input.GetKeyDown(KeyCode.B))
         {
-            weaponHandler.UseAOE();
+            StartCoroutine(UseAOE());
         }
+    }
+
+    IEnumerator UseAOE()
+    {
+        weaponHandler.ChargeAOE();
+        while (!weaponHandler.IsAOEReady)
+        {
+            yield return null;
+        }
+        weaponHandler.UseAOE();
     }
     public void AddAttachedEnemy(IEnemyEffect enemyEffect)
     {
