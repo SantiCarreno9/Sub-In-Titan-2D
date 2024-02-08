@@ -21,11 +21,6 @@ namespace Submarine
         [Header("Cancel")]
         [SerializeField] private GameObject _cancelButton;
 
-        private void Start()
-        {
-
-        }
-
         public void Open()
         {
             _menu.SetActive(true);
@@ -68,21 +63,16 @@ namespace Submarine
         public void StartRepairing()
         {
             _presenter.StartRepairing();
-        }
-
-        public void CancelRepairing()
-        {
-            _repairProgressBar.gameObject.SetActive(false);
-        }
+        }        
 
         public void EnableRepairButton()
         {
-            _repairButton.enabled = true;
+            _repairButton.interactable = true;
         }
 
         public void DisableRepairButton()
         {
-            _repairButton.enabled = false;
+            _repairButton.interactable = false;
         }
 
         public void ShowRepairProgressBar()
@@ -107,12 +97,7 @@ namespace Submarine
         public void StartReloading()
         {
             _presenter.StartReloading();            
-        }
-
-        public void CancelReloading()
-        {
-            _reloadProgressBar.gameObject.SetActive(false);            
-        }
+        }        
 
         public void ShowReloadProgressBar()
         {
@@ -131,12 +116,12 @@ namespace Submarine
 
         public void EnableReloadButton()
         {
-            _reloadButton.enabled = true;
+            _reloadButton.interactable = true;
         }
 
         public void DisableReloadButton()
         {
-            _reloadButton.enabled = false;
+            _reloadButton.interactable = false;
         }
 
         #endregion

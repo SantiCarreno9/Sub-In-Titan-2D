@@ -295,7 +295,7 @@ GameObject:
   - component: {fileID: 2607996699161890481}
   - component: {fileID: 6467496175551760639}
   m_Layer: 0
-  m_Name: HealthSystem
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -617,7 +617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _repairController: {fileID: 8876033086901244750}
+  _healthModule: {fileID: 6467496175551760639}
   _reloadController: {fileID: 1024792104245823951}
+  _attackModule: {fileID: 5995437671634646234}
 --- !u!114 &1024792104245823951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,7 +632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90f0f3b823b7a21498f35deb4bd2d41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultProcessDuration: 5
+  fullProcessDuration: 5
   _attackController: {fileID: 5995437671634646234}
 --- !u!114 &8876033086901244750
 MonoBehaviour:
@@ -644,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fd3a5efe5624440a9770268af11eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultProcessDuration: 5
+  fullProcessDuration: 5
   _healthPercentage: 0.25
 --- !u!1 &8124876290545221435
 GameObject:

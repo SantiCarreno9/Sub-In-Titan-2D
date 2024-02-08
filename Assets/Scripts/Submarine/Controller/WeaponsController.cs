@@ -34,7 +34,7 @@ public class WeaponsController : MonoBehaviour, ISubWeaponsHandler
     public void ReloadCannon(int ammo)
     {
         Debug.Log("Reload Cannon: " + ammo + " bullets");
-        _currentAmmo += ammo;
+        _currentAmmo = ammo;
         Debug.Log($"New load: {_currentAmmo}");
     }
 

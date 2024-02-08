@@ -37,7 +37,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""Aim"",
                     ""type"": ""Value"",
                     ""id"": ""e5a60cdc-2e72-4a17-8221-1671b0bc6c06"",
                     ""expectedControlType"": ""Vector2"",
@@ -222,18 +222,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -244,7 +233,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Joystick"",
-                    ""action"": ""Look"",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d713261-7de3-465e-adff-79852f11f1ca"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -332,6 +332,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ActionMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c55b93e-472e-4644-bb28-5123d8b8a0c3"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""ActionMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -853,6 +864,105 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ActionMenu"",
+            ""id"": ""85d7f26c-d7b0-4415-842c-36bd06e8ce33"",
+            ""actions"": [
+                {
+                    ""name"": ""Repair"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fe5b87a-ce88-4803-96a9-f6fc27ab033f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""bcc66417-5c06-4920-9520-6c86767349a4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""efe271bb-e802-47aa-93aa-85866e185f80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""062d9a96-186c-4796-977d-92494bc8df2b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""f260a5fe-45b2-41bd-8a0b-ea405f3c62d6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cc33c5f-a947-468d-bc3a-f56278f0a64b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c6d6635-f50f-48ba-80e4-c9729221c5ac"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Repair"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93af0727-0358-440d-b8f1-6e1d6ef4c343"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf31a551-f672-4646-ac6c-cac7546a4d96"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -921,7 +1031,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_SpecialAttack = m_Player.FindAction("SpecialAttack", throwIfNotFound: true);
@@ -938,6 +1048,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_UI_RightClick = m_UI.FindAction("RightClick", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
+        // ActionMenu
+        m_ActionMenu = asset.FindActionMap("ActionMenu", throwIfNotFound: true);
+        m_ActionMenu_Repair = m_ActionMenu.FindAction("Repair", throwIfNotFound: true);
+        m_ActionMenu_Reload = m_ActionMenu.FindAction("Reload", throwIfNotFound: true);
+        m_ActionMenu_Cancel = m_ActionMenu.FindAction("Cancel", throwIfNotFound: true);
+        m_ActionMenu_Quit = m_ActionMenu.FindAction("Quit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1000,7 +1116,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_SpecialAttack;
@@ -1010,7 +1126,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         private @PlayerInputs m_Wrapper;
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @SpecialAttack => m_Wrapper.m_Player_SpecialAttack;
@@ -1027,9 +1143,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
             @Fire.started += instance.OnFire;
             @Fire.performed += instance.OnFire;
             @Fire.canceled += instance.OnFire;
@@ -1049,9 +1165,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
             @Fire.started -= instance.OnFire;
             @Fire.performed -= instance.OnFire;
             @Fire.canceled -= instance.OnFire;
@@ -1199,6 +1315,76 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // ActionMenu
+    private readonly InputActionMap m_ActionMenu;
+    private List<IActionMenuActions> m_ActionMenuActionsCallbackInterfaces = new List<IActionMenuActions>();
+    private readonly InputAction m_ActionMenu_Repair;
+    private readonly InputAction m_ActionMenu_Reload;
+    private readonly InputAction m_ActionMenu_Cancel;
+    private readonly InputAction m_ActionMenu_Quit;
+    public struct ActionMenuActions
+    {
+        private @PlayerInputs m_Wrapper;
+        public ActionMenuActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Repair => m_Wrapper.m_ActionMenu_Repair;
+        public InputAction @Reload => m_Wrapper.m_ActionMenu_Reload;
+        public InputAction @Cancel => m_Wrapper.m_ActionMenu_Cancel;
+        public InputAction @Quit => m_Wrapper.m_ActionMenu_Quit;
+        public InputActionMap Get() { return m_Wrapper.m_ActionMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ActionMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IActionMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ActionMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ActionMenuActionsCallbackInterfaces.Add(instance);
+            @Repair.started += instance.OnRepair;
+            @Repair.performed += instance.OnRepair;
+            @Repair.canceled += instance.OnRepair;
+            @Reload.started += instance.OnReload;
+            @Reload.performed += instance.OnReload;
+            @Reload.canceled += instance.OnReload;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @Quit.started += instance.OnQuit;
+            @Quit.performed += instance.OnQuit;
+            @Quit.canceled += instance.OnQuit;
+        }
+
+        private void UnregisterCallbacks(IActionMenuActions instance)
+        {
+            @Repair.started -= instance.OnRepair;
+            @Repair.performed -= instance.OnRepair;
+            @Repair.canceled -= instance.OnRepair;
+            @Reload.started -= instance.OnReload;
+            @Reload.performed -= instance.OnReload;
+            @Reload.canceled -= instance.OnReload;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @Quit.started -= instance.OnQuit;
+            @Quit.performed -= instance.OnQuit;
+            @Quit.canceled -= instance.OnQuit;
+        }
+
+        public void RemoveCallbacks(IActionMenuActions instance)
+        {
+            if (m_Wrapper.m_ActionMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IActionMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ActionMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ActionMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ActionMenuActions @ActionMenu => new ActionMenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1247,7 +1433,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnSpecialAttack(InputAction.CallbackContext context);
@@ -1265,5 +1451,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnRightClick(InputAction.CallbackContext context);
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
+    }
+    public interface IActionMenuActions
+    {
+        void OnRepair(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
 }

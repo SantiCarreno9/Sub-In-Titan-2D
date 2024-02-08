@@ -8,6 +8,8 @@ namespace Submarine
         [SerializeField] private AimController _aimController;
         [SerializeField] private WeaponsController _weaponsController;
 
+        public AimController AimController => _aimController;
+
         [Space]
         [SerializeField] private float _enemyAttackRadius = 0.3f;
 
@@ -48,7 +50,6 @@ namespace Submarine
             if (!IsEnabled)
                 return;
             _isFiringBasicAttack = false;
-            Debug.Log("Stop Basic Attack");
         }
 
         public void ReloadCannon(int ammo)
@@ -57,6 +58,8 @@ namespace Submarine
         }
 
         public int GetCannonAmmo() => _weaponsController.CurrentCannonAmmo;
+        public int GetMaxCannonAmmo() => _weaponsController.MaxAmmo;
+        public bool HasMaxAmmo() => ((float)GetCannonAmmo() / (float)GetMaxCannonAmmo()) == 1;
 
         #endregion
 

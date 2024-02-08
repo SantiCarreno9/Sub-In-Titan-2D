@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,15 @@ namespace Submarine
 {
     public class ActionMenuModule : BaseModule
     {
+        [Header("Repair")]
         [SerializeField] private RepairController _repairController;
+        [SerializeField] private HealthModule _healthModule;
+        [Header("Reload")]
         [SerializeField] private ReloadController _reloadController;
+        [SerializeField] private AttackModule _attackModule;
+
+        public RepairController RepairController => _repairController;
+        public ReloadController ReloadController => _reloadController;
 
 
         private bool _isOpen = false;
@@ -30,15 +38,25 @@ namespace Submarine
         }
 
         public bool AnyProcessRunning() => (_reloadController.IsPerformingProcess || _repairController.IsPerformingProcess);
-        public bool IsRepairing() => _repairController.IsPerformingProcess;
-        public bool IsReloading() => _reloadController.IsPerformingProcess;
 
-        public float GetRepairingProcess() => _repairController.GetProgress();
-        public float GetReloadingProcess() => _reloadController.GetProgress();
+        public void CancelCurrentProcess()
+        {
+            if (AnyProcessRunning())
+                return;
+
+            if (_repairController.IsPerformingProcess)
+                _repairController.CancelProcess();
+
+            if (_reloadController.IsPerformingProcess)
+                _reloadController.CancelProcess();            
+        }
 
         public void StartRepairing()
         {
             if (AnyProcessRunning())
+                return;
+
+            if (!CanRepair())
                 return;
 
             _repairController.StartProcess();
@@ -57,6 +75,9 @@ namespace Submarine
             if (AnyProcessRunning())
                 return;
 
+            if (!CanReload())
+                return;
+
             _reloadController.StartProcess();
         }
 
@@ -68,5 +89,8 @@ namespace Submarine
             _reloadController.CancelProcess();
         }
 
+        public bool CanRepair() => !_healthModule.HasMaxHealth();
+
+        public bool CanReload() => !_attackModule.HasMaxAmmo();
     }
 }

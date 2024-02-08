@@ -5,8 +5,9 @@ namespace Submarine
 {
     public abstract class SubmarineProcess : MonoBehaviour
     {
-        [SerializeField] protected float _defaultProcessDuration = 5f;
-        protected float _processTime = 0;
+        [Tooltip("Process duration from 0% to 100%")]
+        [SerializeField] protected float fullProcessDuration = 5f;
+        protected float processTime = 0;
 
         private float _processDuration;
         public bool IsPerformingProcess { get; protected set; } = false;
@@ -17,14 +18,8 @@ namespace Submarine
 
         private void Start()
         {
-            ResetProcessDuration();
+            _processDuration = fullProcessDuration;
         }
-
-        protected void SetProcessDuration(float newDuration)
-        {
-            _processDuration = newDuration;
-        }
-        protected void ResetProcessDuration() => SetProcessDuration(_defaultProcessDuration);
 
         public virtual void StartProcess()
         {
@@ -46,25 +41,26 @@ namespace Submarine
 
         protected virtual void FinishProcess()
         {
-            Debug.Log("Process Finished");
             IsPerformingProcess = false;
             OnProcessFinished?.Invoke();
-            _processTime = 0;
+            processTime = 0;
         }
 
-
+        /// <summary>
+        /// Returns value between 0 and 1
+        /// </summary>
+        /// <returns></returns>
         public float GetProgress()
         {
-            return _processTime / _processDuration;
+            return processTime / _processDuration;
         }
 
         private void Update()
         {
             if (IsPerformingProcess)
             {
-                _processTime += Time.deltaTime;
-                Debug.Log(_processTime);
-                if (_processTime >= _processDuration)
+                processTime += Time.deltaTime;
+                if (processTime >= _processDuration)
                     FinishProcess();
             }
         }

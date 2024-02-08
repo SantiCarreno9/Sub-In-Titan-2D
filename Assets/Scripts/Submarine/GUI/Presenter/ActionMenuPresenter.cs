@@ -9,21 +9,41 @@ namespace Submarine
         [SerializeField] private ActionMenuView _view;
         [SerializeField] private ActionMenuModule _model;
 
+        private bool _updateRepairProgress = false;
+        private bool _updateReloadProgress = false;
+
         private void OnEnable()
         {
             _model.OnOpen += Open;
             _model.OnClose += Close;
+
+            _model.RepairController.OnProcessStarted += OnRepairStarted;
+            _model.RepairController.OnProcessCanceled += OnRepairCanceled;
+            _model.RepairController.OnProcessFinished += OnRepairFinished;
+
+            _model.ReloadController.OnProcessStarted += OnReloadStarted;
+            _model.ReloadController.OnProcessCanceled += OnReloadCanceled;
+            _model.ReloadController.OnProcessFinished += OnReloadFinished;
         }
 
         private void OnDisable()
         {
             _model.OnOpen -= Open;
             _model.OnClose -= Close;
+
+            _model.RepairController.OnProcessStarted -= OnRepairStarted;
+            _model.RepairController.OnProcessCanceled -= OnRepairCanceled;
+            _model.RepairController.OnProcessFinished -= OnRepairFinished;
+
+            _model.ReloadController.OnProcessStarted -= OnReloadStarted;
+            _model.ReloadController.OnProcessCanceled -= OnReloadCanceled;
+            _model.ReloadController.OnProcessFinished -= OnReloadFinished;
         }
 
         public void Open()
         {
             _view.Open();
+            UpdateButtonsInteractableStatus();
         }
 
         public void Close()
@@ -31,58 +51,92 @@ namespace Submarine
             _view.Close();
         }
 
-        public void StartRepairing()
+        private void UpdateButtonsInteractableStatus()
         {
-            if (_model.AnyProcessRunning())
-                return;
+            if (_model.CanRepair())
+                _view.EnableRepairButton();
+            else _view.DisableRepairButton();
 
-            _model.StartRepairing();
+            if (_model.CanReload())
+                _view.EnableReloadButton();
+            else _view.DisableReloadButton();
+
+        }
+
+        #region VIEW CONTROLLED METHODS
+
+        public void StartRepairing() => _model.StartRepairing();
+
+        public void CancelProcess() => _model.CancelCurrentProcess();
+
+        public void StartReloading() => _model.StartReloading();
+
+        #endregion
+
+        #region EVENTS
+
+        #region REPAIR
+
+        private void OnRepairStarted()
+        {
+            _view.ShowRepairProgressBar();
             _view.ShowCancelButton();
+            _updateRepairProgress = true;
         }
 
-        public void CancelProcess()
+        private void OnRepairCanceled()
         {
-            if (_model.AnyProcessRunning())
-            {
-                if (_model.IsRepairing())
-                {
-                    _model.CancelRepairing();
-                    _view.CancelRepairing();
-                    return;
-                }
-
-                if (_model.IsReloading())
-                {
-                    _model.CancelReloading();
-                    _view.CancelReloading();
-                }
-            }
+            _view.HideRepairProgressBar();
+            _view.HideCancelButton();
+            _updateRepairProgress = false;
         }
 
-        public void StartReloading()
+        private void OnRepairFinished()
         {
-            if (_model.AnyProcessRunning())
-                return;
+            _view.HideRepairProgressBar();
+            _view.HideCancelButton();
+            _view.DisableRepairButton();
+            _updateRepairProgress = false;
+        }
 
-            _model.StartRepairing();
+        #endregion
+
+        #region RELOAD
+
+        private void OnReloadStarted()
+        {
+            _view.ShowReloadProgressBar();
             _view.ShowCancelButton();
+            _updateReloadProgress = true;
         }
+
+        private void OnReloadCanceled()
+        {
+            _view.HideReloadProgressBar();
+            _view.HideCancelButton();
+            _updateReloadProgress = false;
+        }
+
+        private void OnReloadFinished()
+        {
+            _view.HideReloadProgressBar();
+            _view.HideCancelButton();
+            _view.DisableReloadButton();
+            _updateReloadProgress = false;
+        }
+
+        #endregion
+
+        #endregion
 
         private void Update()
         {
-            if (_model.AnyProcessRunning())
-            {
-                if (_model.IsRepairing())
-                {
-                    _view.UpdateRepairProgress(_model.GetRepairingProcess());
-                    return;
-                }
+            if (_updateRepairProgress)
+                _view.UpdateRepairProgress(_model.ReloadController.GetProgress());
 
-                if (_model.IsReloading())
-                {
-                    _view.UpdateReloadProgress(_model.GetReloadingProcess());
-                }
-            }
+            if (_updateReloadProgress)
+                _view.UpdateReloadProgress(_model.ReloadController.GetProgress());
+
         }
     }
 }

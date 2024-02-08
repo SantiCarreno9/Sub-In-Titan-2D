@@ -5,16 +5,20 @@ namespace Submarine
     public class HealthModule : BaseModule, IHealth
     {
         [SerializeField] private int _maxHealthPoints = 200;
-        public int HealthPoints => _healthPoints;
-        private int _healthPoints = 0;
+        public int HealthPoints { get; private set; }        
 
         [SerializeField] private float _damageTimeout = 0.2f;
         private float _recoveryTime = 0;
 
+        private void Start()
+        {
+            HealthPoints = _maxHealthPoints;
+        }
+
         public void Damage(int points)
         {
-            _healthPoints -= points;
-            if (_healthPoints <= 0)
+            HealthPoints -= points;
+            if (HealthPoints <= 0)
                 Die();
             else Damage();
         }
@@ -36,5 +40,8 @@ namespace Submarine
             //_animator.Play("Die");
             GameManager.Instance.ShowGameOverScreen();
         }
+
+        public int GetMaxHealth() => _maxHealthPoints;
+        public bool HasMaxHealth() => ((float)HealthPoints / (float)GetMaxHealth()) == 1;
     }
 }
