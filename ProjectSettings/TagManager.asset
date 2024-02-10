@@ -8,9 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Cavern
   - Water
   - UI
+  - Enemy
   - 
   - 
   - 
@@ -22,8 +23,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PlayerRammy
   - 
   - 
   - 

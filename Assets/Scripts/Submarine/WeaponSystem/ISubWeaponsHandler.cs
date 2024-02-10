@@ -4,6 +4,7 @@ public interface ISubWeaponsHandler
 {
     public bool CanFireCannon { get; }
     public bool CanUseAOE { get; }
+    public bool IsAOEReady { get; }
     public int CurrentCannonAmmo { get; }
     public int MaxAmmo { get; }
 

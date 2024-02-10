@@ -12,6 +12,8 @@ namespace Submarine
 
         private PlayerInputs _inputs;
 
+        public Transform Transform => throw new System.NotImplementedException();
+
         private void Awake()
         {
             _inputs = new PlayerInputs();
@@ -148,7 +150,7 @@ namespace Submarine
             if (GameManager.Instance.IsGamePaused())
                 return;
 
-            _attackController.StartSpecialAttack();
+            _attackController.StopSpecialAttack();
         }
 
         #endregion
@@ -233,6 +235,11 @@ namespace Submarine
         public void Damage(int amount)
         {
             _healthModule.Damage(amount);
+        }
+
+        public Vector2 GetRelativeAttackPosition()
+        {
+            throw new System.NotImplementedException();
         }
     }
 
