@@ -1,4 +1,6 @@
+using Submarine.Test;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Submarine
 {
@@ -15,6 +17,13 @@ namespace Submarine
 
         //TEST ONLY
         [SerializeField] private Transform _enemyAttackPoint;
+
+        public UnityAction OnBasicAttackShot;
+        public UnityAction OnCannonReloaded;
+
+        public UnityAction OnAOECharge;
+        public UnityAction OnAOEShot;
+        public UnityAction OnAOECanceled;
 
         private bool _isFiringBasicAttack = false;
 
@@ -42,6 +51,7 @@ namespace Submarine
             {
                 _weaponsController.SetCannonAimDirection(_aimController.GetAimDirection());
                 _weaponsController.FireCannon();
+                OnBasicAttackShot?.Invoke();
             }
         }
 
@@ -55,6 +65,7 @@ namespace Submarine
         public void ReloadCannon(int ammo)
         {
             _weaponsController.ReloadCannon(ammo);
+            OnCannonReloaded?.Invoke();
         }
 
         public int GetCannonAmmo() => _weaponsController.CurrentCannonAmmo;
@@ -71,7 +82,10 @@ namespace Submarine
                 return;
 
             if (_weaponsController.CanUseAOE)
+            {
                 _weaponsController.ChargeAOE();
+                OnAOECharge?.Invoke();
+            }
         }
 
         public void StopSpecialAttack()
@@ -82,8 +96,15 @@ namespace Submarine
             if (_weaponsController.CanUseAOE)
             {
                 if (_weaponsController.IsAOEReady)
+                {
                     _weaponsController.UseAOE();
-                else _weaponsController.CancelAOE();
+                    OnAOEShot?.Invoke();
+                }
+                else
+                {
+                    _weaponsController.CancelAOE();
+                    OnAOECanceled?.Invoke();
+                }
             }
         }
 

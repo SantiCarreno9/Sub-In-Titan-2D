@@ -5,14 +5,27 @@ namespace Submarine
 {
     public class AnimationsController : MonoBehaviour
     {
-        [SerializeField] private VisualEffect _bubbles;
+        [Header("Animations")]
+        [SerializeField] private Animator _animator;
+        
+        [Header("Movement")]
+        [Header("Bubbles")]
+        [SerializeField] private VisualEffect[] _bubbles;
+        [SerializeField] private Transform _bubblesCont;
         [SerializeField] private MovementModule _movementController;
+        private int _spawnDirectionProperty = 0;
+
+        //[Header("Health")]        
+        //[SerializeField] private VisualEffect[] _bubbles;
+        //[SerializeField] private Transform _bubblesCont;
+        //[SerializeField] private MovementModule _movementController;
+
 
 
         // Start is called before the first frame update
         void Start()
         {
-
+            _spawnDirectionProperty = Shader.PropertyToID("SpawnDirection");
         }
 
         // Update is called once per frame
@@ -23,18 +36,23 @@ namespace Submarine
 
         private void UpdateBubblesDirection()
         {
-            Vector3 direction = -_movementController.GetVelocity().normalized;
-            _bubbles.enabled = (direction != Vector3.zero);
-            _bubbles.SetVector3("SpawnDirection", direction);
-
-            //Vector3 mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-            //_aimDirection = mousePosition - transform.position;
-
-            //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
-
-
-            //_bubbles.transform.eulerAngles = Vector3.forward * angle;                                    
-            //_bubbles.transform.rotation = Quaternion.LookRotation(direction);
+            Vector2 movementDirection = -_movementController.GetMovementDirection();
+            Vector2 normalizedMovement = movementDirection.normalized;
+            if (normalizedMovement.magnitude == 0)
+            {
+                _bubbles[0].enabled = false;
+                _bubbles[1].enabled = false;
+            }
+            else
+            {
+                _bubbles[0].enabled = true;
+                _bubbles[1].enabled = true;
+                _bubbles[0].SetVector3(_spawnDirectionProperty, normalizedMovement);
+                _bubbles[1].SetVector3(_spawnDirectionProperty, normalizedMovement);
+                float angle = Mathf.Atan2(movementDirection.y, movementDirection.x) * Mathf.Rad2Deg - 90;                
+                _bubblesCont.eulerAngles = Vector3.forward * angle;
+            }            
+                        
         }
     }
 }

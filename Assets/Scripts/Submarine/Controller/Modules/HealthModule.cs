@@ -1,35 +1,35 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Submarine
 {
-    public class HealthModule : BaseModule, IHealth
+    public class HealthModule : BaseModule
     {
         [SerializeField] private int _maxHealthPoints = 200;
-        public int HealthPoints { get; private set; }        
+        public int HealthPoints { get; private set; }
 
         [SerializeField] private float _damageTimeout = 0.2f;
         private float _recoveryTime = 0;
 
-        private void Start()
+        public UnityAction<int> OnHealthChanged;
+
+        private void Awake()
         {
             HealthPoints = _maxHealthPoints;
+        }
+
+        public void Recover(int points)
+        {
+            HealthPoints = points;
+            OnHealthChanged?.Invoke(points);
         }
 
         public void Damage(int points)
         {
             HealthPoints -= points;
+            OnHealthChanged?.Invoke(HealthPoints);
             if (HealthPoints <= 0)
                 Die();
-            else Damage();
-        }
-
-        /// <summary>
-        /// Triggers the "getting hit" animation and updates the recovery time
-        /// that has to pass to allow the user to control the character
-        /// </summary>
-        public void Damage()
-        {
-            _recoveryTime = Time.time + _damageTimeout;
         }
 
         /// <summary>
@@ -37,7 +37,6 @@ namespace Submarine
         /// </summary>
         public void Die()
         {
-            //_animator.Play("Die");
             GameManager.Instance.ShowGameOverScreen();
         }
 

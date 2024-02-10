@@ -25,11 +25,6 @@ namespace Submarine
         private float _speedMultiplier = 1f;
         private Vector2 _movement;
 
-
-        //TEST ONLY
-        [Space]
-        [SerializeField] private Image _dashBar;
-
         private void Awake()
         {
             _speed = _normalSpeed;
@@ -44,8 +39,7 @@ namespace Submarine
 
             Move();
 
-            UpdateDashUsage();
-            _dashBar.fillAmount = GetRemainingDashPercentage();
+            UpdateDashUsage();            
         }
 
         public override void EnableModule()
@@ -56,11 +50,6 @@ namespace Submarine
         public override void DisableModule()
         {
             base.DisableModule();
-        }
-
-        public float GetDashUsage()
-        {
-            return _dashRemainingTime;
         }
 
         public void SetUserMovementInput(Vector2 movementInputs)
@@ -75,9 +64,13 @@ namespace Submarine
         public void StopDashing() => _isDashing = false;
 
         private void UpdateDashUsage()
-        {
+        {            
+
             if (_isDashing)
             {
+                if (_movementInputs.magnitude == 0)
+                    return;
+
                 if (_dashRemainingTime > 0)
                     _dashRemainingTime -= Time.fixedDeltaTime;
                 else _dashRemainingTime = 0;
@@ -90,7 +83,7 @@ namespace Submarine
             }
         }
 
-        private float GetRemainingDashPercentage()
+        public float GetRemainingDashPercentage()
         {
             return _dashRemainingTime / _dashDuration;
         }
@@ -99,7 +92,7 @@ namespace Submarine
 
         #endregion
 
-        public Vector2 GetVelocity() => _rigidbody.velocity;
+        public Vector2 GetMovementDirection() => _movementInputs;
 
         private void Move()
         {

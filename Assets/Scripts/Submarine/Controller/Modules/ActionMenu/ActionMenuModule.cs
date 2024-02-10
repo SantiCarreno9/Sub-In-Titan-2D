@@ -41,7 +41,7 @@ namespace Submarine
 
         public void CancelCurrentProcess()
         {
-            if (AnyProcessRunning())
+            if (!AnyProcessRunning())
                 return;
 
             if (_repairController.IsPerformingProcess)
@@ -62,14 +62,6 @@ namespace Submarine
             _repairController.StartProcess();
         }
 
-        public void CancelRepairing()
-        {
-            if (!_repairController.IsPerformingProcess)
-                return;
-
-            _repairController.CancelProcess();
-        }
-
         public void StartReloading()
         {
             if (AnyProcessRunning())
@@ -79,14 +71,6 @@ namespace Submarine
                 return;
 
             _reloadController.StartProcess();
-        }
-
-        public void CancelReloading()
-        {
-            if (!_reloadController.IsPerformingProcess)
-                return;
-
-            _reloadController.CancelProcess();
         }
 
         public bool CanRepair() => !_healthModule.HasMaxHealth();

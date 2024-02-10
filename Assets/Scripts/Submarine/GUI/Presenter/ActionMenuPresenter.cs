@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Submarine
+namespace Submarine.UI
 {
     public class ActionMenuPresenter : MonoBehaviour
     {
@@ -80,6 +78,7 @@ namespace Submarine
         private void OnRepairStarted()
         {
             _view.ShowRepairProgressBar();
+            _view.DisableProgressButtons();
             _view.ShowCancelButton();
             _updateRepairProgress = true;
         }
@@ -89,14 +88,15 @@ namespace Submarine
             _view.HideRepairProgressBar();
             _view.HideCancelButton();
             _updateRepairProgress = false;
+            UpdateButtonsInteractableStatus();
         }
 
         private void OnRepairFinished()
         {
             _view.HideRepairProgressBar();
             _view.HideCancelButton();
-            _view.DisableRepairButton();
             _updateRepairProgress = false;
+            UpdateButtonsInteractableStatus();
         }
 
         #endregion
@@ -107,6 +107,7 @@ namespace Submarine
         {
             _view.ShowReloadProgressBar();
             _view.ShowCancelButton();
+            _view.DisableProgressButtons();
             _updateReloadProgress = true;
         }
 
@@ -115,6 +116,7 @@ namespace Submarine
             _view.HideReloadProgressBar();
             _view.HideCancelButton();
             _updateReloadProgress = false;
+            UpdateButtonsInteractableStatus();
         }
 
         private void OnReloadFinished()
@@ -123,6 +125,7 @@ namespace Submarine
             _view.HideCancelButton();
             _view.DisableReloadButton();
             _updateReloadProgress = false;
+            UpdateButtonsInteractableStatus();
         }
 
         #endregion
@@ -132,7 +135,7 @@ namespace Submarine
         private void Update()
         {
             if (_updateRepairProgress)
-                _view.UpdateRepairProgress(_model.ReloadController.GetProgress());
+                _view.UpdateRepairProgress(_model.RepairController.GetProgress());
 
             if (_updateReloadProgress)
                 _view.UpdateReloadProgress(_model.ReloadController.GetProgress());

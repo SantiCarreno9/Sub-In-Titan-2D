@@ -39,13 +39,14 @@ namespace Submarine
             _inputs.ActionMenu.Cancel.performed += Cancel_performed;
             _inputs.ActionMenu.Quit.performed += Quit_performed;
 
-            #endregion
+            #endregion            
+        }
 
+        private void Start()
+        {
             EnablePlayerActionMap();
             DisableActionMenuActionMap();
         }
-
-
 
         private void OnEnable()
         {
