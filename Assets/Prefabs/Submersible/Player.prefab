@@ -2033,8 +2033,16 @@ PrefabInstance:
       value: SpawnDirection
       objectReference: {fileID: 0}
     - target: {fileID: 6623953425267013344, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9659258
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623953425267013344, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.2588191
+      objectReference: {fileID: 0}
+    - target: {fileID: 6623953425267013344, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7764039360196236504, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_LocalPosition.x

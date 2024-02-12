@@ -59,6 +59,8 @@ namespace Submarine
 
         #region DASH
 
+        public bool IsDashing() => _isDashing;
+
         public void StartDashing() => _isDashing = true;
 
         public void StopDashing() => _isDashing = false;
@@ -93,6 +95,7 @@ namespace Submarine
         #endregion
 
         public Vector2 GetMovementDirection() => _movementInputs;
+        public Vector2 GetVelocity() => _rigidbody.velocity;
 
         private void Move()
         {

@@ -28,7 +28,7 @@ namespace Submarine.UI
 
         private void Start()
         {
-            UpdateAmmo();
+            Invoke("UpdateAmmo", 0.5f);
             UpdateHealth(_healthModule.HealthPoints);
         }
 

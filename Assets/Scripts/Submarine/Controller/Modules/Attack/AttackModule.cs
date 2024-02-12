@@ -48,12 +48,12 @@ namespace Submarine
                 return;
             _isFiringBasicAttack = true;
             //TEST
-            if (_weaponsController.CanFireCannon)
-            {
-                _weaponsController.SetCannonAimDirection(_aimController.GetAimDirection());
-                _weaponsController.FireCannon();
-                OnBasicAttackShot?.Invoke();
-            }
+            //if (_weaponsController.CanFireCannon)
+            //{
+            //    _weaponsController.SetCannonAimDirection(_aimController.GetAimDirection());
+            //    _weaponsController.FireCannon();
+            //    OnBasicAttackShot?.Invoke();
+            //}
         }
 
         public void StopBasicAttack()
@@ -71,7 +71,7 @@ namespace Submarine
 
         public int GetCannonAmmo() => _weaponsController.CurrentCannonAmmo;
         public int GetMaxCannonAmmo() => _weaponsController.MaxAmmo;
-        public bool HasMaxAmmo() => ((float)GetCannonAmmo() / (float)GetMaxCannonAmmo()) == 1;
+        public bool HasMaxAmmo() => (GetCannonAmmo() / GetMaxCannonAmmo()) == 1;
 
         #endregion
 
@@ -128,14 +128,15 @@ namespace Submarine
         {
             if (!IsEnabled)
                 return;
-            //if (_isFiringBasicAttack)
-            //{
-            //    if (_weaponsController.CanFireCannon)
-            //    {
-            //        _weaponsController.SetCannonAimDirection(_aimController.GetAimDirection());
-            //        _weaponsController.FireCannon();
-            //    }
-            //}
+            if (_isFiringBasicAttack)
+            {
+                if (_weaponsController.CanFireCannon)
+                {
+                    _weaponsController.SetCannonAimDirection(_aimController.GetAimDirection());
+                    _weaponsController.FireCannon();
+                    OnBasicAttackShot?.Invoke();
+                }
+            }
 
             //TEST ONLY
             //if (Input.GetKeyDown(KeyCode.E))

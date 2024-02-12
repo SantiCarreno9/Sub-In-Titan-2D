@@ -23,8 +23,18 @@ namespace Submarine
 
         protected override void FinishProcess()
         {
-            base.FinishProcess();            
             _attackController.ReloadCannon(_attackController.GetMaxCannonAmmo());
+            base.FinishProcess();            
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (IsPerformingProcess)
+            {
+                int ammo = (int)(_attackController.GetMaxCannonAmmo() * GetProgress());                
+                _attackController.ReloadCannon(ammo);
+            }
         }
     }
 }

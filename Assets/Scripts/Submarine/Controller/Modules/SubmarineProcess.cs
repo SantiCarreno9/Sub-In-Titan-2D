@@ -55,7 +55,7 @@ namespace Submarine
             return processTime / _processDuration;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             if (IsPerformingProcess)
             {

@@ -84,7 +84,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 
     public void ReloadCannon(int ammo)
     {
-        CurrentCannonAmmo += ammo;
+        CurrentCannonAmmo = ammo;
         if(CurrentCannonAmmo > maxCannonAmmo)
         {
             CurrentCannonAmmo = maxCannonAmmo;

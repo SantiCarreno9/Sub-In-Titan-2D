@@ -122,8 +122,7 @@ namespace Submarine.UI
         private void OnReloadFinished()
         {
             _view.HideReloadProgressBar();
-            _view.HideCancelButton();
-            _view.DisableReloadButton();
+            _view.HideCancelButton();            
             _updateReloadProgress = false;
             UpdateButtonsInteractableStatus();
         }

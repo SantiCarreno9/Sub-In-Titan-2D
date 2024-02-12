@@ -11,8 +11,7 @@ namespace Submarine
 
         public override void StartProcess()
         {
-            float timeMultiplier = (float)_healthModule.HealthPoints / (float)_healthModule.GetMaxHealth();
-            Debug.Log(timeMultiplier);
+            float timeMultiplier = (float)_healthModule.HealthPoints / (float)_healthModule.GetMaxHealth();            
             processTime = fullProcessDuration * timeMultiplier;
             base.StartProcess();
         }
@@ -21,13 +20,23 @@ namespace Submarine
         {
             base.CancelProcess();
             int ammo = (int)(_healthModule.GetMaxHealth() * GetProgress());
-            _healthModule.Recover(ammo);
+            _healthModule.Restore(ammo);
         }
 
         protected override void FinishProcess()
         {
-            base.FinishProcess();            
-            _healthModule.Recover(_healthModule.GetMaxHealth());
+            _healthModule.Restore(_healthModule.GetMaxHealth());
+            base.FinishProcess();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (IsPerformingProcess)
+            {
+                int health = (int)(_healthModule.GetMaxHealth() * GetProgress());                
+                _healthModule.Restore(health);
+            }
         }
     }
 }

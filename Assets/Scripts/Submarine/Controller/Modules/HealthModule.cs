@@ -11,6 +11,8 @@ namespace Submarine
         [SerializeField] private float _damageTimeout = 0.2f;
         private float _recoveryTime = 0;
 
+        public UnityAction OnDamageReceived;
+        public UnityAction OnHealthRestored;
         public UnityAction<int> OnHealthChanged;
 
         private void Awake()
@@ -18,16 +20,18 @@ namespace Submarine
             HealthPoints = _maxHealthPoints;
         }
 
-        public void Recover(int points)
+        public void Restore(int points)
         {
             HealthPoints = points;
             OnHealthChanged?.Invoke(points);
+            OnHealthRestored?.Invoke();
         }
 
         public void Damage(int points)
         {
             HealthPoints -= points;
             OnHealthChanged?.Invoke(HealthPoints);
+            OnDamageReceived?.Invoke();
             if (HealthPoints <= 0)
                 Die();
         }
@@ -41,6 +45,6 @@ namespace Submarine
         }
 
         public int GetMaxHealth() => _maxHealthPoints;
-        public bool HasMaxHealth() => ((float)HealthPoints / (float)GetMaxHealth()) == 1;
+        public bool HasMaxHealth() => (HealthPoints / GetMaxHealth()) == 1;
     }
 }
