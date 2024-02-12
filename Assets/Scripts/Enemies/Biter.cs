@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Biter : MonoBehaviour
+public class Biter : MonoBehaviour, IEnemyEffect
 {
     [SerializeField] Animator animator;
     [SerializeField] float detectionRadius;
@@ -13,9 +13,13 @@ public class Biter : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] float biterWidth;
+    [SerializeField] float slowDownMultiplier;
     ISubmarine playerSub;
     EnemyState enemyState = EnemyState.Idle;
     Vector3 relativeAttackPosition;
+    int health = 100;
+    public float SlowdownMultiplier => slowDownMultiplier;
+
     private void Awake()
     {
         agent.updateRotation = false;
@@ -50,6 +54,7 @@ public class Biter : MonoBehaviour
                 transform.position = player.position + relativeAttackPosition;
                 agent.enabled = false;
                 enemyState = EnemyState.Attack;
+                playerSub.AddAttachedEnemy(this);
                 //change animation to attack
                 animator.SetTrigger("Bite");
             }
@@ -69,6 +74,21 @@ public class Biter : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         playerSub.Damage(damage);
+    }
+
+    public void DamageEnemy(int damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            health = 0;
+            HandleDeath();
+        }
+    }
+    void HandleDeath()
+    {
+        playerSub.RemoveAttachedEnemy(this);
+        Destroy(gameObject);
     }
 
     private void OnDrawGizmos()

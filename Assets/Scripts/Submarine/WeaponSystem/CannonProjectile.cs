@@ -17,6 +17,24 @@ public class CannonProjectile : MonoBehaviour
     bool hasExploded;
     Vector3 launchPoint;
     bool shot;
+    SubWeaponsHandler weaponHandler;
+    public void InjectDependency(SubWeaponsHandler weaponHandler)
+    {
+        this.weaponHandler = weaponHandler;
+    }
+
+    private void OnEnable()
+    {
+        ResetProjectile();
+    }
+    public void ResetProjectile()
+    {
+        hasExploded = false;
+        explosionEffect.SetActive(false);
+        rb.isKinematic = false;
+        GFX.SetActive(true);
+        shot = false;
+    }
     public void Shoot(Vector2 direction)
     {
         launchPoint = transform.position;
@@ -67,6 +85,10 @@ public class CannonProjectile : MonoBehaviour
             enemy.GetComponent<IEnemy>().Damage(damage);
         }
 
-        Destroy(gameObject, destroyTime);
+        Invoke(nameof(ReturnToPool), destroyTime);
+    }
+    void ReturnToPool()
+    {
+        weaponHandler.ReturnCannonProjectile(this);
     }
 }

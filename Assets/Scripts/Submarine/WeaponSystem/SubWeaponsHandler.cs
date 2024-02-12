@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
 public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 {
     [SerializeField] Transform cannon;
@@ -24,7 +23,12 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 
     float cannonFireCooldownLeft = 0;
     float aoeFireCooldownLeft = 0;
+    SimpleObjectPool<CannonProjectile> cannonProjectilePool;
 
+    private void Awake()
+    {
+        cannonProjectilePool = new SimpleObjectPool<CannonProjectile>(maxCannonAmmo * 2, cannonProjectilePrefab, OnCreateCannonProjectile);
+    }
     public void Start()
     {
         CurrentCannonAmmo = maxCannonAmmo;
@@ -36,9 +40,11 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     }
     public void FireCannon()
     {
-        if(CanFireCannon)
+        if(CanFireCannon && CurrentCannonAmmo != 0)
         {
-            var projectile = Instantiate(cannonProjectilePrefab, shootPoint.position, Quaternion.identity);
+            var projectile = cannonProjectilePool.Get();
+            projectile.transform.position = shootPoint.position;
+            projectile.gameObject.SetActive(true);
             projectile.Shoot(cannon.up);
             CurrentCannonAmmo--;
             cannonFireCooldownLeft = cannonFireCooldown;
@@ -102,5 +108,17 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     public void CancelAOE()
     {
         aoeCharge.CancelCharge();
+    }
+
+    public void ReturnCannonProjectile(CannonProjectile cannonProjectile)
+    {
+        cannonProjectile.gameObject.SetActive(false);
+        cannonProjectilePool.Return(cannonProjectile);
+    }
+
+    void OnCreateCannonProjectile(CannonProjectile cannonProjectile)
+    {
+        cannonProjectile.InjectDependency(this);
+        cannonProjectile.gameObject.SetActive(false);
     }
 }
