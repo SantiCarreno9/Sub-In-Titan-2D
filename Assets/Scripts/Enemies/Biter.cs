@@ -1,46 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Biter : MonoBehaviour
 {
     [SerializeField] Animator animator;
     [SerializeField] float detectionRadius;
-    [SerializeField] LayerMask playerLayer;
     [SerializeField] float speed;
-    bool playerFound;
-    ISubmarine player;
-    Vector2 attackTarget;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] Transform player;
+    [SerializeField] LayerMask playerLayer;
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] float biterWidth;
+    ISubmarine playerSub;
+    EnemyState enemyState = EnemyState.Idle;
+    Vector3 relativeAttackPosition;
+    private void Awake()
     {
-        
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+        agent.speed = speed;
+        agent.stoppingDistance = 0;
+        playerSub = player.GetComponent<ISubmarine>();
+        agent.enabled = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!playerFound)
-        {            
-            SearchForPlayer();
+        if (enemyState == EnemyState.Chase)
+        {
+            agent.SetDestination(player.position + relativeAttackPosition);
+            spriteRenderer.flipX = (player.position + relativeAttackPosition).x - biterWidth > transform.position.x;
+        }
+
+        if (enemyState == EnemyState.Attack)
+        {
             return;
         }
 
+        if(enemyState == EnemyState.Chase)
+        {
+            Vector2 target = player.position + relativeAttackPosition;
+            Vector2 current = transform.position;            
+            if((target - current).magnitude <= 0.05f)
+            {
+                transform.parent = player;
+                transform.position = player.position + relativeAttackPosition;
+                agent.enabled = false;
+                enemyState = EnemyState.Attack;
+                //change animation to attack
+                animator.SetTrigger("Bite");
+            }
+
+            return;
+        }
+
+        if(Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer))
+        {
+            agent.enabled = true;
+            enemyState = EnemyState.Chase;
+            relativeAttackPosition = playerSub.GetRelativeAttackPosition();
+            //change animation to chase
+        }
     }
 
-    void SearchForPlayer()
+    public void DamagePlayer(int damage)
     {
-        /*var player = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
-        if (player == null)
+        playerSub.Damage(damage);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        if(player == null)
         {
             return;
         }
-        Vector2 playerDirection = (player.transform.position - transform.position).normalized;
-        if (Physics2D.Raycast(transform.position, playerDirection, detectionRadius).collider != null)
-        {
-            playerFound = true;
-            this.player = player.GetComponent<ISubmarine>();
-            attackTarget = this.player.GetAttackPosition();
-        }*/
+        Gizmos.DrawSphere(player.position + relativeAttackPosition, 0.1f);
+    }
+
+    enum EnemyState
+    {
+        Idle,
+        Chase,
+        Attack
     }
 }

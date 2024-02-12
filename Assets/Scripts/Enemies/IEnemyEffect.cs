@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IEnemyEffect
 {
-    public int SlowdownAmount { get; }
+    public float SlowdownMultiplier { get; }
 }

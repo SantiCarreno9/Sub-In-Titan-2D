@@ -1,44 +1,106 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 {
-    public bool CanFireCannon => throw new System.NotImplementedException();
+    [SerializeField] Transform cannon;
+    [SerializeField] Transform shootPoint;
+    [SerializeField] int maxCannonAmmo = 10;
+    [SerializeField] CannonProjectile cannonProjectilePrefab;
+    [SerializeField] AOECharge aoeCharge;
+    [SerializeField] float cannonFireCooldown;
+    [SerializeField] float aoeFireCooldown;
+    public bool CanFireCannon { get; private set; }
 
-    public bool CanUseAOE => throw new System.NotImplementedException();
+    public bool CanUseAOE { get; private set; }
 
-    public int CurrentCannonAmmo => throw new System.NotImplementedException();
+    public int CurrentCannonAmmo { get; private set; }
 
+    public int MaxAmmo => maxCannonAmmo;
+
+    public bool IsAOEReady => aoeCharge.IsAOEReady;
+
+    float cannonFireCooldownLeft = 0;
+    float aoeFireCooldownLeft = 0;
+
+    public void Start()
+    {
+        CurrentCannonAmmo = maxCannonAmmo;
+    }
+    void Update()
+    {
+        UpdateCannonCooldown();
+        UpdateAOECooldown();
+    }
     public void FireCannon()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public void ReloadCannon()
-    {
-        throw new System.NotImplementedException();
+        if(CanFireCannon)
+        {
+            var projectile = Instantiate(cannonProjectilePrefab, shootPoint.position, Quaternion.identity);
+            projectile.Shoot(cannon.up);
+            CurrentCannonAmmo--;
+            cannonFireCooldownLeft = cannonFireCooldown;
+            CanFireCannon = false;
+        }
     }
 
     public void SetCannonAimDirection(Vector2 direction)
     {
-        throw new System.NotImplementedException();
+        cannon.up = direction;
     }
 
     public void UseAOE()
     {
-        throw new System.NotImplementedException();
+        if (CanUseAOE && aoeCharge.IsAOEReady)
+        {
+            aoeCharge.UseCharge();
+            aoeFireCooldownLeft = aoeFireCooldown;
+            CanUseAOE = false;
+        }
+    }    
+
+    void UpdateCannonCooldown()
+    {
+        if (cannonFireCooldownLeft > 0)
+        {
+            cannonFireCooldownLeft -= Time.deltaTime;
+            return;
+        }
+
+        CanFireCannon = true;
+    }
+    void UpdateAOECooldown()
+    {
+        if (aoeFireCooldownLeft > 0)
+        {
+            aoeFireCooldownLeft -= Time.deltaTime;
+            return;
+        }
+
+        CanUseAOE = true;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void ReloadCannon(int ammo)
     {
-        
+        CurrentCannonAmmo = ammo;
+        if(CurrentCannonAmmo > maxCannonAmmo)
+        {
+            CurrentCannonAmmo = maxCannonAmmo;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChargeAOE()
     {
-        
+        if (CanUseAOE)
+        {
+            aoeCharge.StartCharging();
+        }        
+    }
+
+    public void CancelAOE()
+    {
+        aoeCharge.CancelCharge();
     }
 }
