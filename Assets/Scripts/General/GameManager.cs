@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         Invoke("GameOver", 3);
     }
 
-    void GameOver()
+    public void GameOver()
     {
         //SceneManager.LoadScene("GameOver");
     }

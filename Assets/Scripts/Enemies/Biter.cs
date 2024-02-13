@@ -9,7 +9,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     [SerializeField] float detectionRadius;
     [SerializeField] float speed;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Transform player;
+    Transform player;
     [SerializeField] LayerMask playerLayer;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] float biterWidth;
@@ -18,6 +18,8 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     [SerializeField] GameObject GFX;
     [SerializeField] Collider2D collider;
     [SerializeField] float deathTime;
+    [SerializeField] float attackTime;
+    [SerializeField] int damage;
     ISubmarine playerSub;
     EnemyState enemyState = EnemyState.Idle;
     Vector3 relativeAttackPosition;
@@ -29,9 +31,18 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = speed;
-        agent.stoppingDistance = 0;
-        playerSub = player.GetComponent<ISubmarine>();
+        agent.stoppingDistance = 0;        
         agent.enabled = false;
+    }
+    private void Start()
+    {
+        player = GameManager.Instance.Player.transform;
+        playerSub = player.GetComponent<ISubmarine>();
+    }
+
+    private void OnDestroy()
+    {
+        CancelInvoke();
     }
 
     // Update is called once per frame
@@ -58,6 +69,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
                 playerSub.AddAttachedEnemy(this);
                 //change animation to attack
                 animator.SetBool("attack", true);
+                InvokeRepeating(nameof(DamagePlayer), attackTime, attackTime);
             }
 
             return;
@@ -73,7 +85,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         }
     }
 
-    public void DamagePlayer(int damage)
+    void DamagePlayer()
     {
         playerSub.Damage(damage);
     }
