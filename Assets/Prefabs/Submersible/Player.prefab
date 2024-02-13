@@ -694,7 +694,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.52
+  orthographic size: 4.98
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1333,7 +1333,7 @@ MonoBehaviour:
   m_Follow: {fileID: 4930609243479570303}
   m_Lens:
     FieldOfView: 34
-    OrthographicSize: 2.52
+    OrthographicSize: 4.98
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2012,10 +2012,6 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 2549025013663205572, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4639845381039256455, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_Name
       value: Submersible
@@ -2023,26 +2019,6 @@ PrefabInstance:
     - target: {fileID: 4639845381039256455, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_TagString
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243726657770002186, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6243726657770002186, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[0].m_Name
-      value: SpawnDirection
-      objectReference: {fileID: 0}
-    - target: {fileID: 6623953425267013344, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9659258
-      objectReference: {fileID: 0}
-    - target: {fileID: 6623953425267013344, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.2588191
-      objectReference: {fileID: 0}
-    - target: {fileID: 6623953425267013344, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7764039360196236504, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2083,10 +2059,6 @@ PrefabInstance:
     - target: {fileID: 7764039360196236504, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8888461536346079376, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
