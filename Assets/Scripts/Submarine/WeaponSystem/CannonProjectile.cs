@@ -39,7 +39,7 @@ public class CannonProjectile : MonoBehaviour
     {
         launchPoint = transform.position;
         transform.rotation = Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * direction);
-        rb.velocity = direction;
+        rb.velocity = direction * speed;
         rb.isKinematic = false;
         shot = true;
         explosionEffect.transform.localScale *= explosionRadius;

@@ -239,7 +239,7 @@ namespace Submarine
 
         public Vector2 GetRelativeAttackPosition()
         {
-            throw new System.NotImplementedException();
+            return _attackController.GetEnemyAttackPoint();
         }
     }
 
