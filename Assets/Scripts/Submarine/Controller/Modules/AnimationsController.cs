@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.VFX;
+using DG.Tweening;
 
 namespace Submarine
 {
@@ -17,6 +18,8 @@ namespace Submarine
 
         [Header("Health")]
         [SerializeField] private HealthModule _healthModule;
+        [SerializeField] private CanvasGroup _vignetteEffect;
+        private bool _isPlayingLowHealthEffect = false;
 
 
         private void OnEnable()
@@ -38,7 +41,7 @@ namespace Submarine
         void Start()
         {
             _arcSequencer = Shader.PropertyToID("ArcSequencer");
-            _speedMultiplier = Shader.PropertyToID("SpeedMultiplier");
+            _speedMultiplier = Shader.PropertyToID("SpeedMultiplier");            
         }
 
         // Update is called once per frame
@@ -72,20 +75,17 @@ namespace Submarine
 
         private void UpdateAppearanceByHealth(int healthPoints)
         {
-            float healthPercentage = ((float)healthPoints / (float)_healthModule.GetMaxHealth()) * 100f;
-            switch (healthPercentage)
-            {
-                case 25:
-                    break;
-                case 50:
-                    break;
-                case 75:
-                    break;
-                case 100:
-                    break;
-                default:
-                    break;
+            float healthPercentage = ((float)healthPoints / (float)_healthModule.GetMaxHealth());
+            if (healthPercentage < 0.25f && !_isPlayingLowHealthEffect)
+            {                
+                DOTween.To(() => _vignetteEffect.alpha, x => _vignetteEffect.alpha = x, 0.1f, 2).SetLoops(-1, LoopType.Yoyo);
+                _isPlayingLowHealthEffect = true;
             }
+            else
+            {
+                DOTween.PauseAll();
+                _vignetteEffect.alpha = 0;
+            }            
         }
 
         private void PlayDamageAnimation()

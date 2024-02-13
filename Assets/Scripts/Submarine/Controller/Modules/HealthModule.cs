@@ -13,7 +13,7 @@ namespace Submarine
 
         public UnityAction OnDamageReceived;
         public UnityAction OnHealthRestored;
-        public UnityAction<int> OnHealthChanged;
+        public UnityAction<int> OnHealthChanged;        
 
         private void Awake()
         {

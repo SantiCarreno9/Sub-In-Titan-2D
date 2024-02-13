@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5056208512549710952, guid: 7ad4c1c798379d84dbc1972ebe8ff26c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7849290662496093549, guid: 7ad4c1c798379d84dbc1972ebe8ff26c, type: 3}
       propertyPath: m_Name
       value: WeaponSystem_Santiago Variant

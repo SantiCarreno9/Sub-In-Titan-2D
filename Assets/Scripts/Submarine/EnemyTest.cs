@@ -10,12 +10,11 @@ namespace Submarine.Test
         [SerializeField] private float _slowdownMultiplier = 0.5f;
         [SerializeField] private int _damagePoints = 5;
 
-        private Vector3 _attackPosition;
-        private IEnemyEffect _effect;
+        private Vector3 _attackPosition;        
 
         public float SlowdownMultiplier => _slowdownMultiplier;
         private bool _isAttachedToPlayer = false;
-        private Vector2 _position;
+        private Vector2 _position;        
 
         private void Start()
         {
@@ -24,6 +23,7 @@ namespace Submarine.Test
         private void OnDisable()
         {
             CancelInvoke();
+            GameManager.Instance.Player.GetComponent<PlayerController>().RemoveAttachedEnemy(this);
         }
         private void Update()
         {

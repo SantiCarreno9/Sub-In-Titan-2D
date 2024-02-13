@@ -11,8 +11,8 @@ namespace Submarine
         [SerializeField] private ActionMenuModule _actionMenuController;
 
         private PlayerInputs _inputs;
-
-        public Transform Transform => throw new System.NotImplementedException();
+        
+        public Transform Transform => transform;
 
         private void Awake()
         {
@@ -220,11 +220,13 @@ namespace Submarine
         public void AddAttachedEnemy(IEnemyEffect enemyEffect)
         {
             _movementController.DecreaseSpeedBy(enemyEffect.SlowdownMultiplier);
+            _actionMenuController.RepairController.AddAttachedEnemy();
         }
 
         public void RemoveAttachedEnemy(IEnemyEffect enemyEffect)
         {
             _movementController.IncreaseSpeedBy(enemyEffect.SlowdownMultiplier);
+            _actionMenuController.RepairController.RemoveAttachedEnemy();
         }
 
         public void Push(Vector2 force)

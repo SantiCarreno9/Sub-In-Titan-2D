@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Submarine
 {
@@ -8,6 +9,10 @@ namespace Submarine
         [Range(0, 1)]
         [SerializeField] private float _healthPercentage = 0.25f;
         [SerializeField] private HealthModule _healthModule;
+        private short _enemiesAttachedCount = 0;
+
+        public UnityAction OnEnemyAttached;
+        public UnityAction OnEnemyRemoved;
 
         public override void StartProcess()
         {
@@ -38,5 +43,19 @@ namespace Submarine
                 _healthModule.Restore(health);
             }
         }
+
+        public void AddAttachedEnemy()
+        {
+            _enemiesAttachedCount++;
+        }
+
+        public void RemoveAttachedEnemy()
+        {
+            _enemiesAttachedCount--;
+            if (_enemiesAttachedCount < 0)
+                _enemiesAttachedCount = 0;
+        }
+
+        public bool HasEnemiesAttached() => _enemiesAttachedCount > 0;
     }
 }

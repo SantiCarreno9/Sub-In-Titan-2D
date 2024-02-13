@@ -16,9 +16,6 @@ namespace Submarine
         [Space]
         [SerializeField] private float _enemyAttackRadius = 0.3f;
 
-        //TEST ONLY
-        [SerializeField] private Transform _enemyAttackPoint;
-
         public UnityAction OnBasicAttackShot;
         public UnityAction OnCannonReloaded;
 
@@ -47,13 +44,6 @@ namespace Submarine
             if (!IsEnabled)
                 return;
             _isFiringBasicAttack = true;
-            //TEST
-            //if (_weaponsController.CanFireCannon)
-            //{
-            //    _weaponsController.SetCannonAimDirection(_aimController.GetAimDirection());
-            //    _weaponsController.FireCannon();
-            //    OnBasicAttackShot?.Invoke();
-            //}
         }
 
         public void StopBasicAttack()
@@ -136,11 +126,7 @@ namespace Submarine
                     _weaponsController.FireCannon();
                     OnBasicAttackShot?.Invoke();
                 }
-            }
-
-            //TEST ONLY
-            //if (Input.GetKeyDown(KeyCode.E))
-            //    _enemyAttackPoint.position = GetEnemyAttackPoint() + new Vector2(transform.position.x, transform.position.y);
+            }            
         }
     }
 }

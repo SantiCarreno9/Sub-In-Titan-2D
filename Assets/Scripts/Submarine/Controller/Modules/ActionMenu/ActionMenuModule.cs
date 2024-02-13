@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -48,7 +45,7 @@ namespace Submarine
                 _repairController.CancelProcess();
 
             if (_reloadController.IsPerformingProcess)
-                _reloadController.CancelProcess();            
+                _reloadController.CancelProcess();
         }
 
         public void StartRepairing()
@@ -73,7 +70,7 @@ namespace Submarine
             _reloadController.StartProcess();
         }
 
-        public bool CanRepair() => !_healthModule.HasMaxHealth();
+        public bool CanRepair() => !_healthModule.HasMaxHealth() && !_repairController.HasEnemiesAttached();
 
         public bool CanReload() => !_attackModule.HasMaxAmmo();
     }
