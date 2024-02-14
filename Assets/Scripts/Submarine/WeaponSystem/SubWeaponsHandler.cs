@@ -1,44 +1,132 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
 public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 {
-    public bool CanFireCannon => throw new System.NotImplementedException();
+    [SerializeField] Transform cannon;
+    [SerializeField] Transform shootPoint;
+    [SerializeField] int maxCannonAmmo = 10;
+    [SerializeField] CannonProjectile cannonProjectilePrefab;
+    [SerializeField] AOECharge aoeCharge;
+    [SerializeField] float cannonFireCooldown;
+    [SerializeField] float aoeFireCooldown;
+    bool cannonCooldownOver = true;
+    public bool CanFireCannon => cannonCooldownOver && CurrentCannonAmmo > 0;
 
-    public bool CanUseAOE => throw new System.NotImplementedException();
+    public bool CanUseAOE { get; private set; }
 
-    public int CurrentCannonAmmo => throw new System.NotImplementedException();
+    public int CurrentCannonAmmo { get; private set; }
 
-    public void FireCannon()
+    public int MaxAmmo => maxCannonAmmo;
+
+    public bool IsAOEReady => aoeCharge.IsAOEReady;
+
+    public float AOICooldownTimeLeft => aoeFireCooldownLeft;
+
+    public float GetAOECooldownPercentage()
     {
-        throw new System.NotImplementedException();
+        return (aoeFireCooldownLeft / aoeFireCooldown);
     }
 
-    public void ReloadCannon()
+    float cannonFireCooldownLeft = 0;
+    float aoeFireCooldownLeft = 0;
+    SimpleObjectPool<CannonProjectile> cannonProjectilePool;
+
+    private void Awake()
     {
-        throw new System.NotImplementedException();
+        cannonProjectilePool = new SimpleObjectPool<CannonProjectile>(maxCannonAmmo * 2, cannonProjectilePrefab, OnCreateCannonProjectile);
+    }
+    public void Start()
+    {
+        CurrentCannonAmmo = maxCannonAmmo;
+    }
+    void Update()
+    {
+        UpdateCannonCooldown();
+        UpdateAOECooldown();
+    }
+    public void FireCannon()
+    {
+        if (CanFireCannon)
+        {
+            var projectile = cannonProjectilePool.Get();
+            projectile.transform.position = shootPoint.position;
+            projectile.gameObject.SetActive(true);
+            projectile.Shoot(cannon.up);
+            CurrentCannonAmmo--;
+            cannonFireCooldownLeft = cannonFireCooldown;
+            cannonCooldownOver = false;
+        }
     }
 
     public void SetCannonAimDirection(Vector2 direction)
     {
-        throw new System.NotImplementedException();
+        cannon.up = direction;
     }
 
     public void UseAOE()
     {
-        throw new System.NotImplementedException();
+        if (CanUseAOE && aoeCharge.IsAOEReady)
+        {
+            aoeCharge.UseCharge();
+            aoeFireCooldownLeft = 0;
+            CanUseAOE = false;
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    void UpdateCannonCooldown()
     {
-        
+        if (cannonFireCooldownLeft > 0)
+        {
+            cannonFireCooldownLeft -= Time.deltaTime;
+            return;
+        }
+
+        cannonCooldownOver = true;
+    }
+    void UpdateAOECooldown()
+    {
+        if (aoeFireCooldownLeft < aoeFireCooldown)
+        {
+            aoeFireCooldownLeft += Time.deltaTime;
+            return;
+        }
+
+        CanUseAOE = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ReloadCannon(int ammo)
     {
-        
+        CurrentCannonAmmo = ammo;
+        if (CurrentCannonAmmo > maxCannonAmmo)
+        {
+            CurrentCannonAmmo = maxCannonAmmo;
+        }
+    }
+
+    public void ChargeAOE()
+    {
+        if (CanUseAOE)
+        {
+            aoeCharge.StartCharging();
+        }
+    }
+
+    public void CancelAOE()
+    {
+        aoeCharge.CancelCharge();
+    }
+
+    public void ReturnCannonProjectile(CannonProjectile cannonProjectile)
+    {
+        cannonProjectile.gameObject.SetActive(false);
+        cannonProjectilePool.Return(cannonProjectile);
+    }
+
+    void OnCreateCannonProjectile(CannonProjectile cannonProjectile)
+    {
+        cannonProjectile.InjectDependency(this);
+        cannonProjectile.gameObject.SetActive(false);
     }
 }

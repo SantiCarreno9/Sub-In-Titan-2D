@@ -11,6 +11,8 @@ TagManager:
   - Cavern
   - Water
   - UI
+  - Enemy
+  - Player
   - 
   - 
   - 
@@ -21,9 +23,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - PlayerRammy
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Map
+    uniqueID: 3721840203
+    locked: 0
+  - name: Player
+    uniqueID: 2518753765
+    locked: 0
+  - name: Enemy
+    uniqueID: 1395534375
     locked: 0
