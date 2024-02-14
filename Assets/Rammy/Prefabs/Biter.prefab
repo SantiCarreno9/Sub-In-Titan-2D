@@ -55,7 +55,7 @@ MonoBehaviour:
   agent: {fileID: 2169314784204389370}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 262144
+    m_Bits: 128
   spriteRenderer: {fileID: 209747125865129908}
   biterWidth: 2
   slowDownMultiplier: 0.1
@@ -63,8 +63,8 @@ MonoBehaviour:
   GFX: {fileID: 3448254621970293993}
   collider: {fileID: 8918261952994503357}
   deathTime: 0.9
-  attackTime: 0
-  damage: 0
+  attackTime: 0.5
+  damage: 5
   audioSource: {fileID: 1612226196451311880}
   bitingAudio: {fileID: 11400000, guid: efde7fac6da026047bacb3be4a3488a6, type: 2}
   deathAudio: {fileID: 11400000, guid: 265470fdc206ebd4fbf1afa34363a70b, type: 2}

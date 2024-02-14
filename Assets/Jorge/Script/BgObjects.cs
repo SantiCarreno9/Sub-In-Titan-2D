@@ -4,48 +4,35 @@ using UnityEngine;
 
 public class BgObjects : MonoBehaviour
 {
-    [SerializeField] private GameObject[] objectPrefabs;
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private float spawnDistance = 10f;
+    [SerializeField] private Transform _player;
+    private float _lengthX, _lengthY, _startPosX, _startPosY;
+    [SerializeField] private float _bgSpeed = 0.2f;
 
-    private GameObject[] spawnedObjects;
-
-    private void Start()
+    void Start()
     {
-        // Initialize the object pool
-        spawnedObjects = new GameObject[objectPrefabs.Length];
-        for (int i = 0; i < objectPrefabs.Length; i++)
-        {
-            spawnedObjects[i] = Instantiate(objectPrefabs[i]);
-            spawnedObjects[i].SetActive(false);
-        }
+        _startPosX = transform.position.x;
+        _startPosY = transform.position.y;
+        _lengthX = GetComponent<SpriteRenderer>().bounds.size.x;
+        _lengthY = GetComponent<SpriteRenderer>().bounds.size.y;
     }
 
-    private void Update()
+    void Update()
     {
-        // Check the distance between the player and each spawned object
-        foreach (GameObject obj in spawnedObjects)
-        {
-            if (obj.activeSelf)
-            {
-                float distanceToPlayer = Vector3.Distance(obj.transform.position, playerTransform.position);
-                if (distanceToPlayer > spawnDistance)
-                {
-                    // If the object is too far away, deactivate it
-                    obj.SetActive(false);
-                }
-            }
-            else
-            {
-                // If the object is not active, try to spawn it
-                if (Random.Range(0f, 1f) < 0.1f) // Adjust the probability as needed
-                {
-                    Vector3 randomOffset = Random.insideUnitSphere * spawnDistance;
-                    randomOffset.y = 0f; // Ensure objects spawn at the same height as the player
-                    obj.transform.position = playerTransform.position + randomOffset;
-                    obj.SetActive(true);
-                }
-            }
-        }
+        float tempX = (_player.position.x * (1 - _bgSpeed));
+        float distX = _player.position.x * _bgSpeed;
+        float tempY = (_player.position.y * (1 - _bgSpeed));
+        float distY = _player.position.y * _bgSpeed;
+
+        transform.position = new Vector2(_startPosX + distX, _startPosY + distY);
+
+        if (tempX > _startPosX + _lengthX)
+            _startPosX += _lengthX*2;
+        else if (tempX < _startPosX - _lengthX)
+            _startPosX -= _lengthX*2;
+
+        if (tempY > _startPosY + _lengthY)
+            _startPosY += _lengthY;
+        else if (tempY < _startPosY - _lengthY)
+            _startPosY -= _lengthY;
     }
 }

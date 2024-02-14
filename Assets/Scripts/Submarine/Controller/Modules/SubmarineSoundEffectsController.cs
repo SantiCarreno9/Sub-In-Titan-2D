@@ -11,7 +11,7 @@ namespace Submarine
         [SerializeField] private AudioSource _movementAudioSource;
         [SerializeField] private AudioClip _idleSound;
         [SerializeField] private AudioClip _movementSound;
-        private bool _isMoving;
+        [SerializeField] private float pitchMultiplier = 0.2f;        
 
         [Header("Collision")]
         [SerializeField] private AudioSource _collisionAudioSource;
@@ -82,6 +82,7 @@ namespace Submarine
 
         }
 
+
         // Update is called once per frame
         void Update()
         {
@@ -90,7 +91,9 @@ namespace Submarine
 
         private void PlayMovementSounds()
         {
-            //if ()
+            float velocityMagnitude = _movementModule.GetVelocity().magnitude;
+            float pitch = .5f + velocityMagnitude * pitchMultiplier;
+            _movementAudioSource.pitch = Mathf.Clamp(pitch, 0.1f, 3f);
         }
 
         #region ATTACK

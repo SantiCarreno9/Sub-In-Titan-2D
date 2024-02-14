@@ -8,6 +8,7 @@ namespace Submarine
     {
         [Header("Animations")]
         [SerializeField] private Animator _animator;
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         [Header("Movement")]
         [SerializeField] private MovementModule _movementController;
@@ -19,19 +20,27 @@ namespace Submarine
         [Header("Health")]
         [SerializeField] private HealthModule _healthModule;
         [SerializeField] private CanvasGroup _vignetteEffect;
+        [SerializeField] private Color hurtColor = Color.red;
+        private bool _isReceivingDamage = false;
         private bool _isPlayingLowHealthEffect = false;
+        private Color _initialColor;
+        private float _flickingTime = 15;
 
+        private void Awake()
+        {
+            _initialColor = spriteRenderer.color;
+        }        
 
         private void OnEnable()
         {
-            _healthModule.OnDamageReceived += PlayDamageAnimation;
+            _healthModule.OnDamageReceived += () => _isReceivingDamage = true;
             _healthModule.OnHealthRestored += PlayHealthRestoreAnimation;
             _healthModule.OnHealthChanged += UpdateAppearanceByHealth;
         }
 
         private void OnDisable()
         {
-            _healthModule.OnDamageReceived -= PlayDamageAnimation;
+            _healthModule.OnDamageReceived -= () => _isReceivingDamage = true;
             _healthModule.OnHealthRestored -= PlayHealthRestoreAnimation;
             _healthModule.OnHealthChanged -= UpdateAppearanceByHealth;
         }
@@ -41,7 +50,13 @@ namespace Submarine
         void Start()
         {
             _arcSequencer = Shader.PropertyToID("ArcSequencer");
-            _speedMultiplier = Shader.PropertyToID("SpeedMultiplier");            
+            _speedMultiplier = Shader.PropertyToID("SpeedMultiplier");
+        }
+
+        private void FixedUpdate()
+        {
+            if (_isReceivingDamage)
+                PlayDamageAnimation();
         }
 
         // Update is called once per frame
@@ -82,19 +97,26 @@ namespace Submarine
                 {
                     DOTween.To(() => _vignetteEffect.alpha, x => _vignetteEffect.alpha = x, 0.1f, 2).SetLoops(-1, LoopType.Yoyo);
                     _isPlayingLowHealthEffect = true;
-                }                
+                }
             }
             else
             {
                 DOTween.PauseAll();
                 _vignetteEffect.alpha = 0;
                 _isPlayingLowHealthEffect = false;
-            }            
+            }
         }
 
         private void PlayDamageAnimation()
         {
-            //Place logic to play animation            
+            spriteRenderer.color = spriteRenderer.color == _initialColor ? hurtColor : _initialColor;
+            Debug.Log(spriteRenderer.color);
+            _flickingTime--;
+            if (_flickingTime < 0)
+            {
+                _isReceivingDamage = false; _flickingTime = 15;
+                spriteRenderer.color = _initialColor;
+            }
         }
 
         private void PlayHealthRestoreAnimation()

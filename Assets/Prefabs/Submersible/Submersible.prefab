@@ -90,6 +90,7 @@ MonoBehaviour:
   _movementAudioSource: {fileID: 5112895372965403041}
   _idleSound: {fileID: 0}
   _movementSound: {fileID: 0}
+  pitchMultiplier: 0.2
   _collisionAudioSource: {fileID: 6576424678885136995}
   _collisionSound: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
   _attackAudioSource: {fileID: 8470417743170858048}
@@ -316,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  spriteRenderer: {fileID: 6088626335359659333}
   _movementController: {fileID: 5379209645434732004}
   _bubbles:
   - {fileID: 6243726657770002186}
@@ -323,6 +325,7 @@ MonoBehaviour:
   _bubblesCont: {fileID: 6449404228463132374}
   _healthModule: {fileID: 6467496175551760639}
   _vignetteEffect: {fileID: 0}
+  hurtColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &3347368980902880686
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,20 +820,20 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e818dfccfa2768f46a8d5cbac7fbfd31, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.8
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1927,5 +1930,10 @@ Transform:
 --- !u!4 &4777439410402050504 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3810104897171612852, guid: bec22632669060642ba2ecbe27a0fd2c, type: 3}
+  m_PrefabInstance: {fileID: 8551466955382760828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6088626335359659333 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2509574300942977081, guid: bec22632669060642ba2ecbe27a0fd2c, type: 3}
   m_PrefabInstance: {fileID: 8551466955382760828}
   m_PrefabAsset: {fileID: 0}
