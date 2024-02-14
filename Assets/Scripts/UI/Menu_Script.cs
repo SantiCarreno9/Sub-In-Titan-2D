@@ -29,4 +29,9 @@ public class Menu_Script : MonoBehaviour
     {
         clickSound.Play();
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
