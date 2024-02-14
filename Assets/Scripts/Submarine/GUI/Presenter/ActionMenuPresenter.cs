@@ -79,14 +79,14 @@ namespace Submarine.UI
         {
             _view.ShowRepairProgressBar();
             _view.DisableProgressButtons();
-            _view.ShowCancelButton();
+            _view.ShowProcessMenu();
             _updateRepairProgress = true;
         }
 
         private void OnRepairCanceled()
         {
             _view.HideRepairProgressBar();
-            _view.HideCancelButton();
+            _view.HideProcessMenu();
             _updateRepairProgress = false;
             UpdateButtonsInteractableStatus();
         }
@@ -94,7 +94,7 @@ namespace Submarine.UI
         private void OnRepairFinished()
         {
             _view.HideRepairProgressBar();
-            _view.HideCancelButton();
+            _view.HideProcessMenu();
             _updateRepairProgress = false;
             UpdateButtonsInteractableStatus();
         }
@@ -106,7 +106,7 @@ namespace Submarine.UI
         private void OnReloadStarted()
         {
             _view.ShowReloadProgressBar();
-            _view.ShowCancelButton();
+            _view.ShowProcessMenu();
             _view.DisableProgressButtons();
             _updateReloadProgress = true;
         }
@@ -114,7 +114,7 @@ namespace Submarine.UI
         private void OnReloadCanceled()
         {
             _view.HideReloadProgressBar();
-            _view.HideCancelButton();
+            _view.HideProcessMenu();
             _updateReloadProgress = false;
             UpdateButtonsInteractableStatus();
         }
@@ -122,7 +122,7 @@ namespace Submarine.UI
         private void OnReloadFinished()
         {
             _view.HideReloadProgressBar();
-            _view.HideCancelButton();            
+            _view.HideProcessMenu();            
             _updateReloadProgress = false;
             UpdateButtonsInteractableStatus();
         }

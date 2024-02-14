@@ -31,6 +31,7 @@ namespace Submarine
         [Header("Health")]
         [SerializeField] private AudioSource _healthAudioSource;
         [SerializeField] private AudioClip _lowHealthSound;
+        [SerializeField] private AudioClip _dieSound;
 
         [Space]
         [Header("Modules")]
@@ -49,14 +50,15 @@ namespace Submarine
             _attackModule.OnAOEShot += PlayAOEFireSound;      
             
             _healthModule.OnHealthChanged += PlayHealthBasedSound;
+            _healthModule.OnDie += PlayDieSound;
 
-            _actionMenuModule.ReloadController.OnProcessStarted += PlayReloadSound;
-            _actionMenuModule.ReloadController.OnProcessCanceled += StopPlayingActionSounds;
-            _actionMenuModule.ReloadController.OnProcessFinished += PlayReloadFinishSound;
+            //_actionMenuModule.ReloadController.OnProcessStarted += PlayReloadSound;
+            //_actionMenuModule.ReloadController.OnProcessCanceled += StopPlayingActionSounds;
+            //_actionMenuModule.ReloadController.OnProcessFinished += PlayReloadFinishSound;
 
-            _actionMenuModule.RepairController.OnProcessStarted += PlayRepairSound;            
-            _actionMenuModule.RepairController.OnProcessCanceled += StopPlayingActionSounds;            
-            _actionMenuModule.RepairController.OnProcessFinished += PlayRepairFinishSound;            
+            //_actionMenuModule.RepairController.OnProcessStarted += PlayRepairSound;            
+            //_actionMenuModule.RepairController.OnProcessCanceled += StopPlayingActionSounds;            
+            //_actionMenuModule.RepairController.OnProcessFinished += PlayRepairFinishSound;            
         }
 
         private void OnDisable()
@@ -67,14 +69,15 @@ namespace Submarine
             _attackModule.OnAOEShot -= PlayAOEFireSound;
 
             _healthModule.OnHealthChanged -= PlayHealthBasedSound;
+            _healthModule.OnDie -= PlayDieSound;
 
-            _actionMenuModule.ReloadController.OnProcessStarted -= PlayReloadSound;
-            _actionMenuModule.ReloadController.OnProcessCanceled -= StopPlayingActionSounds;
-            _actionMenuModule.ReloadController.OnProcessFinished -= StopPlayingActionSounds;
+            //_actionMenuModule.ReloadController.OnProcessStarted -= PlayReloadSound;
+            //_actionMenuModule.ReloadController.OnProcessCanceled -= StopPlayingActionSounds;
+            //_actionMenuModule.ReloadController.OnProcessFinished -= StopPlayingActionSounds;
 
-            _actionMenuModule.RepairController.OnProcessStarted -= PlayRepairSound;
-            _actionMenuModule.RepairController.OnProcessCanceled -= StopPlayingActionSounds;
-            _actionMenuModule.RepairController.OnProcessFinished -= StopPlayingActionSounds;
+            //_actionMenuModule.RepairController.OnProcessStarted -= PlayRepairSound;
+            //_actionMenuModule.RepairController.OnProcessCanceled -= StopPlayingActionSounds;
+            //_actionMenuModule.RepairController.OnProcessFinished -= StopPlayingActionSounds;
         }
         // Start is called before the first frame update
         void Start()
@@ -118,16 +121,22 @@ namespace Submarine
             {
                 if (!_healthAudioSource.isPlaying)
                 {
-                    _healthAudioSource.clip = _lowHealthSound;
-                    _healthAudioSource.Play();
-                    _healthAudioSource.loop = true;
+                    //_healthAudioSource.clip = _lowHealthSound;
+                    _healthAudioSource.PlayOneShot(_lowHealthSound);
+                    //_healthAudioSource.loop = true;
                 }                
             }
             else
             {
                 _healthAudioSource.Stop();
-                _healthAudioSource.loop = false;
-            }
+                //_healthAudioSource.loop = false;
+            }            
+        }
+
+        private void PlayDieSound()
+        {
+            _healthAudioSource.loop = false;
+            _healthAudioSource.PlayOneShot(_dieSound);
         }
 
         #region ACTION MENU

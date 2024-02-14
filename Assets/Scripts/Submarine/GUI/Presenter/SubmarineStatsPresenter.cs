@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Submarine.UI
@@ -11,12 +8,14 @@ namespace Submarine.UI
         [SerializeField] private HealthModule _healthModule;
         [SerializeField] private AttackModule _attackModule;
         [SerializeField] private MovementModule _movementModule;
+        private bool _updateAOECooldown = false;
 
         private void OnEnable()
         {
             _healthModule.OnHealthChanged += UpdateHealth;
             _attackModule.OnBasicAttackShot += UpdateAmmo;
             _attackModule.OnCannonReloaded += UpdateAmmo;
+            _attackModule.OnAOEShot += () => _updateAOECooldown = true;
         }
 
         private void OnDisable()
@@ -24,6 +23,7 @@ namespace Submarine.UI
             _healthModule.OnHealthChanged -= UpdateHealth;
             _attackModule.OnBasicAttackShot -= UpdateAmmo;
             _attackModule.OnCannonReloaded -= UpdateAmmo;
+            _attackModule.OnAOEShot -= () => _updateAOECooldown = false;
         }
 
         private void Start()
@@ -32,10 +32,7 @@ namespace Submarine.UI
             UpdateHealth(_healthModule.HealthPoints);
         }
 
-        private void UpdateAmmo()
-        {
-            _view.UpdateAmmo(_attackModule.GetCannonAmmo());
-        }
+
 
         private void UpdateHealth(int points)
         {
@@ -46,7 +43,26 @@ namespace Submarine.UI
         private void Update()
         {
             _view.UpdateDash(_movementModule.GetRemainingDashPercentage());
+            if (_updateAOECooldown)
+                UpdateAOECooldown();
+
         }
 
+        #region ATTACK
+
+        private void UpdateAmmo()
+        {
+            _view.UpdateAmmo(_attackModule.GetCannonAmmo());
+        }
+
+        private void UpdateAOECooldown()
+        {
+            float percentage = _attackModule.WeaponsController.GetAOECooldownPercentage();            
+            _view.UpdateAOECooldown(percentage);
+            if (percentage >= 1)
+                _updateAOECooldown = false;
+        }
+
+        #endregion
     }
 }

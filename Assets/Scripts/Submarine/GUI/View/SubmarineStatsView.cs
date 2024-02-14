@@ -8,33 +8,20 @@ namespace Submarine.UI
     {
         [SerializeField] private GameObject _statsContainer;
         [SerializeField] private Image _healthBar;
-        [SerializeField] private Image _dashBar;
-        [Tooltip("TEST ONLY")]
+        [SerializeField] private Image _dashBar;        
         [SerializeField] private TMP_Text _ammoText;
+        [SerializeField] private Image _aoeCooldownImage;
 
-        public void ShowStats()
-        {
-            _statsContainer.SetActive(true);
-        }
+        public void ShowStats() => _statsContainer.SetActive(true);
 
-        public void HideStats()
-        {
-            _statsContainer.SetActive(false);
-        }
-        
-        public void UpdateAmmo(int amount)
-        {
-            _ammoText.text = $"x{amount}";
-        }
+        public void HideStats() => _statsContainer.SetActive(false);
 
-        public void UpdateHealth(float percentage)
-        {
-            _healthBar.fillAmount = percentage;
-        }
+        public void UpdateAmmo(int amount) => _ammoText.text = $"x{amount}";
 
-        public void UpdateDash(float percentage)
-        {
-            _dashBar.fillAmount = percentage;
-        }
+        public void UpdateHealth(float percentage) => _healthBar.fillAmount = percentage;
+
+        public void UpdateDash(float percentage) => _dashBar.fillAmount = percentage;
+
+        public void UpdateAOECooldown(float percentage) => _aoeCooldownImage.fillAmount = percentage;
     }
 }

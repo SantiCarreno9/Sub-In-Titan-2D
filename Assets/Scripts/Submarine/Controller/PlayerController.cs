@@ -11,7 +11,7 @@ namespace Submarine
         [SerializeField] private ActionMenuModule _actionMenuController;
 
         private PlayerInputs _inputs;
-        
+
         public Transform Transform => transform;
 
         private void Awake()
@@ -42,6 +42,8 @@ namespace Submarine
             _inputs.ActionMenu.Quit.performed += Quit_performed;
 
             #endregion            
+
+            _healthModule.OnDie += Die;
         }
 
         private void Start()
@@ -242,6 +244,12 @@ namespace Submarine
         public Vector2 GetRelativeAttackPosition()
         {
             return _attackController.GetEnemyAttackPoint();
+        }
+
+        private void Die()
+        {
+            DisablePlayerActionMap();
+            GameManager.Instance.ShowGameOverScreen();
         }
     }
 

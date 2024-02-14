@@ -24,6 +24,11 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 
     public float AOICooldownTimeLeft => aoeFireCooldownLeft;
 
+    public float GetAOECooldownPercentage()
+    {
+        return (aoeFireCooldownLeft / aoeFireCooldown);
+    }
+
     float cannonFireCooldownLeft = 0;
     float aoeFireCooldownLeft = 0;
     SimpleObjectPool<CannonProjectile> cannonProjectilePool;
@@ -43,7 +48,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     }
     public void FireCannon()
     {
-        if(CanFireCannon)
+        if (CanFireCannon)
         {
             var projectile = cannonProjectilePool.Get();
             projectile.transform.position = shootPoint.position;
@@ -65,10 +70,10 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
         if (CanUseAOE && aoeCharge.IsAOEReady)
         {
             aoeCharge.UseCharge();
-            aoeFireCooldownLeft = aoeFireCooldown;
+            aoeFireCooldownLeft = 0;
             CanUseAOE = false;
         }
-    }    
+    }
 
     void UpdateCannonCooldown()
     {
@@ -82,9 +87,9 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     }
     void UpdateAOECooldown()
     {
-        if (aoeFireCooldownLeft > 0)
+        if (aoeFireCooldownLeft < aoeFireCooldown)
         {
-            aoeFireCooldownLeft -= Time.deltaTime;
+            aoeFireCooldownLeft += Time.deltaTime;
             return;
         }
 
@@ -94,7 +99,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     public void ReloadCannon(int ammo)
     {
         CurrentCannonAmmo = ammo;
-        if(CurrentCannonAmmo > maxCannonAmmo)
+        if (CurrentCannonAmmo > maxCannonAmmo)
         {
             CurrentCannonAmmo = maxCannonAmmo;
         }
@@ -105,7 +110,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
         if (CanUseAOE)
         {
             aoeCharge.StartCharging();
-        }        
+        }
     }
 
     public void CancelAOE()

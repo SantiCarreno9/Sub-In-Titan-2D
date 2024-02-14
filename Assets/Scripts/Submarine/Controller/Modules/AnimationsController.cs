@@ -8,7 +8,9 @@ namespace Submarine
     {
         [Header("Animations")]
         [SerializeField] private Animator _animator;
-        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private GameObject _shipVisuals;
+        [SerializeField] private GameObject _lights;
 
         [Header("Movement")]
         [SerializeField] private MovementModule _movementController;
@@ -20,6 +22,7 @@ namespace Submarine
         [Header("Health")]
         [SerializeField] private HealthModule _healthModule;
         [SerializeField] private CanvasGroup _vignetteEffect;
+        [SerializeField] private GameObject _explosionEffect;
         [SerializeField] private Color hurtColor = Color.red;
         private bool _isReceivingDamage = false;
         private bool _isPlayingLowHealthEffect = false;
@@ -28,14 +31,15 @@ namespace Submarine
 
         private void Awake()
         {
-            _initialColor = spriteRenderer.color;
-        }        
+            _initialColor = _spriteRenderer.color;
+        }
 
         private void OnEnable()
         {
             _healthModule.OnDamageReceived += () => _isReceivingDamage = true;
             _healthModule.OnHealthRestored += PlayHealthRestoreAnimation;
             _healthModule.OnHealthChanged += UpdateAppearanceByHealth;
+            _healthModule.OnDie += PlayDieAnimation;
         }
 
         private void OnDisable()
@@ -43,6 +47,9 @@ namespace Submarine
             _healthModule.OnDamageReceived -= () => _isReceivingDamage = true;
             _healthModule.OnHealthRestored -= PlayHealthRestoreAnimation;
             _healthModule.OnHealthChanged -= UpdateAppearanceByHealth;
+            _healthModule.OnDie -= PlayDieAnimation;
+
+            DOTween.PauseAll();
         }
 
 
@@ -57,7 +64,7 @@ namespace Submarine
         {
             if (_isReceivingDamage)
                 PlayDamageAnimation();
-        }
+        }        
 
         // Update is called once per frame
         void Update()
@@ -109,14 +116,21 @@ namespace Submarine
 
         private void PlayDamageAnimation()
         {
-            spriteRenderer.color = spriteRenderer.color == _initialColor ? hurtColor : _initialColor;
-            Debug.Log(spriteRenderer.color);
+            _spriteRenderer.color = _spriteRenderer.color == _initialColor ? hurtColor : _initialColor;
             _flickingTime--;
             if (_flickingTime < 0)
             {
                 _isReceivingDamage = false; _flickingTime = 15;
-                spriteRenderer.color = _initialColor;
+                _spriteRenderer.color = _initialColor;
             }
+        }
+
+        private void PlayDieAnimation()
+        {
+            DOTween.PauseAll();
+            _explosionEffect.SetActive(true);
+            _shipVisuals.SetActive(false);
+            _lights.SetActive(false);
         }
 
         private void PlayHealthRestoreAnimation()

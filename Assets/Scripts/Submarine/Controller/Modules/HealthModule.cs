@@ -10,7 +10,8 @@ namespace Submarine
 
         public UnityAction OnDamageReceived;
         public UnityAction OnHealthRestored;
-        public UnityAction<int> OnHealthChanged;        
+        public UnityAction<int> OnHealthChanged;
+        public UnityAction OnDie;
 
         private void Awake()
         {
@@ -26,11 +27,15 @@ namespace Submarine
 
         public void Damage(int points)
         {
-            HealthPoints -= points;
-            OnHealthChanged?.Invoke(HealthPoints);
-            OnDamageReceived?.Invoke();
-            if (HealthPoints <= 0)
-                Die();
+            if (HealthPoints > 0)
+            {
+                HealthPoints -= points;
+                OnHealthChanged?.Invoke(HealthPoints);
+                OnDamageReceived?.Invoke();
+
+                if (HealthPoints <= 0)
+                    Die();
+            }
         }
 
         /// <summary>
@@ -38,7 +43,7 @@ namespace Submarine
         /// </summary>
         public void Die()
         {
-            GameManager.Instance.ShowGameOverScreen();
+            OnDie?.Invoke();
         }
 
         public int GetMaxHealth() => _maxHealthPoints;

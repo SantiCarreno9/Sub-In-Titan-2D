@@ -10,16 +10,19 @@ namespace Submarine.UI
         [SerializeField] private ActionMenuPresenter _presenter;
 
         [SerializeField] private GameObject _menu;
+        [SerializeField] private GameObject _processMenu;
         [Header("Repair")]
         [SerializeField] private Button _repairButton;
+        [SerializeField] private GameObject _repairProgressBarCont;
         [SerializeField] private Image _repairProgressBar;
 
         [Header("Reload")]
         [SerializeField] private Button _reloadButton;
+        [SerializeField] private GameObject _reloadProgressBarCont;
         [SerializeField] private Image _reloadProgressBar;
 
-        [Header("Cancel")]
-        [SerializeField] private GameObject _cancelButton;
+        [SerializeField] private AudioSource _clickSound;
+
 
         public void Open() => _menu.SetActive(true);
 
@@ -37,9 +40,9 @@ namespace Submarine.UI
             DisableRepairButton();
         }
 
-        public void ShowCancelButton() => _cancelButton.SetActive(true);
+        public void ShowProcessMenu() => _processMenu.SetActive(true);
 
-        public void HideCancelButton() => _cancelButton.SetActive(false);
+        public void HideProcessMenu() => _processMenu.SetActive(false);
 
         public void CancelProcess() => _presenter.CancelProcess();
 
@@ -51,9 +54,17 @@ namespace Submarine.UI
 
         public void DisableRepairButton() => _repairButton.interactable = false;
 
-        public void ShowRepairProgressBar() => _repairProgressBar.gameObject.SetActive(true);
+        public void ShowRepairProgressBar()
+        {
+            _repairProgressBarCont.SetActive(true);
+            _repairProgressBar.gameObject.SetActive(true);
+        }
 
-        public void HideRepairProgressBar() => _repairProgressBar.gameObject.SetActive(false);
+        public void HideRepairProgressBar()
+        {
+            _repairProgressBarCont.SetActive(false);
+            _repairProgressBar.gameObject.SetActive(false);
+        }
 
         public void UpdateRepairProgress(float percentage) => _repairProgressBar.fillAmount = percentage;
 
@@ -63,9 +74,17 @@ namespace Submarine.UI
 
         public void StartReloading() => _presenter.StartReloading();
 
-        public void ShowReloadProgressBar() => _reloadProgressBar.gameObject.SetActive(true);
+        public void ShowReloadProgressBar()
+        {
+            _reloadProgressBarCont.gameObject.SetActive(true);
+            _reloadProgressBar.gameObject.SetActive(true);
+        }
 
-        public void HideReloadProgressBar() => _reloadProgressBar.gameObject.SetActive(false);
+        public void HideReloadProgressBar()
+        {
+            _reloadProgressBarCont.gameObject.SetActive(false);
+            _reloadProgressBar.gameObject.SetActive(false);
+        }
 
         public void UpdateReloadProgress(float percentage) => _reloadProgressBar.fillAmount = percentage;
 
@@ -74,5 +93,10 @@ namespace Submarine.UI
         public void DisableReloadButton() => _reloadButton.interactable = false;
 
         #endregion
+
+        public void PLayClickSound()
+        {
+            _clickSound.Play();
+        }
     }
 }

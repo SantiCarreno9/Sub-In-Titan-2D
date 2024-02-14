@@ -12,6 +12,7 @@ namespace Submarine
         [SerializeField] private SubWeaponsHandler _weaponsController;
 
         public AimController AimController => _aimController;
+        public SubWeaponsHandler WeaponsController => _weaponsController;
 
         [Space]
         [SerializeField] private float _enemyAttackRadius = 0.3f;
