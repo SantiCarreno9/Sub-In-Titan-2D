@@ -7,6 +7,7 @@ public interface ISubWeaponsHandler
     public bool IsAOEReady { get; }
     public int CurrentCannonAmmo { get; }
     public int MaxAmmo { get; }
+    public float AOICooldownTimeLeft { get; }
 
     public void SetCannonAimDirection(Vector2 direction);
     public void FireCannon();

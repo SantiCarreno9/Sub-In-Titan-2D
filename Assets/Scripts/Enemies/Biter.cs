@@ -20,6 +20,9 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     [SerializeField] float deathTime;
     [SerializeField] float attackTime;
     [SerializeField] int damage;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioConfigSO bitingAudio;
+    [SerializeField] AudioConfigSO deathAudio;
     ISubmarine playerSub;
     EnemyState enemyState = EnemyState.Idle;
     Vector3 relativeAttackPosition;
@@ -69,6 +72,8 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
                 playerSub.AddAttachedEnemy(this);
                 //change animation to attack
                 animator.SetBool("attack", true);
+                AudioConfigSO.SetData(bitingAudio, audioSource);
+                audioSource.Play();
                 InvokeRepeating(nameof(DamagePlayer), attackTime, attackTime);
             }
 
@@ -95,6 +100,9 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         GFX.SetActive(false);
         collider.enabled = false;
         deathEffect.Play();
+        audioSource.Stop();
+        AudioConfigSO.SetData(deathAudio, audioSource);
+        audioSource.Play();
         Destroy(gameObject, deathTime);
     }
 
