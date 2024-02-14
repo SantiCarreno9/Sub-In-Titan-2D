@@ -14,6 +14,8 @@ public class CannonProjectile : MonoBehaviour
     [SerializeField] GameObject explosionEffect;
     [SerializeField] float destroyTime;
     [SerializeField] GameObject GFX;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioConfigSO explosionAudio;
     bool hasExploded;
     Vector3 launchPoint;
     bool shot;
@@ -77,6 +79,8 @@ public class CannonProjectile : MonoBehaviour
     {
         hasExploded = true;
         explosionEffect.SetActive(true);
+        AudioConfigSO.SetData(explosionAudio, audioSource);
+        audioSource.Play();
         rb.isKinematic = true;
         GFX.SetActive(false);
         var enemies = Physics2D.OverlapCircleAll(transform.position, explosionRadius, enemyLayer);

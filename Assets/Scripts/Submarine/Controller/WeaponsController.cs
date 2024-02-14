@@ -18,6 +18,8 @@ namespace Submarine.Test
 
         public int MaxAmmo => _maxAmmo;
 
+        public float AOICooldownTimeLeft => throw new System.NotImplementedException();
+
         private int _currentAmmo = 0;
 
         private void Awake()

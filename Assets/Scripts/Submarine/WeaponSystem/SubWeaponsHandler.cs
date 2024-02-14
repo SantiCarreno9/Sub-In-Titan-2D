@@ -11,7 +11,8 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     [SerializeField] AOECharge aoeCharge;
     [SerializeField] float cannonFireCooldown;
     [SerializeField] float aoeFireCooldown;
-    public bool CanFireCannon { get; private set; }
+    bool cannonCooldownOver = true;
+    public bool CanFireCannon => cannonCooldownOver && CurrentCannonAmmo > 0;
 
     public bool CanUseAOE { get; private set; }
 
@@ -20,6 +21,8 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     public int MaxAmmo => maxCannonAmmo;
 
     public bool IsAOEReady => aoeCharge.IsAOEReady;
+
+    public float AOICooldownTimeLeft => aoeFireCooldownLeft;
 
     float cannonFireCooldownLeft = 0;
     float aoeFireCooldownLeft = 0;
@@ -40,7 +43,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     }
     public void FireCannon()
     {
-        if(CanFireCannon && CurrentCannonAmmo != 0)
+        if(CanFireCannon)
         {
             var projectile = cannonProjectilePool.Get();
             projectile.transform.position = shootPoint.position;
@@ -48,7 +51,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
             projectile.Shoot(cannon.up);
             CurrentCannonAmmo--;
             cannonFireCooldownLeft = cannonFireCooldown;
-            CanFireCannon = false;
+            cannonCooldownOver = false;
         }
     }
 
@@ -75,7 +78,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
             return;
         }
 
-        CanFireCannon = true;
+        cannonCooldownOver = true;
     }
     void UpdateAOECooldown()
     {
