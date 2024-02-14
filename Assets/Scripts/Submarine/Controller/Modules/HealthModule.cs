@@ -8,9 +8,6 @@ namespace Submarine
         [SerializeField] private int _maxHealthPoints = 200;
         public int HealthPoints { get; private set; }
 
-        [SerializeField] private float _damageTimeout = 0.2f;
-        private float _recoveryTime = 0;
-
         public UnityAction OnDamageReceived;
         public UnityAction OnHealthRestored;
         public UnityAction<int> OnHealthChanged;        

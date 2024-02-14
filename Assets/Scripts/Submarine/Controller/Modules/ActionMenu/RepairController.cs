@@ -5,9 +5,7 @@ namespace Submarine
 {
     public class RepairController : SubmarineProcess
     {
-        [Tooltip("Health percentage restored per session")]
-        [Range(0, 1)]
-        [SerializeField] private float _healthPercentage = 0.25f;
+        [Tooltip("Health percentage restored per session")]        
         [SerializeField] private HealthModule _healthModule;
         private short _enemiesAttachedCount = 0;
 

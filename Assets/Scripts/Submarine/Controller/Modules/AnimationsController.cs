@@ -76,15 +76,19 @@ namespace Submarine
         private void UpdateAppearanceByHealth(int healthPoints)
         {
             float healthPercentage = ((float)healthPoints / (float)_healthModule.GetMaxHealth());
-            if (healthPercentage < 0.25f && !_isPlayingLowHealthEffect)
-            {                
-                DOTween.To(() => _vignetteEffect.alpha, x => _vignetteEffect.alpha = x, 0.1f, 2).SetLoops(-1, LoopType.Yoyo);
-                _isPlayingLowHealthEffect = true;
+            if (healthPercentage < 0.25f)
+            {
+                if (!_isPlayingLowHealthEffect)
+                {
+                    DOTween.To(() => _vignetteEffect.alpha, x => _vignetteEffect.alpha = x, 0.1f, 2).SetLoops(-1, LoopType.Yoyo);
+                    _isPlayingLowHealthEffect = true;
+                }                
             }
             else
             {
                 DOTween.PauseAll();
                 _vignetteEffect.alpha = 0;
+                _isPlayingLowHealthEffect = false;
             }            
         }
 
