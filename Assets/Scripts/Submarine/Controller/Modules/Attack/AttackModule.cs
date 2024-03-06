@@ -1,4 +1,3 @@
-using Submarine.Test;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,8 +6,7 @@ namespace Submarine
     public class AttackModule : BaseModule
     {
         [Header("Components")]
-        [SerializeField] private AimController _aimController;
-        //[SerializeField] private WeaponsController _weaponsController;
+        [SerializeField] private AimController _aimController;        
         [SerializeField] private SubWeaponsHandler _weaponsController;
 
         public AimController AimController => _aimController;

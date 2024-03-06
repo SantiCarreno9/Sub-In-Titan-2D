@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Submarine
@@ -9,13 +7,12 @@ namespace Submarine
         [Header("Audios")]
         [Header("Movement")]
         [SerializeField] private AudioSource _movementAudioSource;
-        [SerializeField] private AudioClip _idleSound;
-        [SerializeField] private AudioClip _movementSound;
-        [SerializeField] private float pitchMultiplier = 0.2f;        
+        [SerializeField] private float pitchMultiplier = 0.2f;
 
         [Header("Collision")]
         [SerializeField] private AudioSource _collisionAudioSource;
-        [SerializeField] private AudioClip _collisionSound;        
+        [SerializeField] private AudioClip _normalCollisionSound;
+        [SerializeField] private AudioClip _dashCollisionSound;
         [Header("Attack")]
         [SerializeField] private AudioSource _attackAudioSource;
         [SerializeField] private AudioClip _basicAttackSound;
@@ -23,7 +20,7 @@ namespace Submarine
         [SerializeField] private AudioClip _aoeFireSound;
         [SerializeField] private AudioClip _aoeCancelSound;
         [Header("Action Menu")]
-        [SerializeField] private AudioSource _actionMenuAudioSource;        
+        [SerializeField] private AudioSource _actionMenuAudioSource;
         [SerializeField] private AudioClip _reloadingSound;
         [SerializeField] private AudioClip _fullReloadSound;
         [SerializeField] private AudioClip _repairingSound;
@@ -43,12 +40,14 @@ namespace Submarine
 
 
         private void OnEnable()
-        {               
+        {
+            _movementModule.OnCollision += PlayCollisionSound;
+
             _attackModule.OnBasicAttackShot += PlayBasicAttackSound;
             _attackModule.OnAOECharge += PlayAOEChargeSound;
             _attackModule.OnAOECanceled += PlayAOECancelSound;
-            _attackModule.OnAOEShot += PlayAOEFireSound;      
-            
+            _attackModule.OnAOEShot += PlayAOEFireSound;
+
             _healthModule.OnHealthChanged += PlayHealthBasedSound;
             _healthModule.OnDie += PlayDieSound;
 
@@ -63,6 +62,8 @@ namespace Submarine
 
         private void OnDisable()
         {
+            _movementModule.OnCollision -= PlayCollisionSound;
+
             _attackModule.OnBasicAttackShot -= PlayBasicAttackSound;
             _attackModule.OnAOECharge -= PlayAOEChargeSound;
             _attackModule.OnAOECanceled -= PlayAOECancelSound;
@@ -79,18 +80,13 @@ namespace Submarine
             //_actionMenuModule.RepairController.OnProcessCanceled -= StopPlayingActionSounds;
             //_actionMenuModule.RepairController.OnProcessFinished -= StopPlayingActionSounds;
         }
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
 
         // Update is called once per frame
         void Update()
         {
             PlayMovementSounds();
-        }        
+        }
 
         private void PlayMovementSounds()
         {
@@ -99,13 +95,22 @@ namespace Submarine
             _movementAudioSource.pitch = Mathf.Clamp(pitch, 0.1f, 3f);
         }
 
+        private void PlayCollisionSound()
+        {
+            if (_movementModule.IsDashing())
+                _collisionAudioSource.clip = _dashCollisionSound;
+            else _collisionAudioSource.clip = _normalCollisionSound;
+
+            _collisionAudioSource.Play();
+        }
+
         #region ATTACK
 
         private void PlayBasicAttackSound() => _attackAudioSource.PlayOneShot(_basicAttackSound);
         private void PlayAOEChargeSound() => _attackAudioSource.PlayOneShot(_aoeChargeSound);
         private void PlayAOECancelSound()
         {
-            if(_attackAudioSource.isPlaying)
+            if (_attackAudioSource.isPlaying)
                 _attackAudioSource.Stop();
             _attackAudioSource.PlayOneShot(_aoeCancelSound);
         }
@@ -117,20 +122,20 @@ namespace Submarine
         private void PlayHealthBasedSound(int healthPoints)
         {
             float percentage = (float)healthPoints / (float)_healthModule.GetMaxHealth();
-            if(percentage < 0.25f)
+            if (percentage < 0.25f)
             {
                 if (!_healthAudioSource.isPlaying)
                 {
                     //_healthAudioSource.clip = _lowHealthSound;
                     _healthAudioSource.PlayOneShot(_lowHealthSound);
                     //_healthAudioSource.loop = true;
-                }                
+                }
             }
             else
             {
                 _healthAudioSource.Stop();
                 //_healthAudioSource.loop = false;
-            }            
+            }
         }
 
         private void PlayDieSound()
@@ -145,7 +150,7 @@ namespace Submarine
         {
             _actionMenuAudioSource.loop = true;
             _actionMenuAudioSource.clip = _repairingSound;
-            _actionMenuAudioSource.Play();  
+            _actionMenuAudioSource.Play();
         }
 
         private void PlayRepairFinishSound() => _actionMenuAudioSource.PlayOneShot(_fullRepairSound);
@@ -156,7 +161,7 @@ namespace Submarine
             _actionMenuAudioSource.clip = _reloadingSound;
             _actionMenuAudioSource.Play();
         }
-        
+
         private void PlayReloadFinishSound() => _actionMenuAudioSource.PlayOneShot(_fullReloadSound);
 
         private void StopPlayingActionSounds()
@@ -164,11 +169,6 @@ namespace Submarine
             _actionMenuAudioSource.Stop();
         }
 
-        #endregion
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            _collisionAudioSource.Play();
-        }
+        #endregion        
     }
 }

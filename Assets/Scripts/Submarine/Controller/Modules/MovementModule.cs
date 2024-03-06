@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 namespace Submarine
 {
@@ -25,6 +25,8 @@ namespace Submarine
         private float _speedMultiplier = 1f;
         private Vector2 _movement;
 
+        public UnityAction OnCollision;
+
         private void Awake()
         {
             _speed = _normalSpeed;
@@ -39,7 +41,7 @@ namespace Submarine
 
             Move();
 
-            UpdateDashUsage();            
+            UpdateDashUsage();
         }
 
         public override void EnableModule()
@@ -59,25 +61,21 @@ namespace Submarine
 
         #region DASH
 
-        public bool IsDashing() => _isDashing;
+        public bool IsDashing() => _speed == _dashSpeed;
 
         public void StartDashing() => _isDashing = true;
 
         public void StopDashing() => _isDashing = false;
 
         private void UpdateDashUsage()
-        {            
-
-            if (_isDashing)
+        {
+            if (_isDashing && _movement.magnitude != 0)
             {
-                if (_movementInputs.magnitude == 0)
-                    return;
-
                 if (_dashRemainingTime > 0)
                     _dashRemainingTime -= Time.fixedDeltaTime;
                 else _dashRemainingTime = 0;
             }
-            else
+            else if (!_isDashing)
             {
                 if (_dashRemainingTime < _dashDuration)
                     _dashRemainingTime += Time.fixedDeltaTime * _dashRecoveryRate;
@@ -124,6 +122,11 @@ namespace Submarine
             _speedMultiplier += multiplier;
             if (_speedMultiplier > 1)
                 _speedMultiplier = 1;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            OnCollision?.Invoke();
         }
     }
 }
