@@ -52,6 +52,9 @@ MonoBehaviour:
   animator: {fileID: 7973942328778793168}
   detectionRadius: 5
   speed: 3
+  snapDistance: 1
+  snapTime: 0.5
+  aggroLoseDistance: 6
   agent: {fileID: 2169314784204389370}
   playerLayer:
     serializedVersion: 2
