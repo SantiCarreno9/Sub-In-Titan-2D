@@ -10,6 +10,7 @@ public class SaveManager : MonoBehaviour
 {
     [SerializeField] Camera screenshotCamera;
     public static int currentGameSlot = 0;
+    public static SaveData currentSaveData;
     static string directoryPath = $"{Application.dataPath}/Saves";
     public void SaveGameData()
     {
@@ -78,7 +79,7 @@ public class SaveData
     public byte[] screenshotData;
     public float playerPositionX;
     public float playerPositionY;
-    public float health;
+    public int health;
     public float depth;
     public int screenshotWidth;
     public int screenshotHeight;

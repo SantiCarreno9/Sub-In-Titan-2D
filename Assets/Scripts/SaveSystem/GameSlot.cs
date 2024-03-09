@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameSlot : MonoBehaviour
@@ -38,12 +39,8 @@ public class GameSlot : MonoBehaviour
 
     void LoadGame()
     {
-        if(saveData == null)
-        {
-            //Load new game
-            return;
-        }
-
-        //load saved game
+        SaveManager.currentGameSlot = slotNumber;
+        SaveManager.currentSaveData = saveData;
+        SceneManager.LoadScene(1);
     }
 }
