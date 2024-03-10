@@ -124,6 +124,51 @@ MonoBehaviour:
   m_UseMeshPrefab: {fileID: 0}
   m_CompressBounds: 0
   m_OverrideVector: {x: 1, y: 1, z: 1}
+--- !u!1 &2480033926659015641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4941278619964109865}
+  - component: {fileID: 8926876743375029495}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4941278619964109865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480033926659015641}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -16.849806, y: 218.64175, z: 2.8757694}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1186478395621638656}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8926876743375029495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480033926659015641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01c7d8806d08634b8e23d8acdb98fe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenshotCamera: {fileID: 6829601306118391171}
 --- !u!1 &6659484959505271502
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +202,7 @@ Transform:
   - {fileID: 2772893443406839743}
   - {fileID: 3904539555853423042}
   - {fileID: 5068241252411599608}
+  - {fileID: 4941278619964109865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7378761544509876552
@@ -332,6 +378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &6829601306118391171 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 806871319452218738, guid: 47230ab8ddf8c484a8063aca3fdacca7, type: 3}
+  m_PrefabInstance: {fileID: 6193868977142067441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8318479784867843474 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2775385387614190947, guid: 47230ab8ddf8c484a8063aca3fdacca7, type: 3}

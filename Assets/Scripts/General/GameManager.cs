@@ -1,3 +1,4 @@
+using Submarine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
+
+        LoadGame();
     }
 
     public void ShowGameOverScreen()
@@ -23,5 +26,16 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("GameOver");
+    }
+
+    void LoadGame()
+    {
+        SaveData saveData = SaveManager.currentSaveData;
+        if(saveData == null)
+        {
+            return;
+        }
+        Player.transform.position = new Vector3(saveData.playerPositionX, saveData.playerPositionY, 0);
+        Player.GetComponentInChildren<HealthModule>().SetHealth(saveData.health);
     }
 }
