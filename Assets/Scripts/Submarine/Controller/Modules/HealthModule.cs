@@ -37,6 +37,11 @@ namespace Submarine
                     Die();
             }
         }
+        public void SetHealth(int health)
+        {
+            HealthPoints = health;
+            OnHealthChanged?.Invoke(HealthPoints);
+        }
 
         /// <summary>
         /// Plays the dead animation and disables the controls

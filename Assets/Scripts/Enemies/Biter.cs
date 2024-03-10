@@ -8,6 +8,9 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     [SerializeField] Animator animator;
     [SerializeField] float detectionRadius;
     [SerializeField] float speed;
+    [SerializeField] float snapDistance;
+    [SerializeField] float snapTime;
+    [SerializeField] float aggroLoseDistance;
     [SerializeField] NavMeshAgent agent;
     Transform player;
     [SerializeField] LayerMask playerLayer;
@@ -27,6 +30,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     EnemyState enemyState = EnemyState.Idle;
     Vector3 relativeAttackPosition;
     int health = 100;
+    float timeLeft;
     public float SlowdownMultiplier => slowDownMultiplier;
 
     private void Awake()
@@ -51,7 +55,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (enemyState == EnemyState.Attack)
+        if (enemyState == EnemyState.Attack || enemyState == EnemyState.Snap)
         {
             return;
         }
@@ -62,25 +66,25 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
             spriteRenderer.flipX = (player.position + relativeAttackPosition).x - biterWidth > transform.position.x;
 
             Vector2 target = player.position + relativeAttackPosition;
-            Vector2 current = transform.position;            
-            if((target - current).magnitude <= 0.05f)
+            Vector2 current = transform.position;
+            if ((target - current).magnitude <= snapDistance)
             {
-                transform.parent = player;
-                transform.position = player.position + relativeAttackPosition;
                 agent.enabled = false;
-                enemyState = EnemyState.Attack;
-                playerSub.AddAttachedEnemy(this);
-                //change animation to attack
-                animator.SetBool("attack", true);
-                AudioConfigSO.SetData(bitingAudio, audioSource);
-                audioSource.Play();
-                InvokeRepeating(nameof(DamagePlayer), attackTime, attackTime);
+                enemyState = EnemyState.Snap;
+                StartCoroutine(SnapCoroutine());
+            }   
+
+            if((target - current).magnitude >= aggroLoseDistance)
+            {
+                agent.enabled = false;
+                enemyState = EnemyState.Idle;
+                animator.SetBool("swim", false);
             }
 
             return;
         }
 
-        if(Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer))
+        if (Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer))
         {
             agent.enabled = true;
             enemyState = EnemyState.Chase;
@@ -127,10 +131,36 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         }
     }
 
+    IEnumerator SnapCoroutine()
+    {
+        spriteRenderer.flipX = (player.position + relativeAttackPosition).x - biterWidth > transform.position.x;
+        timeLeft = snapTime;
+        Vector2 startPosition = transform.position;
+        while(timeLeft > 0)
+        {
+            timeLeft -= Time.deltaTime;
+            float t = 1 - timeLeft / snapTime;
+            Vector2 target = player.position + relativeAttackPosition;
+            transform.position = Vector2.Lerp(startPosition, target, t);
+            yield return null;
+        }
+
+        transform.parent = player;
+        transform.position = player.position + relativeAttackPosition;
+        enemyState = EnemyState.Attack;
+        playerSub.AddAttachedEnemy(this);
+        //change animation to attack
+        animator.SetBool("attack", true);
+        AudioConfigSO.SetData(bitingAudio, audioSource);
+        audioSource.Play();
+        InvokeRepeating(nameof(DamagePlayer), attackTime, attackTime);
+    }
+
     enum EnemyState
     {
         Idle,
         Chase,
+        Snap,
         Attack
     }
 }
