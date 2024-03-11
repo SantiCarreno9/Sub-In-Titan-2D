@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class TriggerArea : MonoBehaviour
 {
     public UnityEvent OnTriggerEnter;
@@ -8,7 +9,7 @@ public class TriggerArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == _layer)
+        if ((1 << collision.gameObject.layer) == _layer.value)
             OnTriggerEnter?.Invoke();
     }
 }

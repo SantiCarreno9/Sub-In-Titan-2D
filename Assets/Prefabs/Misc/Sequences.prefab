@@ -45,7 +45,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -53,6 +53,8 @@ PlayableDirector:
   - key: {fileID: -8805422569020558798, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
     value: {fileID: 3367195237090055754}
   - key: {fileID: -2615041557491050838, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6187774933944123744, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
@@ -89,7 +91,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: GameOver-Kraken
             m_BoolArgument: 0
-          m_CallState: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 0}
