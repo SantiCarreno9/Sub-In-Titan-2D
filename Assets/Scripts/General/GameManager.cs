@@ -28,10 +28,22 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("GameOver");
     }
 
+    public void ChangeSceneByName(string name)
+    {
+        if (!string.IsNullOrEmpty(name))
+            SceneManager.LoadScene(name);
+    }
+
+    public void ChangeSceneByIndex(int index)
+    {
+        if (index >= 0)
+            SceneManager.LoadScene(index);
+    }
+
     void LoadGame()
     {
         SaveData saveData = SaveManager.currentSaveData;
-        if(saveData == null)
+        if (saveData == null)
         {
             return;
         }
