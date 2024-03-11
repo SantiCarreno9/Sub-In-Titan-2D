@@ -39,6 +39,7 @@ public class SaveManager : MonoBehaviour
             depth = 0, //Will get from the script Juan creates
             screenshotHeight = tex.height,
             screenshotWidth = tex.width,
+            checkPointIndex = Checkpoint.lastCheckpointTriggered
         };
 
         Destroy(tex);
@@ -83,6 +84,7 @@ public class SaveData
     public float depth;
     public int screenshotWidth;
     public int screenshotHeight;
+    public int checkPointIndex;
     public Texture2D CreateTexture2DFromScreenshotData()
     {
         Texture2D tex = new Texture2D(screenshotWidth, screenshotHeight);

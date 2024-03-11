@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    static int lasGeneratedCheckPointId = -1;
-    static int lastSavedCheckpointId = -1;
+    [SerializeField] int checkPointIndex = -1;
+    bool isEnabled = true;
+    public static int lastCheckpointTriggered = -1;
     SaveManager saveManager;
     int checkPointId;
-    private void Awake()
+    [SerializeField] CheckpointEffect effect;
+    private void Start()
     {
-        checkPointId = ++lasGeneratedCheckPointId;
+        if(checkPointIndex <= lastCheckpointTriggered)
+        {
+            isEnabled = false;
+            return;
+        }
         saveManager = FindObjectOfType<SaveManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(lastSavedCheckpointId == checkPointId)
+        if (!isEnabled)
         {
             return;
         }
-        lastSavedCheckpointId = checkPointId;
+        isEnabled = false;
+        lastCheckpointTriggered = checkPointId;
         saveManager.SaveGameData();
+        effect.PlaySFX();
         Debug.Log("Saved Data");
     }
 }
