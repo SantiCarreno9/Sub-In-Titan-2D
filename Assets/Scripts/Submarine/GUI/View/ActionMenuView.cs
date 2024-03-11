@@ -94,7 +94,7 @@ namespace Submarine.UI
 
         #endregion
 
-        public void PLayClickSound()
+        public void PlayClickSound()
         {
             _clickSound.Play();
         }
