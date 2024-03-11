@@ -45,7 +45,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -54,11 +54,11 @@ PlayableDirector:
     value: {fileID: 3367195237090055754}
   - key: {fileID: -2615041557491050838, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
     value: {fileID: 0}
-  - key: {fileID: -5466483375654705900, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
+  - key: {fileID: -6187774933944123744, guid: fd71709c8089b2349a7ba98ce55c8859, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References:
-    - 17a83373c65b070418b9bcadf4e25517: {fileID: 0}
+    - 17a83373c65b070418b9bcadf4e25517: {fileID: 2110254520679401237}
     - 623cbebe4ba64ed49bbe50ebe77e3cb5: {fileID: 2110254520679401237}
 --- !u!114 &3367195237090055754
 MonoBehaviour:
@@ -76,6 +76,7 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: 784c03cad4441544ba32c5c1a4e2392c, type: 2}
     - {fileID: 11400000, guid: 8217a37ca6b4c7743a9a2c114d33b565, type: 2}
+    - {fileID: 11400000, guid: 8c10efb2722859b4ab5843cf0a657635, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -90,7 +91,7 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: GameOver-Kraken
             m_BoolArgument: 0
-          m_CallState: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 0}
@@ -103,6 +104,20 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: GameOver-Kraken
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: BlackScreenAnimation, Assembly-CSharp
+          m_MethodName: FadeOut
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 2
+            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &2345710824506052210

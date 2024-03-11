@@ -54,7 +54,7 @@ MonoBehaviour:
   speed: 3
   snapDistance: 1
   snapTime: 0.5
-  aggroLoseDistance: 6
+  aggroLoseDistance: 8
   agent: {fileID: 2169314784204389370}
   playerLayer:
     serializedVersion: 2
