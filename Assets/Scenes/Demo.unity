@@ -1090,10 +1090,6 @@ PrefabInstance:
       propertyPath: size.y
       value: 13.4
       objectReference: {fileID: 0}
-    - target: {fileID: 946549081392625529, guid: 816081e414b0f0340b86c94c10748c53, type: 3}
-      propertyPath: numberOfEnemies
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4099092138702740618, guid: 816081e414b0f0340b86c94c10748c53, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.68
