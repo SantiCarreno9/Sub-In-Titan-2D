@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        Checkpoint.lastCheckpointTriggered = saveData.checkPointIndex;
         Player.transform.position = new Vector3(saveData.playerPositionX, saveData.playerPositionY, 0);
         Player.GetComponentInChildren<HealthModule>().SetHealth(saveData.health);
     }
