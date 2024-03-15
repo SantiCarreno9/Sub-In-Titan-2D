@@ -207,11 +207,11 @@ namespace Submarine
 
         #endregion
 
-        private void EnablePlayerActionMap() => _inputs.Player.Enable();
-        private void DisablePlayerActionMap() => _inputs.Player.Disable();
+        public void EnablePlayerActionMap() => _inputs.Player.Enable();
+        public void DisablePlayerActionMap() => _inputs.Player.Disable();
 
-        private void EnableActionMenuActionMap() => _inputs.ActionMenu.Enable();
-        private void DisableActionMenuActionMap() => _inputs.ActionMenu.Disable();
+        public void EnableActionMenuActionMap() => _inputs.ActionMenu.Enable();
+        public void DisableActionMenuActionMap() => _inputs.ActionMenu.Disable();
 
 
         public Vector2 GetAttackPosition()
