@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Submarine
@@ -169,6 +170,15 @@ namespace Submarine
             _actionMenuAudioSource.Stop();
         }
 
-        #endregion        
+        internal void MuteAllSources()
+        {
+            _collisionAudioSource.mute = true;
+            _movementAudioSource.mute = true;
+            _attackAudioSource.mute = true;
+            _healthAudioSource.mute = true;
+            _actionMenuAudioSource.mute = true;
+        }
+
+        #endregion
     }
 }

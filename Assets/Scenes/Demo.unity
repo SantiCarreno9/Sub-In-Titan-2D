@@ -866,93 +866,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -610.6
       objectReference: {fileID: 0}
-    - target: {fileID: 2857948860938707356, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_Intensity
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857948860938707356, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857948860938707356, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857948860938707356, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857948860938707356, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[1]
-      value: -1776213531
-      objectReference: {fileID: 0}
-    - target: {fileID: 2857948860938707356, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[2]
-      value: 1395534375
-      objectReference: {fileID: 0}
     - target: {fileID: 2959086685996376075, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_Lens.OrthographicSize
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 3511626662383540518, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_LightVolumeIntensity
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3511626662383540518, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3511626662383540518, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3511626662383540518, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_Intensity
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_LightVolumeIntensity
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightInnerAngle
-      value: 59.48238
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightOuterAngle
-      value: 118.95238
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_LightVolumeIntensityEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[0]
-      value: -573127093
-      objectReference: {fileID: 0}
-    - target: {fileID: 4636764329724383404, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_ApplyToSortingLayers.Array.data[1]
-      value: 1395534375
+    - target: {fileID: 5786338685566148319, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6328384931173260682, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: orthographic size
@@ -989,6 +909,26 @@ PrefabInstance:
     - target: {fileID: 8318479784867843474, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 823.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200212926713875376, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200212926713875376, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1366347280}
+    - target: {fileID: 9200212926713875376, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeSceneByName
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200212926713875376, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9200212926713875376, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,10 +9,12 @@ namespace Submarine
         [SerializeField] private AttackModule _attackController;
         [SerializeField] private HealthModule _healthModule;
         [SerializeField] private ActionMenuModule _actionMenuController;
+        [SerializeField] private SubmarineSoundEffectsController _soundEffectsController;
 
         private PlayerInputs _inputs;
 
         public Transform Transform => transform;
+        public SubmarineSoundEffectsController SoundEffectsController=> _soundEffectsController;
 
         private void Awake()
         {
