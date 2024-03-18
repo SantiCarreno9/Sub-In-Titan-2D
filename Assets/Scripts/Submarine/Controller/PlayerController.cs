@@ -9,10 +9,12 @@ namespace Submarine
         [SerializeField] private AttackModule _attackController;
         [SerializeField] private HealthModule _healthModule;
         [SerializeField] private ActionMenuModule _actionMenuController;
+        [SerializeField] private SubmarineSoundEffectsController _soundEffectsController;
 
         private PlayerInputs _inputs;
 
         public Transform Transform => transform;
+        public SubmarineSoundEffectsController SoundEffectsController=> _soundEffectsController;
 
         private void Awake()
         {
@@ -207,11 +209,11 @@ namespace Submarine
 
         #endregion
 
-        private void EnablePlayerActionMap() => _inputs.Player.Enable();
-        private void DisablePlayerActionMap() => _inputs.Player.Disable();
+        public void EnablePlayerActionMap() => _inputs.Player.Enable();
+        public void DisablePlayerActionMap() => _inputs.Player.Disable();
 
-        private void EnableActionMenuActionMap() => _inputs.ActionMenu.Enable();
-        private void DisableActionMenuActionMap() => _inputs.ActionMenu.Disable();
+        public void EnableActionMenuActionMap() => _inputs.ActionMenu.Enable();
+        public void DisableActionMenuActionMap() => _inputs.ActionMenu.Disable();
 
 
         public Vector2 GetAttackPosition()

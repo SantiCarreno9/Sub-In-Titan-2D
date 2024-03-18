@@ -14,7 +14,7 @@ TagManager:
   - Enemy
   - Player
   - Checkpoint
-  - 
+  - Kraken
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 1395534375
+    locked: 0
+  - name: Kraken
+    uniqueID: 2966374591
     locked: 0

@@ -662,7 +662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 297391739837886015, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 11.9900055
       objectReference: {fileID: 0}
     - target: {fileID: 357822244229477582, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -716,25 +716,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1267765491511199630, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.99
+      objectReference: {fileID: 0}
     - target: {fileID: 2346463074311057842, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2976343358029813106, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: depth_text
+    - target: {fileID: 4488576362856628810, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047628543377980063, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_fontSize
+      value: 26.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5047628543377980063, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 610556277}
+      objectReference: {fileID: 11400000, guid: 92f7b52b9433a9d4d9e4590e266ff44d, type: 2}
+    - target: {fileID: 5047628543377980063, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1545699526277698203, guid: 92f7b52b9433a9d4d9e4590e266ff44d, type: 2}
+    - target: {fileID: 5047628543377980063, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5352916648189802178, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6659484959505271502, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_Name
       value: BasicGameplayObjects
       objectReference: {fileID: 0}
-    - target: {fileID: 6876564303356811142, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 202789301}
+    - target: {fileID: 7069652830890104990, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851056312102911443, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 11.9900055
+      objectReference: {fileID: 0}
     - target: {fileID: 8139589814710012508, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1161,17 +1189,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 604875503}
   m_CullTransparentMesh: 1
---- !u!114 &610556277 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6582100732680058415, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
-  m_PrefabInstance: {fileID: 348036123}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &645821079
 GameObject:
   m_ObjectHideFlags: 0

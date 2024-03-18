@@ -21,7 +21,7 @@ public class Menu_Script : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Demo");
+        SceneManager.LoadScene("SmallerMap");
     }
    
 

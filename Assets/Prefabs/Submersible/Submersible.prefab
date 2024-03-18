@@ -88,8 +88,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementAudioSource: {fileID: 5112895372965403041}
-  _idleSound: {fileID: 0}
-  _movementSound: {fileID: 0}
   pitchMultiplier: 0.2
   _collisionAudioSource: {fileID: 6576424678885136995}
   _normalCollisionSound: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
@@ -712,6 +710,7 @@ MonoBehaviour:
   _attackController: {fileID: 5995437671634646234}
   _healthModule: {fileID: 6467496175551760639}
   _actionMenuController: {fileID: 2065795772152067016}
+  _soundEffectsController: {fileID: 177494666889254969}
 --- !u!1 &4868636813335062176
 GameObject:
   m_ObjectHideFlags: 0
