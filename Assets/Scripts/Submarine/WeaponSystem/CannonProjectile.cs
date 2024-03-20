@@ -44,7 +44,7 @@ public class CannonProjectile : MonoBehaviour
         rb.velocity = direction * speed;
         rb.isKinematic = false;
         shot = true;
-        explosionEffect.transform.localScale *= explosionRadius;
+        explosionEffect.transform.localScale = Vector3.one * explosionRadius;
     }
     private void Update()
     {
