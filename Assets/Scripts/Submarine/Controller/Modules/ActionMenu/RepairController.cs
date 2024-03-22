@@ -1,29 +1,38 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Submarine
 {
     public class RepairController : SubmarineProcess
     {
-        [Tooltip("Health percentage restored per session")]        
+        [Tooltip("Health percentage restored per session")]
         [SerializeField] private HealthModule _healthModule;
-        private short _enemiesAttachedCount = 0;
 
-        public UnityAction OnEnemyAttached;
-        public UnityAction OnEnemyRemoved;
+        private void OnEnable()
+        {
+            _healthModule.OnEnemyAttached += CancelProcess;
+            _healthModule.OnEnemyDetached += UpdateProcess;
+        }
+
+        private void OnDisable()
+        {
+            _healthModule.OnEnemyAttached -= CancelProcess;
+            _healthModule.OnEnemyDetached -= UpdateProcess;
+        }
 
         public override void StartProcess()
         {
-            float timeMultiplier = (float)_healthModule.HealthPoints / (float)_healthModule.GetMaxHealth();            
+            float timeMultiplier = (float)_healthModule.HealthPoints / (float)_healthModule.GetMaxHealth();
             processTime = fullProcessDuration * timeMultiplier;
             base.StartProcess();
         }
 
         public override void CancelProcess()
         {
+            if (!IsPerformingProcess)
+                return;
             base.CancelProcess();
-            int ammo = (int)(_healthModule.GetMaxHealth() * GetProgress());
-            _healthModule.Restore(ammo);
+            int health = (int)(_healthModule.GetMaxHealth() * GetProgress());
+            _healthModule.Restore(health);
         }
 
         protected override void FinishProcess()
@@ -37,23 +46,15 @@ namespace Submarine
             base.Update();
             if (IsPerformingProcess)
             {
-                int health = (int)(_healthModule.GetMaxHealth() * GetProgress());                
+                int health = (int)(_healthModule.GetMaxHealth() * GetProgress());
                 _healthModule.Restore(health);
             }
         }
 
-        public void AddAttachedEnemy()
+        private void UpdateProcess()
         {
-            _enemiesAttachedCount++;
+            if (_healthModule.HasEnemiesAttached() && IsPerformingProcess)
+                CancelProcess();
         }
-
-        public void RemoveAttachedEnemy()
-        {
-            _enemiesAttachedCount--;
-            if (_enemiesAttachedCount < 0)
-                _enemiesAttachedCount = 0;
-        }
-
-        public bool HasEnemiesAttached() => _enemiesAttachedCount > 0;
     }
 }

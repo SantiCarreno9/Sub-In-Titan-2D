@@ -127,15 +127,15 @@ namespace Submarine
             {
                 if (!_healthAudioSource.isPlaying)
                 {
-                    //_healthAudioSource.clip = _lowHealthSound;
-                    _healthAudioSource.PlayOneShot(_lowHealthSound);
-                    //_healthAudioSource.loop = true;
+                    _healthAudioSource.clip = _lowHealthSound;
+                    _healthAudioSource.loop = true;
+                    _healthAudioSource.Play();
                 }
             }
             else
             {
                 _healthAudioSource.Stop();
-                //_healthAudioSource.loop = false;
+                _healthAudioSource.loop = false;
             }
         }
 

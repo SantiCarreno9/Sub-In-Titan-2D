@@ -711,6 +711,7 @@ MonoBehaviour:
   _healthModule: {fileID: 6467496175551760639}
   _actionMenuController: {fileID: 2065795772152067016}
   _soundEffectsController: {fileID: 177494666889254969}
+  _animationsController: {fileID: 1228300007797764361}
 --- !u!1 &4868636813335062176
 GameObject:
   m_ObjectHideFlags: 0

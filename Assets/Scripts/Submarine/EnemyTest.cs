@@ -1,6 +1,3 @@
-using Submarine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace Submarine.Test
 {
@@ -23,7 +20,7 @@ namespace Submarine.Test
         private void OnDisable()
         {
             CancelInvoke();
-            GameManager.Instance.Player.GetComponent<PlayerController>().RemoveAttachedEnemy(this);
+            GameManager.Instance.Player.RemoveAttachedEnemy(this);
         }
         private void Update()
         {

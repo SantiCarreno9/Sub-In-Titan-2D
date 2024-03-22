@@ -14,7 +14,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
     bool cannonCooldownOver = true;
     public bool CanFireCannon => cannonCooldownOver && CurrentCannonAmmo > 0;
 
-    public bool CanUseAOE { get; private set; }
+    public bool CanUseAOE { get; private set; } = true;
 
     public int CurrentCannonAmmo { get; private set; }
 

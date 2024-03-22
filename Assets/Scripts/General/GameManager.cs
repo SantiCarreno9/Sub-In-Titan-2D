@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    [SerializeField] private GameObject _player;
-    public GameObject Player => _player;
+    [SerializeField] private PlayerController _playerController;
+    public PlayerController Player => _playerController;
 
     public bool IsGamePaused() => Time.timeScale == 0;
 
@@ -16,6 +16,16 @@ public class GameManager : MonoBehaviour
             Instance = this;
 
         LoadGame();
+    }
+
+    private void OnEnable()
+    {
+        _playerController.OnPlayerDie += ShowGameOverScreen;
+    }
+
+    private void OnDisable()
+    {
+        _playerController.OnPlayerDie -= ShowGameOverScreen;
     }
 
     public void ShowGameOverScreen()
@@ -49,6 +59,6 @@ public class GameManager : MonoBehaviour
         }
         Checkpoint.lastCheckpointTriggered = saveData.checkPointIndex;
         Player.transform.position = new Vector3(saveData.playerPositionX, saveData.playerPositionY, 0);
-        Player.GetComponentInChildren<HealthModule>().SetHealth(saveData.health);
+        Player.HeatlhController.SetHealth(saveData.health);
     }
 }
