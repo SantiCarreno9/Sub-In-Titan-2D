@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Submarine
@@ -10,11 +11,19 @@ namespace Submarine
         [SerializeField] private HealthModule _healthModule;
         [SerializeField] private ActionMenuModule _actionMenuController;
         [SerializeField] private SubmarineSoundEffectsController _soundEffectsController;
+        [SerializeField] private AnimationsController _animationsController;
 
         private PlayerInputs _inputs;
 
         public Transform Transform => transform;
-        public SubmarineSoundEffectsController SoundEffectsController=> _soundEffectsController;
+        public MovementModule MovementController => _movementController;
+        public AttackModule AttackController => _attackController;
+        public HealthModule HeatlhController => _healthModule;
+        public ActionMenuModule ActionMenuController => _actionMenuController;
+        public SubmarineSoundEffectsController SoundEffectsController => _soundEffectsController;
+        public AnimationsController AnimationsController => _animationsController;
+
+        public UnityAction OnPlayerDie;
 
         private void Awake()
         {
@@ -224,13 +233,13 @@ namespace Submarine
         public void AddAttachedEnemy(IEnemyEffect enemyEffect)
         {
             _movementController.DecreaseSpeedBy(enemyEffect.SlowdownMultiplier);
-            _actionMenuController.RepairController.AddAttachedEnemy();
+            _healthModule.AddAttachedEnemy();
         }
 
         public void RemoveAttachedEnemy(IEnemyEffect enemyEffect)
         {
             _movementController.IncreaseSpeedBy(enemyEffect.SlowdownMultiplier);
-            _actionMenuController.RepairController.RemoveAttachedEnemy();
+            _healthModule.RemoveAttachedEnemy();
         }
 
         public void Push(Vector2 force)
@@ -251,7 +260,9 @@ namespace Submarine
         private void Die()
         {
             DisablePlayerActionMap();
-            GameManager.Instance.ShowGameOverScreen();
+            DisableActionMenuActionMap();
+            _actionMenuController.Close();
+            OnPlayerDie?.Invoke();            
         }
     }
 

@@ -32,13 +32,14 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     int health = 100;
     float timeLeft;
     public float SlowdownMultiplier => slowDownMultiplier;
+    private bool _isAttached = false;
 
     private void Awake()
     {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = speed;
-        agent.stoppingDistance = 0;        
+        agent.stoppingDistance = 0;
         agent.enabled = false;
     }
     private void Start()
@@ -60,7 +61,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
             return;
         }
 
-        if(enemyState == EnemyState.Chase)
+        if (enemyState == EnemyState.Chase)
         {
             agent.SetDestination(player.position + relativeAttackPosition);
             spriteRenderer.flipX = (player.position + relativeAttackPosition).x - biterWidth > transform.position.x;
@@ -72,9 +73,9 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
                 agent.enabled = false;
                 enemyState = EnemyState.Snap;
                 StartCoroutine(SnapCoroutine());
-            }   
+            }
 
-            if((target - current).magnitude >= aggroLoseDistance)
+            if ((target - current).magnitude >= aggroLoseDistance)
             {
                 agent.enabled = false;
                 enemyState = EnemyState.Idle;
@@ -100,7 +101,8 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     }
     void HandleDeath()
     {
-        playerSub.RemoveAttachedEnemy(this);
+        if (_isAttached)
+            playerSub.RemoveAttachedEnemy(this);
         GFX.SetActive(false);
         collider.enabled = false;
         deathEffect.Play();
@@ -114,7 +116,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
-        if(player == null)
+        if (player == null)
         {
             return;
         }
@@ -136,7 +138,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         spriteRenderer.flipX = (player.position + relativeAttackPosition).x - biterWidth > transform.position.x;
         timeLeft = snapTime;
         Vector2 startPosition = transform.position;
-        while(timeLeft > 0)
+        while (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
             float t = 1 - timeLeft / snapTime;
@@ -149,6 +151,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         transform.position = player.position + relativeAttackPosition;
         enemyState = EnemyState.Attack;
         playerSub.AddAttachedEnemy(this);
+        _isAttached = true;
         //change animation to attack
         animator.SetBool("attack", true);
         AudioConfigSO.SetData(bitingAudio, audioSource);

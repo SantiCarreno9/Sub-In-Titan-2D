@@ -33,7 +33,6 @@ namespace Submarine.UI
         }
 
 
-
         private void UpdateHealth(int points)
         {
             float percentage = (float)points / (float)_healthModule.GetMaxHealth();

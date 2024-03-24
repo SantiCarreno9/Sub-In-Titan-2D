@@ -35,7 +35,7 @@ public class SaveManager : MonoBehaviour
             screenshotData = tex.EncodeToPNG(),
             playerPositionX = GameManager.Instance.Player.transform.position.x,
             playerPositionY = GameManager.Instance.Player.transform.position.y,
-            health = GameManager.Instance.Player.GetComponentInChildren<HealthModule>().HealthPoints,
+            health = GameManager.Instance.Player.HeatlhController.HealthPoints,
             depth = 0, //Will get from the script Juan creates
             screenshotHeight = tex.height,
             screenshotWidth = tex.width,

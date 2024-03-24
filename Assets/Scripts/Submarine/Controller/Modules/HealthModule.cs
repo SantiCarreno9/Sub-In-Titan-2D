@@ -7,6 +7,11 @@ namespace Submarine
     {
         [SerializeField] private int _maxHealthPoints = 200;
         public int HealthPoints { get; private set; }
+        private byte _enemiesAttachedCount = 0;
+
+
+        public UnityAction OnEnemyAttached;
+        public UnityAction OnEnemyDetached;
 
         public UnityAction OnDamageReceived;
         public UnityAction OnHealthRestored;
@@ -53,5 +58,22 @@ namespace Submarine
 
         public int GetMaxHealth() => _maxHealthPoints;
         public bool HasMaxHealth() => (HealthPoints / GetMaxHealth()) == 1;
+
+        public void AddAttachedEnemy()
+        {
+            _enemiesAttachedCount++;
+            OnEnemyAttached?.Invoke();
+        }
+
+        public void RemoveAttachedEnemy()
+        {
+            _enemiesAttachedCount--;
+            if (_enemiesAttachedCount < 0)
+                _enemiesAttachedCount = 0;
+
+            OnEnemyDetached?.Invoke();
+        }
+
+        public bool HasEnemiesAttached() => _enemiesAttachedCount > 0;
     }
 }
