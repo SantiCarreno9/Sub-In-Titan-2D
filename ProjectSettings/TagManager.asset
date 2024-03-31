@@ -53,3 +53,12 @@ TagManager:
   - name: Kraken
     uniqueID: 2966374591
     locked: 0
+  - name: Body
+    uniqueID: 2947786627
+    locked: 0
+  - name: Eyes
+    uniqueID: 4036620407
+    locked: 0
+  - name: temp
+    uniqueID: 1472058373
+    locked: 0
