@@ -20,12 +20,14 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        _playerController.OnPlayerDie += ShowGameOverScreen;
+        if (_playerController != null)
+            _playerController.OnPlayerDie += ShowGameOverScreen;
     }
 
     private void OnDisable()
     {
-        _playerController.OnPlayerDie -= ShowGameOverScreen;
+        if (_playerController != null)
+            _playerController.OnPlayerDie -= ShowGameOverScreen;
     }
 
     public void ShowGameOverScreen()

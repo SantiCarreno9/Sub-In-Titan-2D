@@ -451,6 +451,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2042495237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9182586815959814880, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+  m_PrefabInstance: {fileID: 4361797992307668999}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2552225484271619215
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -560,6 +565,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 709370516}
     m_Modifications:
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2042495237}
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3831285594004149636, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
+      propertyPath: OnSequenceFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6700584866190429047, guid: 4266d21e5decb374f93c656e5e6a5a7f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

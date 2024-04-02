@@ -3,58 +3,48 @@ using DG.Tweening;
 using UnityEngine.Events;
 using System;
 
-[System.Serializable]
-public class Track
-{
-    public GameObject Object;
-    public float Duration;
-    public UnityEvent OnTrackPlayed;
-}
-
 public abstract class TracksActivationController : MonoBehaviour
-{
-    [SerializeField] protected CanvasGroup CanvasGroupRef;
+{    
     [SerializeField] protected Track[] Tracks;
     [SerializeField] protected float FadeInTime;
     [SerializeField] protected float FadeOutTime;
     [SerializeField] protected bool PlayOnStart;
+    [SerializeField] protected float PlayDelay = 0.0f;
+    [SerializeField] protected bool DeactivateLastTrack = true;
 
-    public UnityEvent OnCurrentTrackPlayed;
-
-
-    private void Awake()
-    {
-        CanvasGroupRef.alpha = 0;
-    }
+    public UnityEvent OnSequenceStarted;
+    public UnityEvent OnSequenceFinished;    
 
     private void Start()
     {
         if (PlayOnStart)
-            StartSequence();
+            Invoke(nameof(StartSequence), PlayDelay);
     }
 
-    public abstract void StartSequence();
-
-    protected void FadeInTrack(Track track, Action callback = null)
+    public virtual void StartSequence()
     {
-        track.Object.SetActive(true);
-        DOTween.To(() => CanvasGroupRef.alpha, x => CanvasGroupRef.alpha = x, 1f, FadeInTime)
-            .onComplete += () =>
-            {
-                track.OnTrackPlayed?.Invoke();
-                OnCurrentTrackPlayed?.Invoke();
-                callback?.Invoke();
-            };
+        OnSequenceStarted?.Invoke();
     }
 
-    protected void FadeOutTrack(Track track, Action callback = null)
-    {
-        DOTween.To(() => CanvasGroupRef.alpha, x => CanvasGroupRef.alpha = x, 0f, FadeOutTime)
-            .onComplete += () =>
-            {
-                track.Object.SetActive(false);
-                callback?.Invoke();
-            };
-    }
+    //protected void FadeInTrack(Track track, Action callback = null)
+    //{
+    //    //track.Object.SetActive(true);
+    //    //DOTween.To(() => CanvasGroupRef.alpha, x => CanvasGroupRef.alpha = x, 1f, FadeInTime)
+    //    //    .onComplete += () =>
+    //    //    {
+    //    //        track.OnTrackPlayed?.Invoke();
+    //    //        callback?.Invoke();
+    //    //    };
+    //}
+
+    //protected void FadeOutTrack(Track track, Action callback = null)
+    //{
+    //    //DOTween.To(() => CanvasGroupRef.alpha, x => CanvasGroupRef.alpha = x, 0f, FadeOutTime)
+    //    //    .onComplete += () =>
+    //    //    {
+    //    //        track.Object.SetActive(false);
+    //    //        callback?.Invoke();
+    //    //    };
+    //}
 
 }

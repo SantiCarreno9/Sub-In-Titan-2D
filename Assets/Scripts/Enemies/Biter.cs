@@ -150,8 +150,11 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         transform.parent = player;
         transform.position = player.position + relativeAttackPosition;
         enemyState = EnemyState.Attack;
-        playerSub.AddAttachedEnemy(this);
-        _isAttached = true;
+        if (!_isAttached)
+        {
+            playerSub.AddAttachedEnemy(this);
+            _isAttached = true;
+        }
         //change animation to attack
         animator.SetBool("attack", true);
         AudioConfigSO.SetData(bitingAudio, audioSource);
