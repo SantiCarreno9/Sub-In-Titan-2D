@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ControlledTracksActivationController : TracksActivationController
@@ -35,6 +36,21 @@ public class ControlledTracksActivationController : TracksActivationController
     {
         if (!enabled) return;
 
+        if (DeactivateLastTrack && _currentTrack != null)
+        {
+            FadeOutCurrentTrack(() =>
+            {
+                if (_currentIndex < Tracks.Length - 1)
+                    NextTrack();
+                else
+                {
+                    HasFinished = true;
+                    OnSequenceFinished?.Invoke();
+                }
+            });
+            return;
+        }
+
         if (_currentIndex == Tracks.Length - 1)
             return;
 
@@ -44,17 +60,24 @@ public class ControlledTracksActivationController : TracksActivationController
 
     private void ChangeTracks()
     {
-        if (DeactivateLastTrack && _currentTrack != null)
-        {
-            _currentTrack.FadeOut(FadeOutTime, () =>
-            {
-                _currentTrack.gameObject.SetActive(false);
-                UpdateButtons();
-                _currentTrack = null;
-                ChangeTracks();
-            });
-            return;
-        }
+        //if (DeactivateLastTrack && _currentTrack != null)
+        //{
+        //    _currentTrack.FadeOut(FadeOutTime, () =>
+        //    {
+        //        _currentTrack.gameObject.SetActive(false);
+        //        UpdateButtons();
+        //        _currentTrack = null;
+
+        //        if (_currentIndex < Tracks.Length - 1)
+        //            ChangeTracks();
+        //        else
+        //        {
+        //            HasFinished = true;
+        //            OnSequenceFinished?.Invoke();
+        //        }
+        //    });
+        //    return;
+        //}
 
         _currentTrack = Tracks[_currentIndex];
         _currentTrack.gameObject.SetActive(true);
@@ -63,19 +86,23 @@ public class ControlledTracksActivationController : TracksActivationController
         else
             _currentTrack.FadeIn(FadeInTime, () =>
             {
-                OnSequenceFinished?.Invoke();
-                HasFinished = true;
+                if (!DeactivateLastTrack)
+                {
+                    OnSequenceFinished?.Invoke();
+                    HasFinished = true;
+                }
             }
             );
-    }  
-    
-    public void FadeOutCurrentTrack()
+    }
+
+    private void FadeOutCurrentTrack(Action callback)
     {
         _currentTrack.FadeOut(FadeOutTime, () =>
         {
             _currentTrack.gameObject.SetActive(false);
             UpdateButtons();
             _currentTrack = null;
+            callback?.Invoke();
         });
     }
 

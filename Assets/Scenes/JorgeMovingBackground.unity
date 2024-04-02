@@ -445,7 +445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &395688980
 Transform:
   m_ObjectHideFlags: 0
@@ -1488,6 +1488,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11093724895893101, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150278088926806427, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150278088926806427, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150278088926806427, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150278088926806427, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150278088926806427, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2549025013663205572, guid: 334b95351af8d5342895e67a8802aab3, type: 3}
       propertyPath: m_Enabled
       value: 1

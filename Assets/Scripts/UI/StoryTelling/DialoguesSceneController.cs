@@ -32,10 +32,6 @@ public class DialoguesSceneController : MonoBehaviour
                 _currentTrackController.gameObject.SetActive(false);
                 ChangeTrack(_tracksControllers[_currentIndex]);
             }
-            else
-            {
-                _currentTrackController.FadeOutCurrentTrack();
-            }
         }
     }
 
