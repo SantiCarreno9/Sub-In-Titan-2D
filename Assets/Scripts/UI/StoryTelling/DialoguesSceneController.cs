@@ -16,10 +16,7 @@ public class DialoguesSceneController : MonoBehaviour
         if (_currentTrackController == null)
             return;
 
-        if (_currentTrackController.CurrentTrack == null)
-            return;
-
-        if (_currentTrackController.CurrentTrack.IsPlayingAnimation)
+        if (_currentTrackController.CurrentTrack != null && _currentTrackController.CurrentTrack.IsPlayingAnimation)
             return;
 
         if (!_currentTrackController.HasFinished)

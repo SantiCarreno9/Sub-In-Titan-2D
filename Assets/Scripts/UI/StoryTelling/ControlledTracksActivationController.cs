@@ -1,10 +1,16 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ControlledTracksActivationController : TracksActivationController
 {
+    [Space]
     [SerializeField] private GameObject _previousButton;
     [SerializeField] private GameObject _nextButton;
+
+    public UnityEvent OnCurrentTrackFadedIn;
+    public UnityEvent OnCurrentTrackFadedOut;
+    public UnityEvent OnNextTrackTriggered;
 
     public Track CurrentTrack => _currentTrack;
     private Track _currentTrack = null;
@@ -38,6 +44,7 @@ public class ControlledTracksActivationController : TracksActivationController
 
         if (DeactivateLastTrack && _currentTrack != null)
         {
+            OnNextTrackTriggered?.Invoke();
             FadeOutCurrentTrack(() =>
             {
                 if (_currentIndex < Tracks.Length - 1)
@@ -54,38 +61,24 @@ public class ControlledTracksActivationController : TracksActivationController
         if (_currentIndex == Tracks.Length - 1)
             return;
 
+        if (!DeactivateLastTrack) OnNextTrackTriggered?.Invoke();
         _currentIndex++;
         ChangeTracks();
     }
 
     private void ChangeTracks()
     {
-        //if (DeactivateLastTrack && _currentTrack != null)
-        //{
-        //    _currentTrack.FadeOut(FadeOutTime, () =>
-        //    {
-        //        _currentTrack.gameObject.SetActive(false);
-        //        UpdateButtons();
-        //        _currentTrack = null;
-
-        //        if (_currentIndex < Tracks.Length - 1)
-        //            ChangeTracks();
-        //        else
-        //        {
-        //            HasFinished = true;
-        //            OnSequenceFinished?.Invoke();
-        //        }
-        //    });
-        //    return;
-        //}
-
         _currentTrack = Tracks[_currentIndex];
         _currentTrack.gameObject.SetActive(true);
         if (_currentIndex < Tracks.Length - 1)
-            _currentTrack.FadeIn(FadeInTime);
+            _currentTrack.FadeIn(FadeInTime, () =>
+            {
+                OnCurrentTrackFadedIn?.Invoke();
+            });
         else
             _currentTrack.FadeIn(FadeInTime, () =>
             {
+                OnCurrentTrackFadedIn?.Invoke();
                 if (!DeactivateLastTrack)
                 {
                     OnSequenceFinished?.Invoke();
@@ -99,6 +92,7 @@ public class ControlledTracksActivationController : TracksActivationController
     {
         _currentTrack.FadeOut(FadeOutTime, () =>
         {
+            OnCurrentTrackFadedOut?.Invoke();
             _currentTrack.gameObject.SetActive(false);
             UpdateButtons();
             _currentTrack = null;

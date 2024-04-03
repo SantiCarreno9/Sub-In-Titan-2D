@@ -2,6 +2,7 @@ using Submarine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering.Universal;
 
 public class FishEndingSequence : MonoBehaviour
@@ -23,11 +24,13 @@ public class FishEndingSequence : MonoBehaviour
     [SerializeField] float maxShipLightSize;
     [SerializeField] float totalFishTime;
     [SerializeField] float shipTime;
-    [Range (0, 1f)]
+    [Range(0, 1f)]
     [SerializeField] float shipStartRatio;
     [SerializeField] MovementModule movementModule;
     [SerializeField] Transform shipImage;
     bool startedShip;
+
+    public UnityEvent OnSequenceEnd;
     // Start is called before the first frame update
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -35,8 +38,8 @@ public class FishEndingSequence : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(FishEndingCoroutine());
-            if(movementModule == null) { Debug.Log("Movement Module not assigned"); }
-            else { movementModule.DisableModule();}
+            if (movementModule == null) { Debug.Log("Movement Module not assigned"); }
+            else { movementModule.DisableModule(); }
             if (shipImage == null) { Debug.Log("Ship Image not assigned"); }
             else { shipImage.position = collision.gameObject.transform.position; }
         }
@@ -75,7 +78,7 @@ public class FishEndingSequence : MonoBehaviour
 
             yield return null;
         }
-        
+        OnSequenceEnd?.Invoke();
     }
 
     IEnumerator ShipRoutine()

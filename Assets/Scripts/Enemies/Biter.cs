@@ -49,7 +49,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     }
 
     private void OnDestroy()
-    {
+    {        
         CancelInvoke();
     }
 
@@ -101,6 +101,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     }
     void HandleDeath()
     {
+        StopAllCoroutines();
         if (_isAttached)
             playerSub.RemoveAttachedEnemy(this);
         GFX.SetActive(false);
