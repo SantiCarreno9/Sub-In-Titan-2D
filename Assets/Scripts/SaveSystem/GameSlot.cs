@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +9,8 @@ public class GameSlot : MonoBehaviour
     [SerializeField] Image screenshotDisplayImage;
     [SerializeField] TextMeshProUGUI depthDisplay;
     [SerializeField] Button slotButton;
+    [SerializeField] int gameSceneIndex = 1;
+    [SerializeField] GameObject defaultImage;
     SaveData saveData;
     Texture2D screenshotTexture;
     private void Awake()
@@ -21,6 +21,7 @@ public class GameSlot : MonoBehaviour
             screenshotTexture = saveData.CreateTexture2DFromScreenshotData();
             screenshotDisplayImage.sprite = Sprite.Create(screenshotTexture, new Rect(0, 0, screenshotTexture.width, screenshotTexture.height), Vector2.one * 0.5f);
             depthDisplay.text = $"Depth: {saveData.depth}m";
+            defaultImage.SetActive(false);
         }         
     }
     private void OnEnable()
@@ -34,6 +35,10 @@ public class GameSlot : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (!screenshotTexture)
+        {
+            return;
+        }
         Destroy(screenshotTexture);
     }
 
@@ -41,6 +46,20 @@ public class GameSlot : MonoBehaviour
     {
         SaveManager.currentGameSlot = slotNumber;
         SaveManager.currentSaveData = saveData;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(gameSceneIndex);
+    }
+    public void DeleteData()
+    {
+        //comment
+        SaveManager.DeleteData(slotNumber);
+        Destroy(screenshotTexture);
+        screenshotTexture = null;
+        defaultImage.SetActive(true);
+    }
+    public void StartNewGame()
+    {
+        SaveManager.currentGameSlot = slotNumber;
+        SaveManager.currentSaveData = null;
+        SceneManager.LoadScene(gameSceneIndex);
     }
 }
