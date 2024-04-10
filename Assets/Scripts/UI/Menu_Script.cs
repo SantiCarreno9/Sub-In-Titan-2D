@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 public class Menu_Script : MonoBehaviour
 {
     [SerializeField] private AudioSource clickSound;
-    [SerializeField] private GameObject mainMenu;
-    [SerializeField] private GameObject Slot1;
-    [SerializeField] private GameObject Slot2;
-    [SerializeField] private GameObject Slot3;
+    [SerializeField] private GameObject mainMenu_canvas;
+    [SerializeField] private GameObject startGame_canvas;
+    [SerializeField] private GameObject settings_canvas;
     [SerializeField] private GameObject back_btn;
+    
     // Start is called before the first frame update
     void Start()
     {
-        mainMenu.SetActive(true);
-        Slot1.SetActive(false);
-        Slot2.SetActive(false);
-        Slot3.SetActive(false);
+        mainMenu_canvas.SetActive(true);
+        startGame_canvas.SetActive(false);
+        settings_canvas.SetActive(false);
         back_btn.SetActive(false);
     }
 
@@ -50,18 +49,28 @@ public class Menu_Script : MonoBehaviour
     }
     public void LoadGame()
     {
-        mainMenu.SetActive(false);
-        Slot1.SetActive(true);
-        Slot2.SetActive(true);
-        Slot3.SetActive(true);
+        mainMenu_canvas.SetActive(false);
+        startGame_canvas.SetActive(true);
         back_btn.SetActive(true);
+    }
+    public void Settings()
+    {
+        mainMenu_canvas.SetActive(false);
+        settings_canvas.SetActive(true);
+        back_btn.SetActive(true) ;
     }
     public void BackBtn()
     {
-        mainMenu.SetActive(true);
-        Slot1.SetActive(false);
-        Slot2.SetActive(false);
-        Slot3.SetActive(false);
+        if (startGame_canvas.activeSelf)
+        {
+            startGame_canvas.SetActive(false );
+            mainMenu_canvas.SetActive(true );
+        }
+        if(settings_canvas.activeSelf)
+        {
+            settings_canvas.SetActive(false );
+            mainMenu_canvas.SetActive(true ) ;
+        }
         back_btn.SetActive(false);
     }
 }
