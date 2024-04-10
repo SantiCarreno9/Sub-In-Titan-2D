@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
     void LoadGame()
     {
         SaveData saveData = SaveManager.currentSaveData;
+        Checkpoint.lastCheckpointTriggered = -1;
         if (saveData == null)
         {
             return;

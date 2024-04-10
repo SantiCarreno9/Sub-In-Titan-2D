@@ -23,6 +23,7 @@ public class DepthManager : MonoBehaviour
     private Transform Initialreference_transform;
     private Transform Finalreference_transform;
     private Image depth_slider;
+    public int Depth => depth;
     // Start is called before the first frame update
     void Start()
     {
