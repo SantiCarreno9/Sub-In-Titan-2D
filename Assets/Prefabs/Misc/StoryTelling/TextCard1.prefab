@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4859179613394780409}
   - component: {fileID: 253763676508142133}
   - component: {fileID: 1895118119844869339}
+  - component: {fileID: 4238709935685621886}
   m_Layer: 5
   m_Name: TextCard1
   m_TagString: Untagged
@@ -134,3 +135,23 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4238709935685621886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456845247197546836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 162cd0da7135ce8409610aef691f7140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Duration: 3
+  OnTrackFadedIn:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTrackFadedOut:
+    m_PersistentCalls:
+      m_Calls: []
+  _canvasRenderer: {fileID: 253763676508142133}

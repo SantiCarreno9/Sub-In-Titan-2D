@@ -1,17 +1,13 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class AutoTracksActivationController : TracksActivationController
 {
-    public UnityEvent OnSequenceStarted;
-    public UnityEvent OnSequenceFinished;
     private byte _currentIndex = 0;
 
     public override void StartSequence()
     {
-        CanvasGroupRef.alpha = 0;
-        OnSequenceStarted?.Invoke();
+        base.StartSequence();
         StartCoroutine(PlaySequenceCoroutine());
     }
 
@@ -27,9 +23,14 @@ public class AutoTracksActivationController : TracksActivationController
 
     private IEnumerator PlayTrack(Track track)
     {
-        FadeInTrack(track);
+        track.gameObject.SetActive(true);
+        track.FadeIn(FadeInTime);
         yield return new WaitForSeconds(track.Duration + FadeInTime);
-        FadeOutTrack(track);
-        yield return new WaitForSeconds(FadeOutTime);
+        if (DeactivateLastTrack)
+        {
+            track.FadeOut(FadeOutTime);
+            yield return new WaitForSeconds(FadeOutTime);
+            track.gameObject.SetActive(false);
+        }
     }
 }

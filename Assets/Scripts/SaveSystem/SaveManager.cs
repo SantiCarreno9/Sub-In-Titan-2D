@@ -9,6 +9,7 @@ using UnityEngine;
 public class SaveManager : MonoBehaviour
 {
     [SerializeField] Camera screenshotCamera;
+    [SerializeField] DepthManager depthManager;
     public static int currentGameSlot = 0;
     public static SaveData currentSaveData;
     static string directoryPath = $"{Application.dataPath}/Saves";
@@ -24,6 +25,7 @@ public class SaveManager : MonoBehaviour
 
         // Create a new Texture2D and read the RenderTexture image into it
         Texture2D tex = new Texture2D(rt.width, rt.height);
+
         tex.ReadPixels(new Rect(0, 0, tex.width, tex.height), 0, 0);
         tex.Apply();
 
@@ -36,7 +38,7 @@ public class SaveManager : MonoBehaviour
             playerPositionX = GameManager.Instance.Player.transform.position.x,
             playerPositionY = GameManager.Instance.Player.transform.position.y,
             health = GameManager.Instance.Player.HeatlhController.HealthPoints,
-            depth = 0, //Will get from the script Juan creates
+            depth = depthManager.Depth,
             screenshotHeight = tex.height,
             screenshotWidth = tex.width,
             checkPointIndex = Checkpoint.lastCheckpointTriggered
@@ -71,6 +73,17 @@ public class SaveManager : MonoBehaviour
             SaveData saveData = (SaveData)new BinaryFormatter().Deserialize(filestream);
             return saveData;
         }
+    }
+
+    public static void DeleteData(int slotNumber)
+    {
+        EnsureDirectoryExists();
+        string path = $"{directoryPath}/Save{slotNumber}";
+        if (!File.Exists(path))
+        {
+            return;
+        }
+        File.Delete(path);
     }
 
 }

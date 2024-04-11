@@ -50,13 +50,13 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
 
     private void OnDestroy()
     {
-        CancelInvoke();
+        Debug.Log(enemyState.ToString());
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (enemyState == EnemyState.Attack || enemyState == EnemyState.Snap)
+        if (enemyState == EnemyState.Attack || enemyState == EnemyState.Snap || enemyState == EnemyState.Dead)
         {
             return;
         }
@@ -101,6 +101,9 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     }
     void HandleDeath()
     {
+        enemyState = EnemyState.Dead;
+        StopAllCoroutines();
+        Debug.Log("Death" + GetInstanceID());
         if (_isAttached)
             playerSub.RemoveAttachedEnemy(this);
         GFX.SetActive(false);
@@ -109,6 +112,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         audioSource.Stop();
         AudioConfigSO.SetData(deathAudio, audioSource);
         audioSource.Play();
+        CancelInvoke();
         Destroy(gameObject, deathTime);
     }
 
@@ -147,16 +151,23 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
             yield return null;
         }
 
-        transform.parent = player;
-        transform.position = player.position + relativeAttackPosition;
-        enemyState = EnemyState.Attack;
-        playerSub.AddAttachedEnemy(this);
-        _isAttached = true;
-        //change animation to attack
-        animator.SetBool("attack", true);
-        AudioConfigSO.SetData(bitingAudio, audioSource);
-        audioSource.Play();
-        InvokeRepeating(nameof(DamagePlayer), attackTime, attackTime);
+        if(enemyState != EnemyState.Dead)
+        {
+            transform.parent = player;
+            transform.position = player.position + relativeAttackPosition;
+            enemyState = EnemyState.Attack;
+            if (!_isAttached)
+            {
+                playerSub.AddAttachedEnemy(this);
+                Debug.Log("Attached Enemy" + GetInstanceID());
+                _isAttached = true;
+            }
+            //change animation to attack
+            animator.SetBool("attack", true);
+            AudioConfigSO.SetData(bitingAudio, audioSource);
+            audioSource.Play();
+            InvokeRepeating(nameof(DamagePlayer), attackTime, attackTime);
+        }        
     }
 
     enum EnemyState
@@ -164,6 +175,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         Idle,
         Chase,
         Snap,
-        Attack
+        Attack,
+        Dead
     }
 }

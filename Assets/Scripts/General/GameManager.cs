@@ -9,23 +9,29 @@ public class GameManager : MonoBehaviour
     public PlayerController Player => _playerController;
 
     public bool IsGamePaused() => Time.timeScale == 0;
+    public bool shouldLoadGame;
 
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
 
-        LoadGame();
+        if (shouldLoadGame)
+        {
+            LoadGame();
+        }        
     }
 
     private void OnEnable()
     {
-        _playerController.OnPlayerDie += ShowGameOverScreen;
+        if (_playerController != null)
+            _playerController.OnPlayerDie += ShowGameOverScreen;
     }
 
     private void OnDisable()
     {
-        _playerController.OnPlayerDie -= ShowGameOverScreen;
+        if (_playerController != null)
+            _playerController.OnPlayerDie -= ShowGameOverScreen;
     }
 
     public void ShowGameOverScreen()
@@ -53,6 +59,7 @@ public class GameManager : MonoBehaviour
     void LoadGame()
     {
         SaveData saveData = SaveManager.currentSaveData;
+        Checkpoint.lastCheckpointTriggered = -1;
         if (saveData == null)
         {
             return;
