@@ -9,7 +9,9 @@ public class GameSlot : MonoBehaviour
     [SerializeField] Image screenshotDisplayImage;
     [SerializeField] TextMeshProUGUI depthDisplay;
     [SerializeField] Button slotButton;
-    [SerializeField] int gameSceneIndex = 1;
+    [SerializeField] int firstLevelIndex = 3;
+    [SerializeField] int firstLevelCheckpointCount = 3;
+    [SerializeField] int secondLevelIndex = 6;
     [SerializeField] GameObject defaultImage;
     SaveData saveData;
     Texture2D screenshotTexture;
@@ -46,7 +48,8 @@ public class GameSlot : MonoBehaviour
     {
         SaveManager.currentGameSlot = slotNumber;
         SaveManager.currentSaveData = saveData;
-        SceneManager.LoadScene(gameSceneIndex);
+        int sceneIndex = saveData.checkPointIndex < firstLevelCheckpointCount ? firstLevelIndex : secondLevelIndex;
+        SceneManager.LoadScene(sceneIndex);
     }
     public void DeleteData()
     {
@@ -60,6 +63,6 @@ public class GameSlot : MonoBehaviour
     {
         SaveManager.currentGameSlot = slotNumber;
         SaveManager.currentSaveData = null;
-        SceneManager.LoadScene(gameSceneIndex);
+        SceneManager.LoadScene(firstLevelIndex);
     }
 }

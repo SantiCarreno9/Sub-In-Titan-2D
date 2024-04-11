@@ -917,6 +917,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6555939189197817046, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: shouldLoadGame
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6659484959505271502, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_Name
       value: BasicGameplayObjects

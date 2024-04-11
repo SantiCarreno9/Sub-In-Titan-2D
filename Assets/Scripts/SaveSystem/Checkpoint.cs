@@ -8,7 +8,6 @@ public class Checkpoint : MonoBehaviour
     bool isEnabled = true;
     public static int lastCheckpointTriggered = -1;
     SaveManager saveManager;
-    int checkPointId;
     [SerializeField] CheckpointEffect effect;
     private void Start()
     {
@@ -27,7 +26,7 @@ public class Checkpoint : MonoBehaviour
             return;
         }
         isEnabled = false;
-        lastCheckpointTriggered = checkPointId;
+        lastCheckpointTriggered = checkPointIndex;
         saveManager.SaveGameData();
         effect.PlaySFX();
         Debug.Log("Saved Data");

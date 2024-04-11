@@ -558,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902507458440185540, guid: 9839b7c51b876f6408e351f1129bc625, type: 3}
       propertyPath: checkPointIndex
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2032,10 +2032,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2104862506}
+  - {fileID: 787601184}
   - {fileID: 1821419407}
   - {fileID: 1105080696}
   - {fileID: 2103933342}
-  - {fileID: 787601184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &470773506
@@ -3819,7 +3819,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902507458440185540, guid: 9839b7c51b876f6408e351f1129bc625, type: 3}
       propertyPath: checkPointIndex
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3845,6 +3845,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 162cd0da7135ce8409610aef691f7140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &814138456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4868823892757497087, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+  m_PrefabInstance: {fileID: 826484470}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8064ef95cc9503844870371526f1bbeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &817745656
@@ -4035,6 +4046,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6555939189197817046, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: shouldLoadGame
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6659484959505271502, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
       propertyPath: m_Name
       value: BasicGameplayObjects
@@ -4059,6 +4074,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 387.9
       objectReference: {fileID: 0}
+    - target: {fileID: 8926876743375029495, guid: 6f4b2c777737c1c4d97c5d24f253c00d, type: 3}
+      propertyPath: depthManager
+      value: 
+      objectReference: {fileID: 814138456}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7252,7 +7271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902507458440185540, guid: 9839b7c51b876f6408e351f1129bc625, type: 3}
       propertyPath: checkPointIndex
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12639,7 +12658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902507458440185540, guid: 9839b7c51b876f6408e351f1129bc625, type: 3}
       propertyPath: checkPointIndex
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12700,7 +12719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8902507458440185540, guid: 9839b7c51b876f6408e351f1129bc625, type: 3}
       propertyPath: checkPointIndex
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
