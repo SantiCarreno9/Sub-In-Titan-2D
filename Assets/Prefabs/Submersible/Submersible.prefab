@@ -98,10 +98,8 @@ MonoBehaviour:
   _aoeFireSound: {fileID: 8300000, guid: 442c3e4ff8fbea648b39312a80ee4643, type: 3}
   _aoeCancelSound: {fileID: 8300000, guid: 0bd05763df902854a80475577a26666a, type: 3}
   _actionMenuAudioSource: {fileID: 21322875635878264}
-  _reloadingSound: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
-  _fullReloadSound: {fileID: 8300000, guid: a764377339b869e459f5e53fb9258f73, type: 3}
-  _repairingSound: {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
-  _fullRepairSound: {fileID: 8300000, guid: 9930d5b4be15bb04c9d0a6fa0d7e6b2e, type: 3}
+  _reloadingSound: {fileID: 8300000, guid: cc88acd64aff4f04c81754973a307906, type: 3}
+  _repairingSound: {fileID: 8300000, guid: 0a3346d3b998ae84094d0f94a0dbe4c5, type: 3}
   _healthAudioSource: {fileID: 2921572961613297453}
   _lowHealthSound: {fileID: 8300000, guid: de0e7426802be6340b186b463fdaf6d8, type: 3}
   _dieSound: {fileID: 8300000, guid: 7b69beceabbd8f24e8bc62d77ac7ca1c, type: 3}

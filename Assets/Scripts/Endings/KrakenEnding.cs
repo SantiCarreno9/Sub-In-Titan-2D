@@ -1,6 +1,4 @@
 using Submarine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KrakenEnding : MonoBehaviour
@@ -10,9 +8,10 @@ public class KrakenEnding : MonoBehaviour
 
     public void AttachSubmersibleToKrakenTail()
     {
+        SaveManager.levelChange = true;
         _playerController.transform.SetParent(_krakenTail);
         _playerController.GetComponent<Rigidbody2D>().simulated = false;
-    }    
+    }
 
     public void SetUpPlayer()
     {

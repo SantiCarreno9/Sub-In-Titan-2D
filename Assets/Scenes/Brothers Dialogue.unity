@@ -3371,7 +3371,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1895118119844869339, guid: 33c23121d67c93f46985cd986d882dba, type: 3}
       propertyPath: m_text
-      value: 'Daniel: "I though it was just an urban legend?"'
+      value: 'Daniel: "I thought it was just an urban legend?"'
       objectReference: {fileID: 0}
     - target: {fileID: 1895118119844869339, guid: 33c23121d67c93f46985cd986d882dba, type: 3}
       propertyPath: m_fontSize
@@ -4561,6 +4561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerController: {fileID: 0}
+  shouldLoadGame: 0
 --- !u!4 &1596552388
 Transform:
   m_ObjectHideFlags: 0

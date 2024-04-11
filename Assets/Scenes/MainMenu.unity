@@ -757,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402843345965970323, guid: 8aa7e21b9ac729645b21fd0b98a085ad, type: 3}
       propertyPath: firstLevelIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5616054811118471966, guid: 8aa7e21b9ac729645b21fd0b98a085ad, type: 3}
       propertyPath: m_Pivot.x
@@ -2901,7 +2901,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3571,10 +3571,10 @@ RectTransform:
   - {fileID: 1273399987}
   m_Father: {fileID: 585438062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.29655766, y: 0.171}
-  m_AnchorMax: {x: 0.7023943, y: 0.38710898}
-  m_AnchoredPosition: {x: 0.5048218, y: -11}
-  m_SizeDelta: {x: -2.2490005, y: -1.2700005}
+  m_AnchorMin: {x: 0.29655766, y: 0.070148155}
+  m_AnchorMax: {x: 0.7023943, y: 0.27785188}
+  m_AnchoredPosition: {x: 0.5048218, y: 7}
+  m_SizeDelta: {x: -2.2490005, y: 7.7299957}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1240191475
 GameObject:
@@ -4054,7 +4054,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402843345965970323, guid: 8aa7e21b9ac729645b21fd0b98a085ad, type: 3}
       propertyPath: firstLevelIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5616054811118471966, guid: 8aa7e21b9ac729645b21fd0b98a085ad, type: 3}
       propertyPath: m_Pivot.x
@@ -5086,10 +5086,10 @@ RectTransform:
   - {fileID: 108575263}
   m_Father: {fileID: 585438062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.29655766, y: 0.61141914}
-  m_AnchorMax: {x: 0.7023943, y: 0.82917434}
-  m_AnchoredPosition: {x: 1.2017975, y: -37}
-  m_SizeDelta: {x: -0.85501, y: 1.0110002}
+  m_AnchorMin: {x: 0.29655766, y: 0.5}
+  m_AnchorMax: {x: 0.7023943, y: 0.7205556}
+  m_AnchoredPosition: {x: 1.2017822, y: 4}
+  m_SizeDelta: {x: -0.855011, y: -1.9889984}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1577149263
 GameObject:
@@ -5122,10 +5122,10 @@ RectTransform:
   - {fileID: 1617366312}
   m_Father: {fileID: 585438062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.29655766, y: 0.38710898}
-  m_AnchorMax: {x: 0.7023943, y: 0.61141914}
-  m_AnchoredPosition: {x: -1.1835022, y: -24}
-  m_SizeDelta: {x: -2.3670006, y: 0.9879999}
+  m_AnchorMin: {x: 0.29655766, y: 0.28985187}
+  m_AnchorMax: {x: 0.7023943, y: 0.5166667}
+  m_AnchoredPosition: {x: -1.1835022, y: 1}
+  m_SizeDelta: {x: -2.3670006, y: -1.012001}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1590981422
 GameObject:
@@ -5569,7 +5569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5402843345965970323, guid: 8aa7e21b9ac729645b21fd0b98a085ad, type: 3}
       propertyPath: firstLevelIndex
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5616054811118471966, guid: 8aa7e21b9ac729645b21fd0b98a085ad, type: 3}
       propertyPath: m_Pivot.x
@@ -6491,7 +6491,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6661,7 +6661,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18.2
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7707,7 +7707,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 72
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7899,10 +7899,10 @@ RectTransform:
   - {fileID: 643043629}
   m_Father: {fileID: 585438062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.29655766, y: 0.61141914}
-  m_AnchorMax: {x: 0.7023943, y: 0.82917434}
-  m_AnchoredPosition: {x: 1.2017975, y: 46}
-  m_SizeDelta: {x: -0.85501, y: 1.0110002}
+  m_AnchorMin: {x: 0.29655766, y: 0.7205556}
+  m_AnchorMax: {x: 0.7023943, y: 0.9281852}
+  m_AnchoredPosition: {x: 1.2017822, y: -3}
+  m_SizeDelta: {x: -0.85499954, y: -1.3598938}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

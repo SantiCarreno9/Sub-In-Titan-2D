@@ -1,9 +1,5 @@
-using Submarine;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -13,6 +9,7 @@ public class SaveManager : MonoBehaviour
     public static int currentGameSlot = 0;
     public static SaveData currentSaveData;
     static string directoryPath = $"{Application.dataPath}/Saves";
+    public static bool levelChange = false;
     public void SaveGameData()
     {
         screenshotCamera.Render();
