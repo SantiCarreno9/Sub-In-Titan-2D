@@ -313,7 +313,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378bff49fd8ac3f418ccad57825b2af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
   _spriteRenderer: {fileID: 6088626335359659333}
   _shipVisuals: {fileID: 4712720750765637646}
   _lights: {fileID: 6142196909749287912}
@@ -2143,6 +2142,10 @@ PrefabInstance:
       propertyPath: shootPoint
       value: 
       objectReference: {fileID: 1252900328507859063}
+    - target: {fileID: 4156438321537635153, guid: e57ec74d71529b942a4fd201c0a4a843, type: 3}
+      propertyPath: aoeFireCooldown
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4874541083825643175, guid: e57ec74d71529b942a4fd201c0a4a843, type: 3}
       propertyPath: m_Layer
       value: 7

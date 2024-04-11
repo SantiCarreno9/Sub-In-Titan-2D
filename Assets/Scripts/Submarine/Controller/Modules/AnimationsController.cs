@@ -4,10 +4,9 @@ using DG.Tweening;
 
 namespace Submarine
 {
-    public class AnimationsController : MonoBehaviour
+    public class AnimationsController : BaseModule
     {
         [Header("Animations")]
-        [SerializeField] private Animator _animator;
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private GameObject _shipVisuals;
         [SerializeField] private GameObject _lights;
@@ -64,7 +63,7 @@ namespace Submarine
         {
             if (_isReceivingDamage)
                 PlayDamageAnimation();
-        }        
+        }
 
         // Update is called once per frame
         void Update()
@@ -137,5 +136,9 @@ namespace Submarine
         {
             //Place logic to play animation
         }
+
+        public void ShowLights() => _lights.SetActive(true);
+
+        public void HideLights() => _lights.SetActive(false);
     }
 }

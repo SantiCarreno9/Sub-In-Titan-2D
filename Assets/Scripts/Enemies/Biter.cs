@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
 {
@@ -26,6 +27,8 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioConfigSO bitingAudio;
     [SerializeField] AudioConfigSO deathAudio;
+
+    public UnityAction OnDead;
     ISubmarine playerSub;
     EnemyState enemyState = EnemyState.Idle;
     Vector3 relativeAttackPosition;
@@ -108,6 +111,7 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
         audioSource.Play();
         CancelInvoke();
         Destroy(gameObject, deathTime);
+        OnDead?.Invoke();
     }
 
     private void OnDrawGizmos()
@@ -129,6 +133,14 @@ public class Biter : MonoBehaviour, IEnemyEffect, IEnemy
             health = 0;
             HandleDeath();
         }
+        else StartCoroutine(PlayDamageAnimation());
+    }
+
+    private IEnumerator PlayDamageAnimation()
+    {
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        spriteRenderer.color = Color.white;
     }
 
     IEnumerator SnapCoroutine()

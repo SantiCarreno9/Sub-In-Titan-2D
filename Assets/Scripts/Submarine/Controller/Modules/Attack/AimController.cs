@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Submarine
 {
-    public class AimController : MonoBehaviour
+    public class AimController : BaseModule
     {
         private Vector2 _aimDirection = Vector2.zero;
 
@@ -12,6 +12,9 @@ namespace Submarine
 
         public void UpdateAimDirection(Vector2 direction)
         {
+            if (!IsEnabled)
+                return;
+
             CalculateAimDirection(direction);
         }
 

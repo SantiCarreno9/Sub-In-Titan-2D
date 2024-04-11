@@ -24,12 +24,16 @@ namespace Submarine
 
         public void Open()
         {
+            if (!IsEnabled)
+                return;
             _isOpen = true;
             OnOpen?.Invoke();
         }
 
         public void Close()
         {
+            if (!IsEnabled)
+                return;
             _isOpen = false;
             CancelCurrentProcess();
             OnClose?.Invoke();
@@ -71,15 +75,7 @@ namespace Submarine
             _reloadController.StartProcess();
         }
 
-        //public bool CanRepair() => !_healthModule.HasMaxHealth() && !_repairController.HasEnemiesAttached();
-        //Test
-        public bool CanRepair()
-        {
-            bool canRepair = !_healthModule.HasMaxHealth() && !_healthModule.HasEnemiesAttached();
-            if (!canRepair)
-                Debug.Log("!_healthModule.HasMaxHealth(): " + !_healthModule.HasMaxHealth() + " && " + "!_healthModule.HasEnemiesAttached(): " + !_healthModule.HasEnemiesAttached());
-            return canRepair;
-        }
+        public bool CanRepair() => !_healthModule.HasMaxHealth() && !_healthModule.HasEnemiesAttached();
 
         public bool CanReload() => !_attackModule.HasMaxAmmo();
     }

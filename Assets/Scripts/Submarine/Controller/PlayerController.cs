@@ -18,7 +18,7 @@ namespace Submarine
         public Transform Transform => transform;
         public MovementModule MovementController => _movementController;
         public AttackModule AttackController => _attackController;
-        public HealthModule HeatlhController => _healthModule;
+        public HealthModule HealthController => _healthModule;
         public ActionMenuModule ActionMenuController => _actionMenuController;
         public SubmarineSoundEffectsController SoundEffectsController => _soundEffectsController;
         public AnimationsController AnimationsController => _animationsController;
@@ -71,6 +71,24 @@ namespace Submarine
         private void OnDisable()
         {
             _inputs.Disable();
+        }
+
+        public void EnableModules()
+        {
+            MovementController.EnableModule();
+            AttackController.EnableModule();
+            HealthController.EnableModule();
+            ActionMenuController.EnableModule();
+            AnimationsController.EnableModule();
+        }
+
+        public void DisableModules()
+        {
+            MovementController.DisableModule();
+            AttackController.DisableModule();            
+            HealthController.DisableModule();
+            ActionMenuController.DisableModule();
+            AnimationsController.DisableModule();
         }
 
         #region USER INPUTS EVENTS
@@ -262,7 +280,7 @@ namespace Submarine
             DisablePlayerActionMap();
             DisableActionMenuActionMap();
             _actionMenuController.Close();
-            OnPlayerDie?.Invoke();            
+            OnPlayerDie?.Invoke();
         }
     }
 

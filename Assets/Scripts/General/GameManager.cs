@@ -61,6 +61,6 @@ public class GameManager : MonoBehaviour
         }
         Checkpoint.lastCheckpointTriggered = saveData.checkPointIndex;
         Player.transform.position = new Vector3(saveData.playerPositionX, saveData.playerPositionY, 0);
-        Player.HeatlhController.SetHealth(saveData.health);
+        Player.HealthController.SetHealth(saveData.health);
     }
 }

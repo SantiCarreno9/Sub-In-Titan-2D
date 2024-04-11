@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Submarine
@@ -10,11 +8,13 @@ namespace Submarine
         
         public virtual void EnableModule()
         {
+            this.enabled= true;
             IsEnabled = true;
         }
 
         public virtual void DisableModule() 
         {
+            this.enabled = false;
             IsEnabled = false;
         }
     }
