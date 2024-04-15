@@ -61,6 +61,8 @@ namespace Submarine
 
         #region DASH
 
+        public void FullyReloadDash() => _dashRemainingTime = _dashDuration;
+
         public bool IsDashing() => _speed == _dashSpeed;
 
         public void StartDashing() => _isDashing = true;

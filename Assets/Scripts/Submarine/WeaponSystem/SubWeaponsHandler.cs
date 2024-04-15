@@ -16,13 +16,15 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
 
     public bool CanUseAOE { get; private set; } = true;
 
+    public bool UnlimitedAmmo = false;
+
     public int CurrentCannonAmmo { get; private set; }
 
     public int MaxAmmo => maxCannonAmmo;
 
     public bool IsAOEReady => aoeCharge.IsAOEReady;
 
-    public float AOICooldownTimeLeft => aoeFireCooldownLeft;
+    public float AOECooldownTimeLeft => aoeFireCooldownLeft;
 
     public float GetAOECooldownPercentage()
     {
@@ -54,7 +56,7 @@ public class SubWeaponsHandler : MonoBehaviour, ISubWeaponsHandler
             projectile.transform.position = shootPoint.position;
             projectile.gameObject.SetActive(true);
             projectile.Shoot(cannon.up);
-            CurrentCannonAmmo--;
+            if (!UnlimitedAmmo) CurrentCannonAmmo--;
             cannonFireCooldownLeft = cannonFireCooldown;
             cannonCooldownOver = false;
         }

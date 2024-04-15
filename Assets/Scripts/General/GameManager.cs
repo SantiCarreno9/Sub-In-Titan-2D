@@ -65,7 +65,9 @@ public class GameManager : MonoBehaviour
             return;
         }
         Checkpoint.lastCheckpointTriggered = saveData.checkPointIndex;
+        if (SaveManager.levelChange)
+            return;
         Player.transform.position = new Vector3(saveData.playerPositionX, saveData.playerPositionY, 0);
-        Player.HeatlhController.SetHealth(saveData.health);
+        Player.HealthController.SetHealth(saveData.health);
     }
 }

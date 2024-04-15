@@ -10,7 +10,7 @@ public class Menu_Script : MonoBehaviour
     [SerializeField] private GameObject startGame_canvas;
     [SerializeField] private GameObject settings_canvas;
     [SerializeField] private GameObject back_btn;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +23,7 @@ public class Menu_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -31,7 +31,7 @@ public class Menu_Script : MonoBehaviour
     {
         SceneManager.LoadScene("SmallerMap");
     }
-   
+
 
     public void PLayClickSound()
     {
@@ -57,20 +57,25 @@ public class Menu_Script : MonoBehaviour
     {
         mainMenu_canvas.SetActive(false);
         settings_canvas.SetActive(true);
-        back_btn.SetActive(true) ;
+        back_btn.SetActive(true);
     }
     public void BackBtn()
     {
         if (startGame_canvas.activeSelf)
         {
-            startGame_canvas.SetActive(false );
-            mainMenu_canvas.SetActive(true );
+            startGame_canvas.SetActive(false);
+            mainMenu_canvas.SetActive(true);
         }
-        if(settings_canvas.activeSelf)
+        if (settings_canvas.activeSelf)
         {
-            settings_canvas.SetActive(false );
-            mainMenu_canvas.SetActive(true ) ;
+            settings_canvas.SetActive(false);
+            mainMenu_canvas.SetActive(true);
         }
         back_btn.SetActive(false);
+    }
+
+    public void LoadSceneByIndex(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }

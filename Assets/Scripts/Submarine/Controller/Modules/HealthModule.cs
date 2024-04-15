@@ -61,13 +61,13 @@ namespace Submarine
 
         public void AddAttachedEnemy()
         {
-            _enemiesAttachedCount++;
+            _enemiesAttachedCount++;            
             OnEnemyAttached?.Invoke();
         }
 
         public void RemoveAttachedEnemy()
         {
-            _enemiesAttachedCount--;
+            _enemiesAttachedCount--;            
             if (_enemiesAttachedCount < 0)
                 _enemiesAttachedCount = 0;
 

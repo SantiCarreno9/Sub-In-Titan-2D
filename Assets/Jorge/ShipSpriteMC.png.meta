@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9fd45dd67e3370144ad23514e648b37a
+guid: 3072beeac3568e241a807190e9385302
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CannonMC
+      name: ShipSpriteMC_0
       rect:
         serializedVersion: 2
         x: 0
@@ -150,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bdf58e5112e5dc4f912b3d15b8d33a9
-      internalID: 763564823
+      spriteID: b2ac240248948cc4e9b1238bd438089e
+      internalID: -1527957328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Window
+      name: ShipSpriteMC_1
       rect:
         serializedVersion: 2
         x: 65
@@ -171,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8d8b33e985524e498f11911ce6a3d11
-      internalID: 468775508
+      spriteID: f8bea60f4150dc441a5a5e8c69c783cc
+      internalID: 1730857172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShipMC
+      name: ShipSpriteMC_2
       rect:
         serializedVersion: 2
         x: 315
@@ -192,8 +192,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d055d9760741b09468f660c60947ceea
-      internalID: -1837783113
+      spriteID: cfc1f2af08f18874c8d026089ae236f8
+      internalID: -1016955463
       vertices: []
       indices: 
       edges: []
@@ -209,9 +209,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CannonMC: 763564823
-      ShipMC: -1837783113
-      Window: 468775508
+      ShipSpriteMC_0: -1527957328
+      ShipSpriteMC_1: 1730857172
+      ShipSpriteMC_2: -1016955463
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MC Level.unity
     guid: 0a291fc6223cb5f4184a493d4f4d6a33
   - enabled: 1
+    path: Assets/Scenes/GameOverScenes/GameOver-Megalodon.unity
+    guid: 964c6621a7620a749a9514eecb5535c1
+  - enabled: 1
     path: Assets/Scenes/GameOverScenes/GameOver.unity
     guid: 1f0bc40a490be044899766b439b76edb
+  - enabled: 1
+    path: Assets/Scenes/Tutorial Level.unity
+    guid: 86669b2b064effe40a416c3eac69db92
   m_configObjects: {}

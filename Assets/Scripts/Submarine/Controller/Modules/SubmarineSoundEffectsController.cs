@@ -22,10 +22,8 @@ namespace Submarine
         [SerializeField] private AudioClip _aoeCancelSound;
         [Header("Action Menu")]
         [SerializeField] private AudioSource _actionMenuAudioSource;
-        [SerializeField] private AudioClip _reloadingSound;
-        [SerializeField] private AudioClip _fullReloadSound;
-        [SerializeField] private AudioClip _repairingSound;
-        [SerializeField] private AudioClip _fullRepairSound;
+        [SerializeField] private AudioClip _reloadingSound;        
+        [SerializeField] private AudioClip _repairingSound;        
         [Header("Health")]
         [SerializeField] private AudioSource _healthAudioSource;
         [SerializeField] private AudioClip _lowHealthSound;
@@ -52,13 +50,13 @@ namespace Submarine
             _healthModule.OnHealthChanged += PlayHealthBasedSound;
             _healthModule.OnDie += PlayDieSound;
 
-            //_actionMenuModule.ReloadController.OnProcessStarted += PlayReloadSound;
-            //_actionMenuModule.ReloadController.OnProcessCanceled += StopPlayingActionSounds;
-            //_actionMenuModule.ReloadController.OnProcessFinished += PlayReloadFinishSound;
+            _actionMenuModule.ReloadController.OnProcessStarted += PlayReloadSound;
+            _actionMenuModule.ReloadController.OnProcessCanceled += StopPlayingActionSounds;
+            _actionMenuModule.ReloadController.OnProcessFinished += StopPlayingActionSounds;
 
-            //_actionMenuModule.RepairController.OnProcessStarted += PlayRepairSound;            
-            //_actionMenuModule.RepairController.OnProcessCanceled += StopPlayingActionSounds;            
-            //_actionMenuModule.RepairController.OnProcessFinished += PlayRepairFinishSound;            
+            _actionMenuModule.RepairController.OnProcessStarted += PlayRepairSound;
+            _actionMenuModule.RepairController.OnProcessCanceled += StopPlayingActionSounds;
+            _actionMenuModule.RepairController.OnProcessFinished += StopPlayingActionSounds;
         }
 
         private void OnDisable()
@@ -73,13 +71,13 @@ namespace Submarine
             _healthModule.OnHealthChanged -= PlayHealthBasedSound;
             _healthModule.OnDie -= PlayDieSound;
 
-            //_actionMenuModule.ReloadController.OnProcessStarted -= PlayReloadSound;
-            //_actionMenuModule.ReloadController.OnProcessCanceled -= StopPlayingActionSounds;
-            //_actionMenuModule.ReloadController.OnProcessFinished -= StopPlayingActionSounds;
+            _actionMenuModule.ReloadController.OnProcessStarted -= PlayReloadSound;
+            _actionMenuModule.ReloadController.OnProcessCanceled -= StopPlayingActionSounds;
+            _actionMenuModule.ReloadController.OnProcessFinished -= StopPlayingActionSounds;
 
-            //_actionMenuModule.RepairController.OnProcessStarted -= PlayRepairSound;
-            //_actionMenuModule.RepairController.OnProcessCanceled -= StopPlayingActionSounds;
-            //_actionMenuModule.RepairController.OnProcessFinished -= StopPlayingActionSounds;
+            _actionMenuModule.RepairController.OnProcessStarted -= PlayRepairSound;
+            _actionMenuModule.RepairController.OnProcessCanceled -= StopPlayingActionSounds;
+            _actionMenuModule.RepairController.OnProcessFinished -= StopPlayingActionSounds;
         }
 
 
@@ -152,18 +150,14 @@ namespace Submarine
             _actionMenuAudioSource.loop = true;
             _actionMenuAudioSource.clip = _repairingSound;
             _actionMenuAudioSource.Play();
-        }
-
-        private void PlayRepairFinishSound() => _actionMenuAudioSource.PlayOneShot(_fullRepairSound);
+        }        
 
         private void PlayReloadSound()
         {
             _actionMenuAudioSource.loop = true;
             _actionMenuAudioSource.clip = _reloadingSound;
             _actionMenuAudioSource.Play();
-        }
-
-        private void PlayReloadFinishSound() => _actionMenuAudioSource.PlayOneShot(_fullReloadSound);
+        }        
 
         private void StopPlayingActionSounds()
         {

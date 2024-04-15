@@ -63,6 +63,6 @@ public class GameSlot : MonoBehaviour
     {
         SaveManager.currentGameSlot = slotNumber;
         SaveManager.currentSaveData = null;
-        SceneManager.LoadScene(firstLevelIndex);
+        SceneManager.LoadScene(1);
     }
 }

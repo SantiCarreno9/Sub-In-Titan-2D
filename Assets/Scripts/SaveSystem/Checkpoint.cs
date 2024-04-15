@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
@@ -11,7 +9,7 @@ public class Checkpoint : MonoBehaviour
     [SerializeField] CheckpointEffect effect;
     private void Start()
     {
-        if(checkPointIndex <= lastCheckpointTriggered)
+        if (checkPointIndex <= lastCheckpointTriggered)
         {
             isEnabled = false;
             return;
@@ -27,6 +25,7 @@ public class Checkpoint : MonoBehaviour
         }
         isEnabled = false;
         lastCheckpointTriggered = checkPointIndex;
+        SaveManager.levelChange = false;
         saveManager.SaveGameData();
         effect.PlaySFX();
         Debug.Log("Saved Data");

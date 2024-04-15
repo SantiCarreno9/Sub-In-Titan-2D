@@ -6,8 +6,11 @@ namespace Submarine
     public class AttackModule : BaseModule
     {
         [Header("Components")]
-        [SerializeField] private AimController _aimController;        
+        [SerializeField] private AimController _aimController;
         [SerializeField] private SubWeaponsHandler _weaponsController;
+
+        private bool _isBasicAttackEnabled = true;
+        private bool _isAOEAttackEnabled = true;
 
         public AimController AimController => _aimController;
         public SubWeaponsHandler WeaponsController => _weaponsController;
@@ -27,21 +30,28 @@ namespace Submarine
         public override void EnableModule()
         {
             base.EnableModule();
-            _aimController.enabled = true;
+            _aimController.EnableModule();
         }
 
         public override void DisableModule()
         {
             base.DisableModule();
-            _aimController.enabled = false;
+            _aimController.DisableModule();
         }
 
         #region BASIC ATTACK
+
+        public void EnableBasicAttack() => _isBasicAttackEnabled = true;
+        public void DisableBasicAttack() => _isBasicAttackEnabled = false;
 
         public void StartBasicAttack()
         {
             if (!IsEnabled)
                 return;
+
+            if (!_isBasicAttackEnabled)
+                return;
+
             _isFiringBasicAttack = true;
         }
 
@@ -49,6 +59,10 @@ namespace Submarine
         {
             if (!IsEnabled)
                 return;
+
+            if (!_isBasicAttackEnabled)
+                return;
+
             _isFiringBasicAttack = false;
         }
 
@@ -66,9 +80,15 @@ namespace Submarine
 
         #region SPECIAL ATTACK (AOE)
 
+        public void EnableAOEAttack() => _isAOEAttackEnabled = true;
+        public void DisableAOEAttack() => _isAOEAttackEnabled = false;
+
         public void StartSpecialAttack()
         {
             if (!IsEnabled)
+                return;
+
+            if (!_isAOEAttackEnabled)
                 return;
 
             if (_weaponsController.CanUseAOE)
@@ -81,6 +101,9 @@ namespace Submarine
         public void StopSpecialAttack()
         {
             if (!IsEnabled)
+                return;
+
+            if (!_isAOEAttackEnabled)
                 return;
 
             if (_weaponsController.CanUseAOE)
@@ -125,7 +148,7 @@ namespace Submarine
                     _weaponsController.FireCannon();
                     OnBasicAttackShot?.Invoke();
                 }
-            }            
+            }
         }
     }
 }
